@@ -114,7 +114,7 @@ function App() {
         </Modal.Header>
         <Modal.Body>
 
-            {/*
+            
             
             <ReactCompareSlider
               itemOne={<ReactCompareSliderImage src={image2} />}
@@ -122,7 +122,7 @@ function App() {
             />
 
           <img src={selectedImage} fluid />
-            */}
+            
           <iframe src='https://www.youtube.com/embed/rPQUkV3--7c?si=kJV0ZieuoDyS5R3C'></iframe>
         </Modal.Body>
         <Modal.Footer>
