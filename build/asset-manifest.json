@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio-tiago-holles/static/css/main.f96f07a4.css",
-    "main.js": "/portfolio-tiago-holles/static/js/main.47eb8f1b.js",
+    "main.js": "/portfolio-tiago-holles/static/js/main.d059ee16.js",
     "static/js/787.7da95b79.chunk.js": "/portfolio-tiago-holles/static/js/787.7da95b79.chunk.js",
     "static/media/background.png": "/portfolio-tiago-holles/static/media/background.5b24f836efdffd93913b.png",
     "static/media/numero1.png": "/portfolio-tiago-holles/static/media/numero1.941af86155425165e292.png",
@@ -15,11 +15,11 @@
     "static/media/profile.png": "/portfolio-tiago-holles/static/media/profile.a78796a91aaef5e90963.png",
     "index.html": "/portfolio-tiago-holles/index.html",
     "main.f96f07a4.css.map": "/portfolio-tiago-holles/static/css/main.f96f07a4.css.map",
-    "main.47eb8f1b.js.map": "/portfolio-tiago-holles/static/js/main.47eb8f1b.js.map",
+    "main.d059ee16.js.map": "/portfolio-tiago-holles/static/js/main.d059ee16.js.map",
     "787.7da95b79.chunk.js.map": "/portfolio-tiago-holles/static/js/787.7da95b79.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f96f07a4.css",
-    "static/js/main.47eb8f1b.js"
+    "static/js/main.d059ee16.js"
   ]
 }
