@@ -121,9 +121,11 @@ function App() {
               itemTwo={<ReactCompareSliderImage src={image1} />}
             />
 
-          <img src={selectedImage} fluid />
+          <img src={selectedImage} fluid alt='selected' />
+            {/*
             
           <iframe src='https://www.youtube.com/embed/rPQUkV3--7c?si=kJV0ZieuoDyS5R3C'></iframe>
+            */}
         </Modal.Body>
         <Modal.Footer>
         Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O proposito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
