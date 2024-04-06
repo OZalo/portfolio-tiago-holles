@@ -1,5 +1,9 @@
-import React from 'react'
-import { Container, Row, Col, Image, Modal } from 'react-bootstrap'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { motion } from "framer-motion";
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+import { Modal } from 'react-bootstrap';
+
 import fundo from './assets/miscellaneous/background.png'
 import firstImage from './assets/squares/firstImage.png'
 import secondImage from './assets/squares/secondImage.png'
@@ -7,137 +11,151 @@ import thirdImage from './assets/squares/thirdImage.png'
 import fourthImage from './assets/squares/fourthImage.png'
 import fifthImage from './assets/squares/fifthImage.png'
 import sixthImage from './assets/squares/sixthImage.png'
-import profile from './assets/miscellaneous/profile.png'
 import image1 from './assets/miscellaneous/numero1.png'
 import image2 from './assets/miscellaneous/numero3.png'
 
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-import { motion } from "framer-motion"
-
-const mainContainerStyle = {
-  height: '200vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center',
-  marginTop: '70vh'
-}
-const imageArray1 = [
+const imageArray = [
   { src: firstImage, title: "Pior Que Dor de Dente"},
   { src: secondImage, title: "História em Dados: As Infinitas Possibilidades do RPG"},
   { src: thirdImage, title: "Reflexo da Maldade"},
-]
-
-const imageArray2 = [
   { src: fourthImage, title: "Oficina de Desenho Performática"},
   { src: fifthImage, title: "Canal Grid"},
-  { src: sixthImage, title: "Outros Trabalhos"},
+  { src: sixthImage, title: "Outros Trabalhos"}
 ]
 
+const headerStyle = {
+  backgroundColor: '#27221e', 
+  color: '#fff',  
+  display: 'flex', 
+  justifyContent: 'space-between', 
+  position: 'fixed', 
+  top: '0', 
+  left: '0', 
+  right: '0', 
+  zIndex: '1000',
+}
+
+const style = {
+  container: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '10px',
+    marginLeft: '-10px', 
+    marginRight: '-10px', 
+  },
+  image: {
+    width: '100%',
+    height: '100%', 
+    objectFit: 'cover', 
+  },
+  textSection: {
+    gridColumn: '1 / -1',
+    color: 'black',
+    padding: '20px',
+    textAlign: 'center',
+  },
+  button: {
+    display: 'flex',
+    marginTop: '20px',
+    padding: '10px',
+    backgroundColor: 'black',
+    color: 'white',
+    border: 'none',
+    cursor: 'pointer',
+  },
+};
+
 function App() {
-  const [showModal, setShowModal] = React.useState(false)
-  const [selectedImage, setSelectedImage] = React.useState('')
-  const [selectedTitle, setSelectedTitle] = React.useState('')
+  const [showModal, setShowModal] = React.useState(false);
+  const [selectedImage, setSelectedImage] = React.useState('');
+  const [selectedTitle, setSelectedTitle] = React.useState('');
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
 
   const handleImageClick = (src, title) => {
-    setSelectedImage(src)
-    setSelectedTitle(title)
-    setShowModal(true)
+    setSelectedImage(src);
+    setSelectedTitle(title);
+    setShowModal(true);
   }
 
   const handleCloseModal = () => {
-    setShowModal(false)
+    setShowModal(false);
   }
 
+  const isMobile = width <= 768;
+
+  React.useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
 
   return (
-    <div style={{ backgroundImage: `url(${fundo})`, height: '250vh', backgroundSize: 'cover', display: 'flex', flexDirection: 'column' }}>
-
-      <Container style={mainContainerStyle}>
-
-          {/* quadrados superiores */}
-
-          <Row className="justify-content-between mb-4 align-items-center">
-            {imageArray1.map((image, index) => (
-              <Col key={index} className='mx-2'>
-                <motion.div  whileHover={{ scale: 1.09, cursor: 'pointer', opacity:0.3 }} whileTap={{ scale: 0.8 }}>
-                  <motion.img
-                    onClick={() => handleImageClick(image.src, image.title)}
-                    src={image.src}
-                  />
-
-                </motion.div>
-              </Col>
-            ))}
-        </Row>
-
-        
-          {/* Divs inferiores */}
-
-          <Row className="justify-content-between mb-4 align-items-center">
-            {imageArray2.map((image, index) => (
-              <Col key={index} className='mx-2'>
-                <motion.div whileHover={{ scale: 1.09, cursor: 'pointer', opacity:0.3 }} whileTap={{ scale: 0.8 }}>
-                  <motion.img
-                    onClick={() => handleImageClick(image.src, image.title)}
-                    src={image.src}
-                  />
-                </motion.div>
-              </Col>
-            ))}
-          </Row>
-
-      </Container>
-
-      {/* Footer */}
-      
-              <div style={{justifyContent:'center',display:'flex',flexDirection:'row', marginTop:150,marginBottom:100}}>
-
-                <Image roundedCircle src={profile}/>
-              
-                <div style={{marginLeft:100}}>
-              
-                <h1 style={{marginBottom:20}}>Tiago Holles</h1>
-                <h4 style={{maxInlineSize:1000}}>Busco oportunidade de aprender mais na minha área de formação, crescimento profissional e estabilidade no mercado de trabalho, sempre melhorando minhas habilidades de roteiro e edição.</h4>
-              
-                </div>
-              </div>
-              <div>
-
-              </div>
-
-      {/* Modal */}
+    <div style={{backgroundImage: `url(${fundo})`}}>
+      <div style={{ marginBottom:40}}>
+        <nav style={headerStyle}>
+          <div>
+            <h1 style={{ margin: '0' }}>Tiago Holles</h1>
+          </div>
+          <div>
+            <h1 style={{ margin: '0' }}>icones</h1>
+          </div>
+        </nav>
+      </div>
+      <div style={style.container}>
+        {imageArray.map((image, index) => (
+          <div key={index} className='mx-2'>
+            <motion.div  whileHover={{ scale: 1.02, cursor: 'pointer' }} whileTap={{ scale: 0.8 }}>
+              <motion.img
+                width={isMobile? '100%' : 'auto'}
+                height={isMobile? '200px' : 'auto'}
+                style={style.image}
+                onClick={() => handleImageClick(image.src, image.title)}
+                src={image.src}
+                alt={image.title}
+              />
+            </motion.div>
+          </div>
+        ))}
+      </div>
+      <div style={style.textSection}>
+        <p>
+          Olá. Me chamo Tiago Holles, sou editor, roteirista e nos tempos livres dublador. Busco oportunidade de aprender
+          mais na minha área de formação, crescimento profissional e estabilidade no mercado de trabalho,
+          sempre melhorando minhas habilidades de roteiro, edição e narração.
+        </p>
+      </div>
+      <div className="d-flex justify-content-center">
+        <motion.button
+          className='mb-5'
+          whileHover={{ scale: 1.02, cursor: 'pointer' }} 
+          whileTap={{ scale: 0.8 }} 
+          style={style.button}
+        > 
+          Contato
+        </motion.button>
+      </div>
       <Modal centered show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>{selectedTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
-            
-            
-            <ReactCompareSlider
-              itemOne={<ReactCompareSliderImage src={image2} />}
-              itemTwo={<ReactCompareSliderImage src={image1} />}
-            />
-
-          <img src={selectedImage} fluid alt='selected' />
-            {/*
-            
-          <iframe src='https://www.youtube.com/embed/rPQUkV3--7c?si=kJV0ZieuoDyS5R3C'></iframe>
-            */}
+          <ReactCompareSlider
+            itemOne={<ReactCompareSliderImage src={image2} />}
+            itemTwo={<ReactCompareSliderImage src={image1} />}
+          />
+          <img src={selectedImage} style={{width: '100%'}} alt='selected' />
         </Modal.Body>
         <Modal.Footer>
-        Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O proposito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
-        </Modal.Footer>
-        <Modal.Footer>
-
+          Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
         </Modal.Footer>
       </Modal>
-
-
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
