@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { Modal } from 'react-bootstrap';
 
+
 import fundo from './assets/miscellaneous/background.png'
 import firstImage from './assets/squares/firstImage.png'
 import secondImage from './assets/squares/secondImage.png'
@@ -13,6 +14,8 @@ import fifthImage from './assets/squares/fifthImage.png'
 import sixthImage from './assets/squares/sixthImage.png'
 import image1 from './assets/miscellaneous/numero1.png'
 import image2 from './assets/miscellaneous/numero3.png'
+
+
 
 const imageArray = [
   { src: firstImage, title: "Pior Que Dor de Dente"},
@@ -39,14 +42,14 @@ const style = {
   container: {
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '10px',
-    marginLeft: '-10px', 
-    marginRight: '-10px', 
+    gap: '15px',
+    marginLeft: '10px', 
+    marginRight: '10px', 
   },
   image: {
     width: '100%',
     height: '100%', 
-    objectFit: 'cover', 
+    borderRadius: '20px'
   },
   textSection: {
     gridColumn: '1 / -1',
@@ -66,6 +69,7 @@ const style = {
 };
 
 function App() {
+  
   const [showModal, setShowModal] = React.useState(false);
   const [selectedImage, setSelectedImage] = React.useState('');
   const [selectedTitle, setSelectedTitle] = React.useState('');
@@ -95,24 +99,29 @@ function App() {
   }, []);
 
   return (
+    
     <div style={{backgroundImage: `url(${fundo})`}}>
-      <div style={{ marginBottom:40}}>
+      <div style={{ paddingBottom: isMobile? 60 : 70}}>
         <nav style={headerStyle}>
           <div>
-            <h1 style={{ margin: '0' }}>Tiago Holles</h1>
+            <h1 style={{ marginLeft:5 }}>Tiago Holles</h1>
           </div>
-          <div>
-            <h1 style={{ margin: '0' }}>icones</h1>
+
+          <div style={{display:'flex', flexDirection:'row', marginRight:5}}>
+
+          <i class="fa fa-instagram fa-2x pt-3"/>
+          <i class="fa fa-linkedin fa-2x pt-3 mx-4"/>
+          <i class="fa fa-youtube fa-2x pt-3"/>
+
           </div>
         </nav>
       </div>
+
       <div style={style.container}>
         {imageArray.map((image, index) => (
           <div key={index} className='mx-2'>
             <motion.div  whileHover={{ scale: 1.02, cursor: 'pointer' }} whileTap={{ scale: 0.8 }}>
               <motion.img
-                width={isMobile? '100%' : 'auto'}
-                height={isMobile? '200px' : 'auto'}
                 style={style.image}
                 onClick={() => handleImageClick(image.src, image.title)}
                 src={image.src}
@@ -122,6 +131,7 @@ function App() {
           </div>
         ))}
       </div>
+
       <div style={style.textSection}>
         <p>
           Olá. Me chamo Tiago Holles, sou editor, roteirista e nos tempos livres dublador. Busco oportunidade de aprender
@@ -129,6 +139,7 @@ function App() {
           sempre melhorando minhas habilidades de roteiro, edição e narração.
         </p>
       </div>
+
       <div className="d-flex justify-content-center">
         <motion.button
           className='mb-5'
@@ -139,6 +150,7 @@ function App() {
           Contato
         </motion.button>
       </div>
+
       <Modal centered show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>{selectedTitle}</Modal.Title>
@@ -154,6 +166,7 @@ function App() {
           Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
         </Modal.Footer>
       </Modal>
+
     </div>
   );
 }
