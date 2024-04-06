@@ -133,11 +133,11 @@ function App() {
       </div>
 
       <div style={style.textSection}>
-        <p>
-          Olá. Me chamo Tiago Holles, sou editor, roteirista e nos tempos livres dublador. Busco oportunidade de aprender
-          mais na minha área de formação, crescimento profissional e estabilidade no mercado de trabalho,
+        <h3>
+          Olá. Me chamo Tiago Holles, sou editor, roteirista e nos tempos livres dublador. Busco oportunidade de aprender<br />
+          mais na minha área de formação, crescimento profissional e estabilidade no mercado de trabalho,<br />
           sempre melhorando minhas habilidades de roteiro, edição e narração.
-        </p>
+        </h3>
       </div>
 
       <div className="d-flex justify-content-center">
