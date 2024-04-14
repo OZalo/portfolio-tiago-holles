@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { motion } from "framer-motion";
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+// import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import { Modal } from 'react-bootstrap';
 
 
@@ -12,10 +12,10 @@ import thirdImage from './assets/squares/thirdImage.png'
 import fourthImage from './assets/squares/fourthImage.png'
 import fifthImage from './assets/squares/fifthImage.png'
 import sixthImage from './assets/squares/sixthImage.png'
-import image1 from './assets/miscellaneous/numero1.png'
-import image2 from './assets/miscellaneous/numero3.png'
-
-
+// import image1 from './assets/miscellaneous/numero1.png'
+// import image2 from './assets/miscellaneous/numero3.png'
+// import gif from './assets/miscellaneous/a.gif'
+import iurabarra from './assets/miscellaneous/b.gif'
 
 const imageArray = [
   { src: firstImage, title: "Pior Que Dor de Dente"},
@@ -23,7 +23,9 @@ const imageArray = [
   { src: thirdImage, title: "Reflexo da Maldade"},
   { src: fourthImage, title: "Oficina de Desenho Performática"},
   { src: fifthImage, title: "Canal Grid"},
-  { src: sixthImage, title: "Outros Trabalhos"}
+  { src: sixthImage, title: "Outros Trabalhos"},
+  // { src: gif, title: "vai te foder kkkkkk"},
+  { src: iurabarra, title: "2 gifs"},
 ]
 
 const headerStyle = {
@@ -69,11 +71,11 @@ const style = {
 };
 
 function App() {
-  
-  const [showModal, setShowModal] = React.useState(false);
-  const [selectedImage, setSelectedImage] = React.useState('');
-  const [selectedTitle, setSelectedTitle] = React.useState('');
-  const [width, setWidth] = React.useState(window.innerWidth);
+
+  const [showModal, setShowModal] = React.useState(false)
+  const [selectedImage, setSelectedImage] = React.useState('')
+  const [selectedTitle, setSelectedTitle] = React.useState('')
+  const [width, setWidth] = React.useState(window.innerWidth)
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
@@ -92,15 +94,16 @@ function App() {
   const isMobile = width <= 768;
 
   React.useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
+    window.addEventListener("resize", handleWindowSizeChange)
     return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
+      window.removeEventListener("resize", handleWindowSizeChange)
+    }
+  }, [])
 
   return (
     
     <div style={{backgroundImage: `url(${fundo})`}}>
+
       <div style={{ paddingBottom: isMobile? 60 : 70}}>
         <nav style={headerStyle}>
           <div>
@@ -109,7 +112,11 @@ function App() {
 
           <div style={{display:'flex', flexDirection:'row', marginRight:5}}>
 
-          <i class="fa fa-instagram fa-2x pt-3"/>
+          <i 
+            onClick={() => {window.open('https://www.instagram.com/tiago_holles', '_blank');}} 
+            class="fa fa-instagram fa-2x pt-3"
+            style={{cursor:'pointer'}}
+            />
           <i class="fa fa-linkedin fa-2x pt-3 mx-4"/>
           <i class="fa fa-youtube fa-2x pt-3"/>
 
@@ -120,6 +127,7 @@ function App() {
       <div style={style.container}>
         {imageArray.map((image, index) => (
           <div key={index} className='mx-2'>
+
             <motion.div  whileHover={{ scale: 1.02, cursor: 'pointer' }} whileTap={{ scale: 0.8 }}>
               <motion.img
                 style={style.image}
@@ -128,6 +136,7 @@ function App() {
                 alt={image.title}
               />
             </motion.div>
+            
           </div>
         ))}
       </div>
@@ -146,21 +155,30 @@ function App() {
           whileHover={{ scale: 1.02, cursor: 'pointer' }} 
           whileTap={{ scale: 0.8 }} 
           style={style.button}
+          onClick={() => {window.open('https://www.instagram.com/tiago_holles', '_blank');}}
         > 
           Contato
         </motion.button>
       </div>
 
-      <Modal centered show={showModal} onHide={handleCloseModal}>
+      <Modal centered size='xl' show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>{selectedTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ReactCompareSlider
+          {/* <ReactCompareSlider
             itemOne={<ReactCompareSliderImage src={image2} />}
             itemTwo={<ReactCompareSliderImage src={image1} />}
-          />
+          /> */}
+          <text>
+          Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
+          </text>
           <img src={selectedImage} style={{width: '100%'}} alt='selected' />
+          <text>
+          Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
+          </text>
+          <img src={selectedImage} style={{width: '100%'}} alt='selected' />
+          
         </Modal.Body>
         <Modal.Footer>
           Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
