@@ -6,26 +6,14 @@ import { Modal } from 'react-bootstrap';
 
 
 import fundo from './assets/miscellaneous/background.png'
-import firstImage from './assets/squares/firstImage.png'
-import secondImage from './assets/squares/secondImage.png'
-import thirdImage from './assets/squares/thirdImage.png'
-import fourthImage from './assets/squares/fourthImage.png'
-import fifthImage from './assets/squares/fifthImage.png'
-import sixthImage from './assets/squares/sixthImage.png'
-// import image1 from './assets/miscellaneous/numero1.png'
-// import image2 from './assets/miscellaneous/numero3.png'
-// import gif from './assets/miscellaneous/a.gif'
-import iurabarra from './assets/miscellaneous/b.gif'
+
+// var imageLink = `https://drive.google.com/thumbnail?id=${}&sz=w1000`
 
 const imageArray = [
-  { src: firstImage, title: "Pior Que Dor de Dente"},
-  { src: secondImage, title: "História em Dados: As Infinitas Possibilidades do RPG"},
-  { src: thirdImage, title: "Reflexo da Maldade"},
-  { src: fourthImage, title: "Oficina de Desenho Performática"},
-  { src: fifthImage, title: "Canal Grid"},
-  { src: sixthImage, title: "Outros Trabalhos"},
-  // { src: gif, title: "vai te foder kkkkkk"},
-  { src: iurabarra, title: "2 gifs"},
+  { src: 'https://drive.google.com/thumbnail?id=1Wo9862X0Snb44bilgEOyjJbCK1jsiEij&sz=w1000', title: "Pior Que Dor de Dente"},
+  { src: 'https://drive.google.com/thumbnail?id=1XS9iVXvWl6Ug27MSm6vOupAOOxhX3UvQ&sz=w1000', title: "História em Dados: As Infinitas Possibilidades do RPG"},
+  { src: 'https://drive.google.com/thumbnail?id=1TUAyAVdK77CkFNPmCevg0tF_Lhx4Rp6N&sz=w1000', title: "Reflexo da Maldade"},
+  { src: 'https://drive.google.com/thumbnail?id=1NfAOXw8eXqx8bETPA1xdZ2Bi2_hyiwBc&sz=w1000', title: "Reflexo da Maldade"},
 ]
 
 const headerStyle = {
@@ -177,7 +165,9 @@ function App() {
           <text>
           Eu sempre tive vontade de fazer um áudio drama, devido à complexidade do mesmo, e então eu juntei alguns amigos meus para testar como seria fazer um. Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos que me ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama e ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que vem ganhado força cada vez mais nas redes sociais.
           </text>
-          <img src={selectedImage} style={{width: '100%'}} alt='selected' />
+
+          <iframe style={{width: '100%', height: '30vw'}} src='https://www.youtube.com/embed/rPQUkV3--7c?si=pCKb2ZBNLNKtKbQQ'></iframe>
+
           
         </Modal.Body>
         <Modal.Footer>
