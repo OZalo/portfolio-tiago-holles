@@ -1,13 +1,22 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'GothamThin', sans-serif;
+  src: local('GothamThin'), url(./fonts/GothamThin.otf) format('otf');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.thefont {
+  font-family: 'GothamThin';
+}
+
+@font-face {
+  font-family: 'GothamThin';
+  src: url(./fonts/GothamThin.otf) format('otf'),
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'GothamThin', sans-serif;
+  src: local('GothamThin'), url(./fonts/GothamThin.otf) format('otf'),
     monospace;
 }
