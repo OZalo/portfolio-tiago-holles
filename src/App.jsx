@@ -63,7 +63,7 @@ const contentArray = [
       secondText: "Você precisa estudar o desenho muito antes de levá-lo a um editor, pois antes de animar, esse desenho precisa ser recortado em detalhes, apenas nas partes que serão animadas ou destacadas com algum efeito posteriormente. Como, por exemplo, a espada do personagem Higuruma, que poderia ser pintada dentro do After Effects (programa usado para essa animação), porém, como eu já tinha certeza de que a cor seria essa, então é menos trabalho e gasto de processamento dentro do editor.",
       secondMedia: "https://drive.google.com/thumbnail?id=1HLtAKiswuVRSmRvBlps4CBeqVkrAJNOn&sz=w1000",
       thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
-      thirdMedia: "https://drive.google.com/thumbnail?id=1v3MkN-HHY0STyLY3-oiLHUP47aNP7hjM&sz=w1000",
+      thirdMedia: "https://i.imgur.com/SnFfjM4.gif",
       fourthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
       fifthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
       sixthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
@@ -73,9 +73,9 @@ const contentArray = [
     content: {
       src: 'https://drive.google.com/thumbnail?id=1ixLBKay3bcSIk8xay6bQ-XSOOHTiXvSq&sz=w1000', 
       title: "Dublagem e Tratamento de Aúdio",
-      firstText: "",
-      firstMedia: 'https://drive.google.com/thumbnail?id=aqui&sz=w1000',
-      secondText: "",
+      firstText: "Dublagem segue em dificuldades do começo ao fim, desde o tratamento acústico que você tem em sua sala até a qualidade de configuração do seu microfone e conhecimento orgânico de mixagem e pós-produção. Eu tive a oportunidade de fazer parte de um projeto de fan-dublagem para dublar o jogo Street Fighter 6, que chegou ao Brasil sem dublagem oficial. Obviamente, parte das complexidades começa com o fato de ter gravado em um quarto sem tratamento acústico.",
+      firstMedia: 'https://drive.google.com/thumbnail?id=1w0McaHtNqMSn-hs0xalQE_e-GWinYAaM&sz=w1000',
+      secondText: "A parte artística de atuação é muito importante, mas para fan-dublagens tende a não ser tão dramático quanto para dublagens oficiais. Toda minha dublagem é baseada em edição para compensar o lugar que gravo, já que qualquer grito ou som de fora da vizinhança pode destruir o áudio em questão. No fim usei plugins da Wave de compressão, De Reverbs (para controle de sala) com SPL De-Reverb da Alliance, tudo isso dentro do programa Reaper para essa gravação e edição.",
       secondMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
       thirdText: "",
       thirdMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
@@ -130,7 +130,6 @@ const style = {
     margin: 'auto',
   },
   modalText: {
-    color: 'white', 
     fontSize:24, 
     textAlign:'left', 
     display:'flex', 
@@ -230,15 +229,18 @@ function App() {
           style={style.button}
           onClick={() => { window.open('https://www.instagram.com/tiago_holles', '_blank') }}
         >
+          <text style={{fontSize:24}}>
+
           Contato
+          </text>
         </motion.button>
       </div>
 
 
 
-      <Modal contentClassName='bg-dark' centered size='xl' show={showModal} onHide={handleCloseModal}>
+      <Modal contentClassName='bg-dark text-white' centered size='xl' show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title className='thefont' style={{ color: 'white' }}>{selectedTitle}</Modal.Title>
+          <Modal.Title className='thefont' >{selectedTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
@@ -248,27 +250,24 @@ function App() {
           <React.Fragment></React.Fragment>
           }
           
-          <span>
-            <hr style={{borderTop:'2px', color:'white', width:'100vh'}} />
-            </span> 
 
           <text className='thefont' style={style.modalText}>
             {selectedContent.firstText}
           </text>
 
-          <img src={selectedContent.firstMedia} style={style.modalImage} alt='selected' />
+          <img src={selectedContent.firstMedia} style={style.modalImage} />
 
           <text className='thefont' style={style.modalText}>
             {selectedContent.secondText}
           </text>
 
-          <img src={selectedContent.secondMedia} style={style.modalImage} alt='selected' />
+          <img src={selectedContent.secondMedia} style={style.modalImage} />
 
           <text className='thefont' style={style.modalText}>
             {selectedContent.thirdText}
           </text>
 
-          <img src={selectedContent.thirdMedia} style={style.modalImage} alt='selected' />
+          <img src={selectedContent.thirdMedia} style={style.modalImage} />
 
 
         </Modal.Body>
