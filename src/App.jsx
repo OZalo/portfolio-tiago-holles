@@ -63,7 +63,7 @@ const contentArray = [
       secondText: "Você precisa estudar o desenho muito antes de levá-lo a um editor, pois antes de animar, esse desenho precisa ser recortado em detalhes, apenas nas partes que serão animadas ou destacadas com algum efeito posteriormente. Como, por exemplo, a espada do personagem Higuruma, que poderia ser pintada dentro do After Effects (programa usado para essa animação), porém, como eu já tinha certeza de que a cor seria essa, então é menos trabalho e gasto de processamento dentro do editor.",
       secondMedia: "https://drive.google.com/thumbnail?id=1HLtAKiswuVRSmRvBlps4CBeqVkrAJNOn&sz=w1000",
       thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
-      thirdMedia: "https://i.imgur.com/SnFfjM4.gif",
+      thirdMedia: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDJlb3BpYWhucWlkb2R1dWxveTB0Mzgwdjkxb2VhZnRoOHBrZTloNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RR5i5CJgOPMfVXuYYS/giphy.gif",
       fourthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
       fifthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
       sixthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
@@ -267,7 +267,7 @@ function App() {
             {selectedContent.thirdText}
           </text>
 
-          <img src={selectedContent.thirdMedia} style={style.modalImage} />
+          <img src={selectedContent.thirdMedia} style={{...style.modalImage, width:1000}} />
 
 
         </Modal.Body>
