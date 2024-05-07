@@ -8,6 +8,9 @@ import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slide
 import sliderImageOne from './assets/miscellaneous/numero1.png'
 import sliderImageTwo from './assets/miscellaneous/numero3.png'
 import motionhiguruma from './assets/miscellaneous/motionhiguruma.gif'
+import motionyhwach from './assets/miscellaneous/motionyhwach.gif'
+import rpgrpg from './assets/miscellaneous/rpgrpg.gif'
+import motionmash from './assets/miscellaneous/motionmash.gif'
 
 const contentArray = [
   { //video clipe
@@ -19,7 +22,6 @@ const contentArray = [
       secondText: 'Então, ele aceitou nossa proposta de fazer um clipe para ele como projeto final, o que seria benéfico para ambos os lados. Nós ganhamos uma música conhecida nacionalmente, um cantor de nome e facilidade de locação devido aos contatos do Marcello e ele ganha um clipe novinho saindo do forno. O Marcello queria uma história bem serena como a própria música, mas meio fantasiosa no sentido de encontrar a pessoa perfeita, histórias que terminam com um final feliz apesar dos problemas durante a "aventura"',
       secondMedia: "https://drive.google.com/thumbnail?id=1V1kb6Gph7gj4RiNFVfOYn8ILVrFGEvO8&sz=w1000",
       thirdText: "E apesar dos problemas de locação e da pouca disponibilidade do cantor devido ser muito ocupado, só tivemos 1 dia para gravar o clipe todo, então se não conseguimos alguma cena ela simplesmente não iria existir e não teria como fazer nada a respeito. No fim o clipe foi um sucesso ganhando o Festival de Vídeos Universitários (OSGA), como melhor vídeo clipe em 2023.",
-      // thirdMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
     }
   },
   { //rpg
@@ -28,7 +30,7 @@ const contentArray = [
       src: 'https://drive.google.com/thumbnail?id=1XS9iVXvWl6Ug27MSm6vOupAOOxhX3UvQ&sz=w1000',
       video: 'https://www.youtube.com/embed/rPQUkV3--7c?si=NTKcl1fRetekRUzK',
       firstText: "Eu tive a oportunidade de fazer um áudio drama como projeto de faculdade, o objetivo aqui é fazer uma partidade de RPG através de uma visão dramatizada de quem está jogando, afinal, ver por fora pessoas jogando RPG, faz o mesmo parecer complexo confuso.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=1Lzkh7Dsozq0W7jYMWhCpWWfgZTJDm1VJ&sz=w1000',
+      firstMedia: rpgrpg,
       secondText: "Então, tanto em roteiro quanto em uma pequena atuação como Mestre de Mesa, eu tive que transformar uma sessão de RPG em algo fácil de digerir até mesmo para que não sabe nada de mundos medievais fantásticos.",
       secondMedia: "https://drive.google.com/thumbnail?id=1hSJjt4mBdxVIWzmSBICZaWrXrEV4ib-6&sz=w1000",
       thirdText: "Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos os integrantes que ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama é ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que se tornou cada vez mais raro mundo a fora, devido a natureza social que o jogo trás.",
@@ -66,9 +68,8 @@ const contentArray = [
       secondMedia: "https://drive.google.com/thumbnail?id=1HLtAKiswuVRSmRvBlps4CBeqVkrAJNOn&sz=w1000",
       thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
       thirdMedia: motionhiguruma,
-      fourthMedia: "https://drive.google.com/thumbnail?id=1cgt48vtvMZZdn0hvOsn37lDAa7mxDflc&sz=w1000",
-      fifthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
-      sixthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
+      fourthMedia: motionmash,
+      fifthMedia: motionyhwach
     }
   },
   { //dublagem
@@ -76,11 +77,13 @@ const contentArray = [
       src: 'https://drive.google.com/thumbnail?id=1ixLBKay3bcSIk8xay6bQ-XSOOHTiXvSq&sz=w1000', 
       title: "Dublagem e Tratamento de Aúdio",
       firstText: "Dublagem segue em dificuldades do começo ao fim, desde o tratamento acústico que você tem em sua sala até a qualidade de configuração do seu microfone e conhecimento orgânico de mixagem e pós-produção. Eu tive a oportunidade de fazer parte de um projeto de fan-dublagem para dublar o jogo Street Fighter 6, que chegou ao Brasil sem dublagem oficial. Obviamente, parte das complexidades começa com o fato de ter gravado em um quarto sem tratamento acústico.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=11UVc1wsWVSi1bWDd_dApaEIzI-6yF4G8&sz=w1000',
       secondText: "A parte artística de atuação é muito importante, mas para fan-dublagens tende a não ser tão dramático quanto para dublagens oficiais. Toda minha dublagem é baseada em edição para compensar o lugar que gravo, já que qualquer grito ou som de fora da vizinhança pode destruir o áudio em questão. No fim usei plugins da Wave de compressão, De Reverbs (para controle de sala) com SPL De-Reverb da Alliance, tudo isso dentro do programa Reaper para essa gravação e edição.",
-      secondMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
-      thirdText: "",
-      thirdMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
+      thirdText: "Essas são outras fan-dublagens que acabei fazendo.",
+      firstVideo: "https://drive.google.com/file/d/1w0McaHtNqMSn-hs0xalQE_e-GWinYAaM/preview",
+      secondVideo: "https://drive.google.com/file/d/11UVc1wsWVSi1bWDd_dApaEIzI-6yF4G8/preview",
+      thirdVideo: "https://drive.google.com/file/d/1bPHaux38JGZhx6Gr0OJ56rq9UGPD2vDx/preview",
+      fourthVideo: "https://drive.google.com/file/d/1BTase7CFPYdCzA646HBrwxgLqB1I55Tx/preview",
+      fifthVideo: "https://drive.google.com/file/d/10dS309di16rvgopznbWcdJa-RM_ZJ0Fy/preview",
     }
   },
 ]
@@ -115,6 +118,7 @@ const style = {
     color: 'white',
     padding: '20px',
     textAlign: 'center',
+    marginTop:30
   },
   button: {
     display: 'flex',
@@ -131,6 +135,11 @@ const style = {
     display: 'block',
     margin: 'auto',
   },
+  modalVideo: {
+    display: 'block',
+    margin: 'auto',
+    marginTop:30, 
+  },
   modalText: {
     fontSize:24, 
     textAlign:'left', 
@@ -142,7 +151,6 @@ const style = {
 
 function App() {
   const [showModal, setShowModal] = useState(false)
-  const [selectedImage, setSelectedImage] = useState('')
   const [selectedTitle, setSelectedTitle] = useState('')
   const [selectedContent, setSelectedContent] = useState({})
   const [width, setWidth] = useState(window.innerWidth)
@@ -152,7 +160,6 @@ function App() {
   }
 
   const handleImageClick = (src, title, content) => {
-    setSelectedImage(src)
     setSelectedTitle(title)
     setSelectedContent(content)
     setShowModal(true)
@@ -187,7 +194,11 @@ function App() {
               className="fa fa-instagram fa-2x pt-3"
               style={{ cursor: 'pointer' }}
             />
-            <i className="fa fa-linkedin fa-2x pt-3 mx-4" />
+            <i 
+              onClick={() => { window.open('https://www.linkedin.com/in/tiago-holles-30a81a308', '_blank') }}
+              style={{ cursor: 'pointer' }}
+            
+            className="fa fa-linkedin fa-2x pt-3 mx-4" />
             <i
               onClick={() => { window.open('https://www.youtube.com/@Grid_Zone', '_blank') }}
               className="fa fa-youtube fa-2x pt-3"
@@ -215,7 +226,7 @@ function App() {
         ))}
       </div>
 
-      <div style={style.textSection}>
+      <div style={style.textSection} >
         <h3 className='thefont'>
           Olá. Me chamo Tiago Holles, sou editor, roteirista e nos tempos livres dublador. Busco oportunidade de aprender<br />
           mais na minha área de formação, crescimento profissional e estabilidade no mercado de trabalho,<br />
@@ -259,6 +270,13 @@ function App() {
 
           <img src={selectedContent.firstMedia} style={style.modalImage} />
 
+          {selectedContent.firstVideo?          
+          <iframe src={selectedContent.firstVideo} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
+
+
           <ReactCompareSlider
             style={style.modalImage}
             itemOne={<ReactCompareSliderImage src={selectedContent.sliderImageOne}/>}
@@ -269,15 +287,50 @@ function App() {
             {selectedContent.secondText}
           </text>
 
+          {selectedContent.secondVideo?          
+          <iframe src={selectedContent.secondVideo} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
+
           <img src={selectedContent.secondMedia} style={style.modalImage} />
 
           <text className='thefont' style={style.modalText}>
             {selectedContent.thirdText}
           </text>
 
+          {selectedContent.thirdVideo?          
+          <iframe src={selectedContent.thirdVideo} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
+
+          {selectedContent.fourthVideo?          
+          <iframe src={selectedContent.fourthVideo} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
+
+          {selectedContent.fifthVideo?          
+          <iframe src={selectedContent.fifthVideo} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
+
           <img src={selectedContent.thirdMedia} style={{...style.modalImage}} />
 
+          {selectedContent.fourthMedia?
           <img src={selectedContent.fourthMedia} style={{...style.modalImage, marginTop:50}} />
+          :
+          <React.Fragment/>
+          }
+
+          {selectedContent.fifthMedia?
+          <img src={selectedContent.fifthMedia} style={{...style.modalImage, marginTop:50}} />
+          :
+          <React.Fragment/>
+          }
+
 
 
 
