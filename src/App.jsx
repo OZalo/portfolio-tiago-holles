@@ -4,6 +4,10 @@ import { motion } from "framer-motion"
 import { Modal } from 'react-bootstrap'
 import './index.css'
 import fundo from './assets/miscellaneous/background.png'
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+import sliderImageOne from './assets/miscellaneous/numero1.png'
+import sliderImageTwo from './assets/miscellaneous/numero3.png'
+import motionhiguruma from './assets/miscellaneous/motionhiguruma.gif'
 
 const contentArray = [
   { //video clipe
@@ -35,13 +39,11 @@ const contentArray = [
     content: {
       src: 'https://drive.google.com/thumbnail?id=1TUAyAVdK77CkFNPmCevg0tF_Lhx4Rp6N&sz=w1000', 
       title: "Curta Metragem",
-      firstText: "",
-      firstMedia: 'https://drive.google.com/thumbnail?id=aqui&sz=w1000',
-      secondText: "",
-      secondMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
-      thirdText: "",
-      thirdMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
-
+      firstText: "Reflexo da Maldade foi um curta-metragem feito como projeto final de curso, eu fui convidado com editor por fora, o que é muito interessante porque tem a visão da equipe que produziu e a visão que eu tenho de olhar o projeto do lado de fora. No geral, não era um projeto desafiador no sentido geral, o que realmente precisava de muita atenção era um efeito especial referente ao espelho onde acontecia todo o drama do curta. Se essa parte ficasse ruim, ou não fosse convincente, estragaria toda a experiência de quem está assistindo.",
+      secondText: "Outra parte complicada, era compensar a falta de atores com cenários, já que eles não tinham como chamar atores para o curta, alguns membros da equipe tiveram que suprir essa falta de recurso, e obviamente por não terem conhecimento de atuação, eu tive que na edição dar grandes focos nos cenários, efeitos e ambientes escuros, que escondam esses detalhes.",
+      secondMedia: "https://drive.google.com/thumbnail?id=1cMq54cA3PpMR2OjaPNsmbDrDHfQR_Ftq&sz=w1000",
+      sliderImageOne: sliderImageOne,
+      sliderImageTwo: sliderImageTwo
     }
   },
   { //grid
@@ -49,7 +51,7 @@ const contentArray = [
       src: 'https://drive.google.com/thumbnail?id=1NfAOXw8eXqx8bETPA1xdZ2Bi2_hyiwBc&sz=w1000', 
       title: "Grid",
       firstText: "Grid é meu canal do YouTube que tem como objetivo tocar em assuntos aleatórios como treinamento geral de produção, eu sempre busco um assunto que não tem nada a ver com o vídeo passado para me forçar a criar roteiros diferentes, designs novos e propostas de construções de vídeo que eu não posso roubar do vídeo anterior, afinal é bem natural criar um canal no YouTube com uma estética e proposta de construção de vídeo e ir usando ela e todos os vídeos tanto por um padrão quanto por simplicidade de se editar vários vídeos de uma só fez. No fim é apenas um grande playground para eu testar habilidades novas e propostas de vídeo que são usadas mundo a fora e tentar fazer do meu jeito.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=1_s5MswiIP6qSMN5C0X6OWKH5KbtLozZQ&sz=w1000',
+      firstMedia: 'https://drive.google.com/thumbnail?id=1sPjTpP_NQaXM1GGsbW9gBOcO8SoyaOPT&sz=w1000',
       secondText: "A parte mais complicada é sempre a construção visual do que você quer. Eu queria passar um ar neutro para quem entrasse no meu canal, através do banner ou títulos dos vídeos. Vocês não sabem qual é o assunto principal desse canal, é uma área aberta para todo tipo de conteúdo.",
       secondMedia: "https://drive.google.com/thumbnail?id=1_s5MswiIP6qSMN5C0X6OWKH5KbtLozZQ&sz=w1000",
     }
@@ -63,8 +65,8 @@ const contentArray = [
       secondText: "Você precisa estudar o desenho muito antes de levá-lo a um editor, pois antes de animar, esse desenho precisa ser recortado em detalhes, apenas nas partes que serão animadas ou destacadas com algum efeito posteriormente. Como, por exemplo, a espada do personagem Higuruma, que poderia ser pintada dentro do After Effects (programa usado para essa animação), porém, como eu já tinha certeza de que a cor seria essa, então é menos trabalho e gasto de processamento dentro do editor.",
       secondMedia: "https://drive.google.com/thumbnail?id=1HLtAKiswuVRSmRvBlps4CBeqVkrAJNOn&sz=w1000",
       thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
-      thirdMedia: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDJlb3BpYWhucWlkb2R1dWxveTB0Mzgwdjkxb2VhZnRoOHBrZTloNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RR5i5CJgOPMfVXuYYS/giphy.gif",
-      fourthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
+      thirdMedia: motionhiguruma,
+      fourthMedia: "https://drive.google.com/thumbnail?id=1cgt48vtvMZZdn0hvOsn37lDAa7mxDflc&sz=w1000",
       fifthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
       sixthMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
     }
@@ -74,7 +76,7 @@ const contentArray = [
       src: 'https://drive.google.com/thumbnail?id=1ixLBKay3bcSIk8xay6bQ-XSOOHTiXvSq&sz=w1000', 
       title: "Dublagem e Tratamento de Aúdio",
       firstText: "Dublagem segue em dificuldades do começo ao fim, desde o tratamento acústico que você tem em sua sala até a qualidade de configuração do seu microfone e conhecimento orgânico de mixagem e pós-produção. Eu tive a oportunidade de fazer parte de um projeto de fan-dublagem para dublar o jogo Street Fighter 6, que chegou ao Brasil sem dublagem oficial. Obviamente, parte das complexidades começa com o fato de ter gravado em um quarto sem tratamento acústico.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=1w0McaHtNqMSn-hs0xalQE_e-GWinYAaM&sz=w1000',
+      firstMedia: 'https://drive.google.com/thumbnail?id=11UVc1wsWVSi1bWDd_dApaEIzI-6yF4G8&sz=w1000',
       secondText: "A parte artística de atuação é muito importante, mas para fan-dublagens tende a não ser tão dramático quanto para dublagens oficiais. Toda minha dublagem é baseada em edição para compensar o lugar que gravo, já que qualquer grito ou som de fora da vizinhança pode destruir o áudio em questão. No fim usei plugins da Wave de compressão, De Reverbs (para controle de sala) com SPL De-Reverb da Alliance, tudo isso dentro do programa Reaper para essa gravação e edição.",
       secondMedia: "https://drive.google.com/thumbnail?id=aqui&sz=w1000",
       thirdText: "",
@@ -84,7 +86,7 @@ const contentArray = [
 ]
 
 const headerStyle = {
-  backgroundColor: '#27221e', 
+  backgroundColor: 'black', 
   color: '#fff',  
   display: 'flex', 
   justifyContent: 'space-between', 
@@ -175,10 +177,10 @@ function App() {
       <div style={{ paddingBottom: isMobile ? 60 : 70 }}>
         <nav style={headerStyle}>
           <div>
-            <h1 className='thefont' style={{ marginLeft: 5 }}>Tiago Holles</h1>
+            <h1 className='thefont' style={{ marginLeft: 5, marginTop: 5 }}>Tiago Holles</h1>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'row', marginRight: 5 }}>
+          <div style={{ display: 'flex', flexDirection: 'row', marginRight: 5, paddingRight:8 }}>
 
             <i
               onClick={() => { window.open('https://www.instagram.com/tiago_holles', '_blank') }}
@@ -257,6 +259,12 @@ function App() {
 
           <img src={selectedContent.firstMedia} style={style.modalImage} />
 
+          <ReactCompareSlider
+            style={style.modalImage}
+            itemOne={<ReactCompareSliderImage src={selectedContent.sliderImageOne}/>}
+            itemTwo={<ReactCompareSliderImage src={selectedContent.sliderImageTwo}/>}
+          />
+
           <text className='thefont' style={style.modalText}>
             {selectedContent.secondText}
           </text>
@@ -267,7 +275,10 @@ function App() {
             {selectedContent.thirdText}
           </text>
 
-          <img src={selectedContent.thirdMedia} style={{...style.modalImage, width:1000}} />
+          <img src={selectedContent.thirdMedia} style={{...style.modalImage}} />
+
+          <img src={selectedContent.fourthMedia} style={{...style.modalImage, marginTop:50}} />
+
 
 
         </Modal.Body>
