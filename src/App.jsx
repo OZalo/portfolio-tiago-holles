@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { motion } from "framer-motion"
-import { Modal } from 'react-bootstrap'
+import { Modal, CloseButton } from 'react-bootstrap'
 import './index.css'
 import fundo from './assets/miscellaneous/background.png'
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
@@ -196,8 +196,8 @@ function App() {
 
       <div style={{ paddingBottom: isMobile ? 60 : 70 }}>
         <nav style={headerStyle}>
-          <div>
-            <h1 className='thefont' style={isMobile? { marginLeft: 5, paddingTop:5 } : { marginLeft: 5 }}>Tiago Holles</h1>
+          <div style={{}}>
+            <h1 className='thefont ' style={isMobile? { marginLeft: 5, paddingTop:5 } : { marginLeft: 5, marginTop:5 }}>Tiago Holles</h1>
           </div>
 
           <div 
@@ -269,9 +269,9 @@ function App() {
       }
 
 
-      <div style={{marginTop: 36}} className="d-flex justify-content-center">
+      <div style={ isMobile? {  marginTop: 36} : {  marginTop: 0}} className="d-flex justify-content-center">
         <motion.button
-          className='mb-5 thefont'
+          className='mb-5 thefont '
           whileHover={{ scale: 1.02, cursor: 'pointer' }}
           whileTap={{ scale: 0.8 }}
           style={style.button}
@@ -287,19 +287,20 @@ function App() {
 
 
       <Modal style={{color:'white'}} contentClassName='text-white btn-close-white ' centered size='xl' show={showModal} onHide={handleCloseModal}>
-        <Modal.Header style={{ backgroundColor: '#040509'  }} closeButton>
+        <Modal.Header closeButton={false} style={{ backgroundColor: '#040509'  }}>
           <Modal.Title  className='thefont' >{selectedTitle}</Modal.Title>
+          <CloseButton onClick={handleCloseModal} variant="white" />
         </Modal.Header>
         <Modal.Body  style={{ backgroundColor: '#040509' }} >
 
           {selectedContent.video? 
-          <iframe src={selectedContent.video} allowFullScreen={true} style={{...style.modalImage, height:'500px', width:'3000px'}} />
+          <iframe title='Vídeo Principal' src={selectedContent.video} allowFullScreen={true} style={{...style.modalImage, height:'500px', width:'3000px'}} />
           :
           <React.Fragment></React.Fragment>
           }
           
           {selectedContent.upperVideo?          
-          <iframe src={selectedContent.upperVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          <iframe title='Vídeo de cima' src={selectedContent.upperVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
           :
           <React.Fragment/>
           }
@@ -308,10 +309,10 @@ function App() {
             {selectedContent.firstText}
           </text>
 
-          <img src={selectedContent.firstMedia} style={style.modalImage} />
+          <img alt='' src={selectedContent.firstMedia} style={style.modalImage} />
 
           {selectedContent.firstVideo?          
-          <iframe src={selectedContent.firstVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          <iframe title='Primeiro Vídeo' src={selectedContent.firstVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
           :
           <React.Fragment/>
           }
@@ -328,45 +329,45 @@ function App() {
           </text>
 
           {selectedContent.secondVideo?          
-          <iframe src={selectedContent.secondVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          <iframe title='Segundo Vídeo' src={selectedContent.secondVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
           :
           <React.Fragment/>
           }
 
-          <img src={selectedContent.secondMedia} style={style.modalImage} />
+          <img alt='' src={selectedContent.secondMedia} style={style.modalImage} />
 
           <text className='thefont' style={style.modalText}>
             {selectedContent.thirdText}
           </text>
 
           {selectedContent.thirdVideo?          
-          <iframe src={selectedContent.thirdVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          <iframe title='Terceiro Vídeo' src={selectedContent.thirdVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
           :
           <React.Fragment/>
           }
 
           {selectedContent.fourthVideo?          
-          <iframe src={selectedContent.fourthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          <iframe title='Quarto Vídeo' src={selectedContent.fourthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
           :
           <React.Fragment/>
           }
 
           {selectedContent.fifthVideo?          
-          <iframe src={selectedContent.fifthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          <iframe title='Quinto Vídeo' src={selectedContent.fifthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
           :
           <React.Fragment/>
           }
 
-          <img src={selectedContent.thirdMedia} style={{...style.modalImage}} />
+          <img alt='' src={selectedContent.thirdMedia} style={{...style.modalImage}} />
 
           {selectedContent.fourthMedia?
-          <img src={selectedContent.fourthMedia} style={{...style.modalImage, marginTop:50}} />
+          <img alt='' src={selectedContent.fourthMedia} style={{...style.modalImage, marginTop:50}} />
           :
           <React.Fragment/>
           }
 
           {selectedContent.fifthMedia?
-          <img src={selectedContent.fifthMedia} style={{...style.modalImage, marginTop:50}} />
+          <img alt='' src={selectedContent.fifthMedia} style={{...style.modalImage, marginTop:50}} />
           :
           <React.Fragment/>
           }
