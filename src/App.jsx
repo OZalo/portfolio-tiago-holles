@@ -13,7 +13,7 @@ import rpgrpg from './assets/miscellaneous/rpgrpg.gif'
 import motionmash from './assets/miscellaneous/motionmash.gif'
 
 const contentArray = [
-  { //video clipe
+  { //video clipe 
     content: {
       src: 'https://drive.google.com/thumbnail?id=1Wo9862X0Snb44bilgEOyjJbCK1jsiEij&sz=w1000', 
       title: "Pior Que Dor de Dente",
