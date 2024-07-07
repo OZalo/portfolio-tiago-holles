@@ -11,7 +11,7 @@ import motionhiguruma from './assets/miscellaneous/motionhiguruma.gif'
 import motionyhwach from './assets/miscellaneous/motionyhwach.gif'
 import rpgrpg from './assets/miscellaneous/rpgrpg.gif'
 import motionmash from './assets/miscellaneous/motionmash.gif'
-
+//comentario
 const contentArray = [
   { //video clipe
     content: {
