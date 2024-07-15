@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { motion } from "framer-motion"
+import { motion, useMotionValue } from "framer-motion"
 import { Modal, CloseButton } from 'react-bootstrap'
 import './index.css'
 import fundo from './assets/miscellaneous/background.png'
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider'
 import sliderImageOne from './assets/miscellaneous/numero1.png'
 import sliderImageTwo from './assets/miscellaneous/numero3.png'
 import motionhiguruma from './assets/miscellaneous/motionhiguruma.gif'
@@ -77,7 +77,7 @@ const contentArray = [
   },
   { //dublagem
     content: {
-      src: 'https://drive.google.com/thumbnail?id=1ixLBKay3bcSIk8xay6bQ-XSOOHTiXvSq&sz=w1000', 
+      src: 'https://drive.google.com/thumbnail?id=1sp7cVV8RPnjrF_dhtn7suQ7v3xPyPRcK&sz=w1000', 
       title: "Dublagem e Tratamento de Aúdio",
       firstText: "Dublagem segue em dificuldades do começo ao fim, desde o tratamento acústico que você tem em sua sala até a qualidade de configuração do seu microfone e conhecimento orgânico de mixagem e pós-produção. Eu tive a oportunidade de fazer parte de um projeto de fan-dublagem para dublar o jogo Street Fighter 6, que chegou ao Brasil sem dublagem oficial. Obviamente, parte das complexidades começa com o fato de ter gravado em um quarto sem tratamento acústico.",
       secondText: "A parte artística de atuação é muito importante, mas para fan-dublagens tende a não ser tão dramático quanto para dublagens oficiais. Toda minha dublagem é baseada em edição para compensar o lugar que gravo, já que qualquer grito ou som de fora da vizinhança pode destruir o áudio em questão. No fim usei plugins da Wave de compressão, De Reverbs (para controle de sala) com SPL De-Reverb da Alliance, tudo isso dentro do programa Reaper para essa gravação e edição.",
@@ -161,12 +161,36 @@ const style = {
   }
 }
 
+const oneSecond = 1000
+const autoDelay = oneSecond * 10
+const dragBuffer = 50
+
+const springOptions = {
+  type: "spring",
+  mass: 3,
+  stiffness: 400,
+  damping: 50,
+}
+
+const carouselItems = [
+  "https://www.youtube.com/embed/fOXJZA_Uh3g?si=64gpe9Ic7C0MvLIK",
+  "https://www.youtube.com/embed/8NCm6vdPf6M?si=1FiG_TSAA2Ncih9n",
+  "https://www.youtube.com/embed/jvKKDEjygnY?si=4ys8NHSpsWNXK6xd",
+  "https://www.youtube.com/embed/AmyMaNq3h6M?si=lE4BCJBP-9EEKd7i",
+
+]
+
 function App() {
 
   const [showModal, setShowModal] = useState(false)
   const [selectedTitle, setSelectedTitle] = useState('')
   const [selectedContent, setSelectedContent] = useState({})
   const [width, setWidth] = useState(window.innerWidth)
+  const [itemIndex, setItemIndex] = useState(0)
+  const dragX = useMotionValue(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  const isMobile = width <= 768
 
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth)
@@ -182,7 +206,18 @@ function App() {
     setShowModal(false)
   }
 
-  const isMobile = width <= 768
+  const onDragEnd = () => {
+    const x = dragX.get()
+
+    if (x <= -dragBuffer && itemIndex < carouselItems.length - 1) {
+      setItemIndex((pv) => pv + 1)
+    } else if (x >= dragBuffer && itemIndex > 0) {
+      setItemIndex((pv) => pv - 1)
+    }
+  }  
+
+  const handleMouseEnter = () => setIsPaused(true)
+  const handleMouseLeave = () => setIsPaused(false)
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange)
@@ -190,6 +225,27 @@ function App() {
       window.removeEventListener("resize", handleWindowSizeChange)
     }
   }, [])
+
+  useEffect(() => {
+    const intervalRef = setInterval(() => {
+      if (!isPaused) {
+        const x = dragX.get()
+        if (x === 0) {
+          setItemIndex((pv) => {
+            if (pv === carouselItems.length - 1) {
+              return 0
+            }
+            return pv + 1
+          })
+        }
+      }
+    }, autoDelay)
+
+    return () => clearInterval(intervalRef)
+    // eslint-disable-next-line
+  }, [isPaused])
+
+
 
   return (
     <div style={{ backgroundImage: `url(${fundo})` }}>
@@ -254,6 +310,45 @@ function App() {
           </div>
         ))}
       </div>
+
+      <div style={{
+          color: 'white',
+          textAlign: 'center',
+          marginTop: 30
+
+      }} >
+        <h3 className='thefont'>
+          VÍDEOS QUE JÁ EDITEI
+        </h3>
+      </div>
+      <div 
+        style={{backgroundColor:'#040509'}} 
+        className="position-relative overflow-hidden mt-4"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        >
+      <motion.div
+        drag="x"
+        dragConstraints={{
+          left: 0,
+          right: 0,
+        }}
+        style={{
+          x: dragX,
+        }}
+        animate={{
+          translateX: `-${itemIndex * 100}%`,
+        }}
+        transition={springOptions}
+        onDragEnd={onDragEnd}
+        className="d-flex align-items-center"
+      >
+        <VideosContainer itemIndex={itemIndex} />
+      </motion.div>
+
+      <Dots itemIndex={itemIndex} setItemIndex={setItemIndex} />
+      <GradientEdges />
+    </div>
 
       {isMobile?
       <React.Fragment></React.Fragment>
@@ -380,6 +475,93 @@ function App() {
       </Modal>
 
     </div>
+  )
+}
+
+const VideosContainer = ({ itemIndex }) => {
+  return (
+    <>
+      {carouselItems.map((item, idx) => {
+        return (
+          <motion.div
+          key={idx}
+          style={{
+            flexShrink: 0,
+            width: "100%",
+            padding: "0 10%",
+          }}
+          animate={{ scale: itemIndex === idx ? 0.95 : 0.85 }}
+          transition={springOptions}
+        >
+          <iframe
+            title='carouselVideo'
+            src={item}
+            style={{
+              height: '500px',
+              width:'900px',
+              display: 'block',
+              margin: 'auto',
+            }}
+            allowFullScreen
+          />
+        </motion.div>
+        )
+      })}
+    </>
+  )
+}
+
+
+const Dots = ({ itemIndex, setItemIndex }) => {
+  return (
+    <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.5rem" }}>
+      {carouselItems.map((_, idx) => {
+        return (
+          <button
+            key={idx}
+            onClick={() => setItemIndex(idx)}
+            style={{
+              width: "12px",
+              height: "12px",
+              borderRadius: "50%",
+              padding: 8,
+              marginBottom:10,
+              backgroundColor: idx === itemIndex ? "#f8f9fa" : "#6c757d",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+const GradientEdges = () => {
+  return (
+    <>
+      <div style={{
+        pointerEvents: "none",
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        top: 0,
+        width: "10vw",
+        maxWidth: "100px",
+        background: "linear-gradient(to right, rgba(33, 37, 41, 0.5), rgba(33, 37, 41, 0))"
+      }} />
+      <div style={{
+        pointerEvents: "none",
+        position: "absolute",
+        bottom: 0,
+        right: 0,
+        top: 0,
+        width: "10vw",
+        maxWidth: "100px",
+        background: "linear-gradient(to left, rgba(33, 37, 41, 0.5), rgba(33, 37, 41, 0))"
+      }} />
+    </>
   )
 }
 
