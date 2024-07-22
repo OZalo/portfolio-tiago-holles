@@ -8,7 +8,6 @@ import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slide
 import sliderImageOne from './assets/miscellaneous/numero1.png'
 import sliderImageTwo from './assets/miscellaneous/numero3.png'
 import motionhiguruma from './assets/miscellaneous/motionhiguruma.gif'
-import motionyhwach from './assets/miscellaneous/motionyhwach.gif'
 import rpgrpg from './assets/miscellaneous/rpgrpg.gif'
 import motionmash from './assets/miscellaneous/motionmash.gif'
 
@@ -72,7 +71,8 @@ const contentArray = [
       thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
       thirdMedia: motionhiguruma,
       fourthMedia: motionmash,
-      fifthMedia: motionyhwach
+      fourthVideo: "https://drive.google.com/file/d/1CnpWz54muD65nXzykiZLKyoeO5Cr83Np/preview",
+      thirdVideo: "https://drive.google.com/file/d/1ryVdqE_yxIQfOOUoZFD_UrS0ChrqPlU1/preview"
     }
   },
   { //dublagem
@@ -87,6 +87,7 @@ const contentArray = [
       thirdVideo: "https://drive.google.com/file/d/1bPHaux38JGZhx6Gr0OJ56rq9UGPD2vDx/preview",
       fourthVideo: "https://drive.google.com/file/d/1BTase7CFPYdCzA646HBrwxgLqB1I55Tx/preview",
       fifthVideo: "https://drive.google.com/file/d/10dS309di16rvgopznbWcdJa-RM_ZJ0Fy/preview",
+      sixthVideo: "https://drive.google.com/file/d/1ryVdqE_yxIQfOOUoZFD_UrS0ChrqPlU1/preview"
     }
   },
 ]
@@ -150,6 +151,7 @@ const style = {
     display: 'block',
     margin: 'auto',
     marginTop:30, 
+    marginBottom:30, 
   },
   modalText: {
     color: 'white',
@@ -177,6 +179,7 @@ const carouselItems = [
   "https://www.youtube.com/embed/8NCm6vdPf6M?si=1FiG_TSAA2Ncih9n",
   "https://www.youtube.com/embed/jvKKDEjygnY?si=4ys8NHSpsWNXK6xd",
   "https://www.youtube.com/embed/AmyMaNq3h6M?si=lE4BCJBP-9EEKd7i",
+  "https://www.youtube.com/embed/iQL6J2wwb0Y?si=6agQ-NkFhvkCZifs",
 
 ]
 
@@ -343,7 +346,7 @@ function App() {
         onDragEnd={onDragEnd}
         className="d-flex align-items-center"
       >
-        <VideosContainer itemIndex={itemIndex} />
+        <VideosContainer height={isMobile? '200px' : '500px'} width={isMobile? '350px' : '900px'} itemIndex={itemIndex} />
       </motion.div>
 
       <Dots itemIndex={itemIndex} setItemIndex={setItemIndex} />
@@ -453,6 +456,12 @@ function App() {
           <React.Fragment/>
           }
 
+          {selectedContent.sixthVideo?          
+          <iframe title='Quinto Vídeo' src={selectedContent.sixthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
+
           <img alt='' src={selectedContent.thirdMedia} style={{...style.modalImage}} />
 
           {selectedContent.fourthMedia?
@@ -478,7 +487,7 @@ function App() {
   )
 }
 
-const VideosContainer = ({ itemIndex }) => {
+const VideosContainer = ({ itemIndex, height, width }) => {
   return (
     <>
       {carouselItems.map((item, idx) => {
@@ -497,8 +506,8 @@ const VideosContainer = ({ itemIndex }) => {
             title='carouselVideo'
             src={item}
             style={{
-              height: '500px',
-              width:'900px',
+              height: height,
+              width: width,
               display: 'block',
               margin: 'auto',
             }}
