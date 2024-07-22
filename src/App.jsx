@@ -72,7 +72,6 @@ const contentArray = [
       thirdMedia: motionhiguruma,
       fourthMedia: motionmash,
       fourthVideo: "https://drive.google.com/file/d/1CnpWz54muD65nXzykiZLKyoeO5Cr83Np/preview",
-      thirdVideo: "https://drive.google.com/file/d/1ryVdqE_yxIQfOOUoZFD_UrS0ChrqPlU1/preview"
     }
   },
   { //dublagem
