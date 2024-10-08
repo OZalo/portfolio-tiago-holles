@@ -174,7 +174,6 @@ const springOptions = {
   damping: 50,
 }
 
-
 const carouselItems = [
   "https://www.youtube.com/embed/fOXJZA_Uh3g?si=64gpe9Ic7C0MvLIK",
   "https://www.youtube.com/embed/8NCm6vdPf6M?si=1FiG_TSAA2Ncih9n",
