@@ -83,11 +83,11 @@ const contentArray = [
       secondText: "A parte artística de atuação é muito importante, mas para fan-dublagens tende a não ser tão dramático quanto para dublagens oficiais. Toda minha dublagem é baseada em edição para compensar o lugar que gravo, já que qualquer grito ou som de fora da vizinhança pode destruir o áudio em questão. No fim usei plugins da Wave de compressão, De Reverbs (para controle de sala) com SPL De-Reverb da Alliance, tudo isso dentro do programa Reaper para essa gravação e edição.",
       thirdText: "Essas são outras fan-dublagens que acabei fazendo. Também com o mesmo problema, gravando em um local ruim que acaba sendo o único disponível para mim, porém, com o tratamento de áudio certo e conhecimentos sobre como melhor aproveitar o microfone que tenho (Blue Yeti Classic nessa situação), deu para chegar em um desempenho muito próximo de uma gravação profissional.",
       firstVideo: "https://drive.google.com/file/d/1w0McaHtNqMSn-hs0xalQE_e-GWinYAaM/preview",
-      secondVideo: "https://drive.google.com/file/d/11UVc1wsWVSi1bWDd_dApaEIzI-6yF4G8/preview",
-      thirdVideo: "https://drive.google.com/file/d/1bPHaux38JGZhx6Gr0OJ56rq9UGPD2vDx/preview",
-      fourthVideo: "https://drive.google.com/file/d/1BTase7CFPYdCzA646HBrwxgLqB1I55Tx/preview",
-      fifthVideo: "https://drive.google.com/file/d/10dS309di16rvgopznbWcdJa-RM_ZJ0Fy/preview",
-      sixthVideo: "https://drive.google.com/file/d/1ryVdqE_yxIQfOOUoZFD_UrS0ChrqPlU1/preview"
+      secondVideo: "https://drive.google.com/file/d/1isd41huNbSWHQJaEBqRb4WTZDSUxmbFJ/preview",
+      thirdVideo: "https://drive.google.com/file/d/1RL0EWhL3iSRGIbBzzyeUe1eRaPN1VOFT/preview",
+      fourthVideo: "https://drive.google.com/file/d/1nFkXiU7gujJ0VVZaR3HQqVqj69tpUWWt/preview",
+      fifthVideo: "https://drive.google.com/file/d/1aYdXQIN2o2BnI5CLbDAhR3v-hsWsx_jd/preview",
+      sixthVideo: "https://drive.google.com/file/d/1C3EUN9CDmlvd_z9cjpT5uws3DCMIpRBB/preview"
     }
   },
 ]
