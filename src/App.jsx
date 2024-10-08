@@ -177,7 +177,7 @@ const springOptions = {
 const carouselItems = [
   "https://www.youtube.com/embed/fOXJZA_Uh3g?si=64gpe9Ic7C0MvLIK",
   "https://www.youtube.com/embed/8NCm6vdPf6M?si=1FiG_TSAA2Ncih9n",
-  "https://www.youtube.com/embed/jvKKDEjygnY?si=4ys8NHSpsWNXK6xd",
+  // "https://www.youtube.com/embed/jvKKDEjygnY?si=4ys8NHSpsWNXK6xd",
   "https://www.youtube.com/embed/AmyMaNq3h6M?si=lE4BCJBP-9EEKd7i",
   "https://www.youtube.com/embed/iQL6J2wwb0Y?si=6agQ-NkFhvkCZifs",
 
