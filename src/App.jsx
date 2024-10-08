@@ -71,8 +71,8 @@ const contentArray = [
       thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
       thirdMedia: motionhiguruma,
       fourthMedia: motionmash,
-      fourthVideo: "https://drive.google.com/file/d/1CnpWz54muD65nXzykiZLKyoeO5Cr83Np/preview",
-      thirdVideo: "https://drive.google.com/file/d/1F3s79FrYap0d7ILO3NgjZxtKz9iQa3Sv/preview",
+      seventhVideo: "https://drive.google.com/file/d/1CnpWz54muD65nXzykiZLKyoeO5Cr83Np/preview",
+      eighteenth: "https://drive.google.com/file/d/1F3s79FrYap0d7ILO3NgjZxtKz9iQa3Sv/preview",
     }
   },
   { //dublagem
@@ -457,7 +457,7 @@ function App() {
           }
 
           {selectedContent.sixthVideo?          
-          <iframe title='Quinto Vídeo' src={selectedContent.sixthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          <iframe src={selectedContent.sixthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
           :
           <React.Fragment/>
           }
@@ -476,7 +476,17 @@ function App() {
           <React.Fragment/>
           }
 
+          {selectedContent.seventhVideo?          
+          <iframe src={selectedContent.seventhVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
 
+          {selectedContent.eighteenth?          
+          <iframe src={selectedContent.eighteenth} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
+          :
+          <React.Fragment/>
+          }
 
 
         </Modal.Body>
