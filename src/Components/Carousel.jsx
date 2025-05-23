@@ -23,6 +23,10 @@ import conquista from '../Assets/conquista.gif'
 import diobrando from '../Assets/diobrando.gif'
 import ripper from '../Assets/ripper.gif'
 import reivoltou from '../Assets/reivoltou.gif'
+import { FaYoutube } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { FaInstagram } from 'react-icons/fa';
+import line from '../Assets/line.png'
 
 const contentArray = [
   { //video clipe
@@ -53,7 +57,7 @@ const contentArray = [
   { //reflexo da maldade
     content: {
       src: maldade, 
-      title: "Curta Metragem",
+      title: "Reflexo da Maldade",
       firstText: "“Reflexo da Maldade” é um curta-metragem realizado como projeto final de curso. Fui convidado a participar como editor externo, o que tornou a experiência particularmente interessante — pude trabalhar com o olhar de quem não esteve presente em toda a produção, oferecendo uma perspectiva de fora sobre o material da equipe. No geral, o projeto não apresentava grandes desafios técnicos, mas exigia atenção especial em um ponto crucial: um efeito visual envolvendo um espelho, que é o centro do drama do curta. Esse elemento precisava funcionar perfeitamente, pois, se não fosse convincente, comprometeria toda a imersão e a experiência do espectador.",
       upperVideo: "https://drive.google.com/file/d/1XYd0o72mtAd1jj-qVZMhpADggpGuPWpv/preview",
       secondText: "Outro desafio do projeto foi compensar a ausência de atores profissionais. Por limitações de recursos, alguns membros da própria equipe precisaram assumir os papéis no curta. Naturalmente, como não tinham experiência em atuação, meu trabalho na edição ganhou ainda mais importância. Para equilibrar essa limitação, foquei em destacar os cenários, criar atmosferas através de efeitos visuais e utilizar ambientes escuros, que ajudassem a disfarçar essas imperfeições e a manter a imersão do público.",
@@ -71,7 +75,8 @@ const contentArray = [
       secondVideo: "https://www.youtube.com/embed/NByp69XM358?si=VvFGxpCW_LRF8Ynx",
       thirdVideo: 'https://www.youtube.com/embed/Min9JZII5k8?si=OckB8fLYYgQgERiz',
       fourthVideo: 'https://www.youtube.com/embed/P1a9L_cI_MU?si=0lEer3__C8jUaho7',
-      fifthVideo: 'https://www.youtube.com/embed/tTHaQzkNj7M?si=78wJTjEYucJPJnzY'
+      fifthVideo: 'https://www.youtube.com/embed/tTHaQzkNj7M?si=78wJTjEYucJPJnzY',
+      youtubutton: "true"
     }
   },
   { // motion
@@ -85,6 +90,7 @@ const contentArray = [
       // thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
       thirdMedia: ripper,
       fourthMedia: diobrando,
+      blockx: "true"
 
     }
   },
@@ -102,10 +108,31 @@ const contentArray = [
       src: instagram, 
       title: "Instagram",
       firstText: "Estou dando meus primeiros passos no universo dos vídeos curtos, mas já trago na bagagem a prática de edição e criação de conteúdo dinâmico. Faço cortes de podcasts, vídeos para vendas e adaptações que realmente se conectam com quem assiste. Já produzi cortes de podcast para o Grupo Polaro e já desenvolvi vídeos curtos para a Universidade da Amazônia (UNAMA) e para a Fluxo.",
-      blockquoted: "true"
+      blockquoted: "true",
+      firstMedia: line
     }
   },
 ]
+
+const badgeStyle = {
+  display: 'inline-flex',
+  fontFamily: 'Arial, sans-serif',
+  overflow: 'hidden',
+  borderRadius: '4px',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+};
+
+const labelStyle = {
+  backgroundColor: '#4c4c4c',
+  color: '#fff',
+  padding: '6px 10px'
+};
+
+const valueStyle = {
+  backgroundColor: '#007ec6',
+  color: '#fff',
+  padding: '6px 10px'
+};
 
 const style = {
   container: {
@@ -170,8 +197,19 @@ const Carousel = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedContent, setselectedContent] = useState({});
   const [width, setWidth] = useState(window.innerWidth)
+  const [isLoading, setIsLoading] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 50 }); // Posição relativa em %
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    setMousePos({ x });
+  };
+  
 
   const isMobile = width <= 768
+
+
 
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth)
@@ -179,6 +217,7 @@ const Carousel = () => {
 
   const handleCardClick = (card) => {
     setselectedContent(card);
+    setIsLoading(true);
     setShowModal(true);
   };
 
@@ -207,30 +246,53 @@ const Carousel = () => {
   
 
   return (
-    <div style={{ width: '100%', overflowX: 'hidden', marginTop: '20px' }}>
+    <div style={{ 
+      width: '100%', 
+      overflow: 'hidden', 
+      marginTop: '20px', 
+      backgroundColor: 'black',
+      padding: 0,
+      margin: 0
+      }}>
       <Swiper
         modules={[Navigation, Pagination]}
-        // spaceBetween={-50}
-        slidesPerView={isMobile? 1 : 4}
+        slidesPerView={isMobile ? 1 : 4}
         navigation
-        // pagination={{ clickable: true }}
         loop
         style={{
           '--swiper-navigation-color': 'white',
-          '--swiper-pagination-color': 'white'
+          '--swiper-pagination-color': 'white',
+          backgroundColor: 'black',
+          padding: 0,
+          margin: 0
         }}
-      >
+        >
         {contentArray.map((item, index) => (
-          <SwiperSlide key={index}>
-            <motion.div whileHover={{ scale: 1.02, cursor: 'pointer' }} whileTap={{ scale: 0.8 }}>
+
+          <SwiperSlide
+            key={index}
+            style={{
+              backgroundColor: 'black',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.02, cursor: 'pointer' }}
+              whileTap={{ scale: 0.8 }}
+              style={{ width: '70%', height: 'auto', minHeight: '350px' }}
+              onClick={() => handleCardClick(item.content)}
+            >
               <motion.img
-                style={{ width: '70%', height: '70%', minHeight: '350px', objectFit: 'cover' }}
-                onClick={() => handleCardClick(item.content)}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 src={item.content.src}
                 alt={item.content.title}
               />
             </motion.div>
           </SwiperSlide>
+
+
         ))}
       </Swiper>
 
@@ -239,142 +301,362 @@ const Carousel = () => {
           <Modal.Title className='thefont'>{selectedContent.title}</Modal.Title>
           <CloseButton onClick={() => setShowModal(false)} variant='white' />
         </Modal.Header>
-        <Modal.Body style={{ backgroundColor: '#040509' }}>
 
-          {selectedContent.video? 
-          <iframe title='Vídeo Principal' src={selectedContent.video} allowFullScreen={true} style={{...style.modalImage, height:'500px', width:'3000px'}} />
-          :
-          <React.Fragment></React.Fragment>
-          }
-          
-          {selectedContent.upperVideo?          
-          <iframe title='Vídeo de cima' src={selectedContent.upperVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
+        <Modal.Body style={{ backgroundColor: '#040509', position: 'relative' }}>
 
-          <text className='thefont' style={style.modalText}>
-            {selectedContent.firstText}
-          </text>
+{/* Overlay de Loading no topo */}
+{isLoading && (
 
-          {/* ifelse img iframe */}
-          <img alt='' src={selectedContent.firstMedia} style={style.modalImage} />
+<div style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'black',
+    zIndex: 9999,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingTop: '50px',
+  }}>
+    <div style={{
+      position: 'relative',
+      display: 'inline-block',
+      fontSize: '48px',
+      fontWeight: 'bold',
+      fontFamily: 'Arial, sans-serif',
+      color: 'white',
+      overflow: 'hidden'
+    }}>
+      <span
+        className='thefont'
+        style={{
+        position: 'relative',
+        zIndex: 1,
+        color: 'white',
+      }}>
+        Carregando
+      </span>
 
-          {selectedContent.firstVideo?          
-          <iframe title='Primeiro Vídeo' src={selectedContent.firstVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
+      <motion.span
+        className='thefont'
+        initial={{ width: 0 }}
+        animate={{ width: isLoading ? '100%' : '0%' }}
+        transition={{ 
+          duration: isLoading ? 2 : 0.2, 
+          ease: 'easeInOut' 
+        }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          color: 'red',
+          textShadow: '0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5)',  
+          zIndex: 2
+        }}
+      >
+        Carregando
+      </motion.span>
+    </div>
+  </div>
 
-          
-          <ReactCompareSlider
-            style={style.modalImage}
-            itemOne={<ReactCompareSliderImage src={selectedContent.sliderImageOne}/>}
-            itemTwo={<ReactCompareSliderImage src={selectedContent.sliderImageTwo}/>}
-          />
+)}
 
-          <text className='thefont' style={style.modalText}>
-            {selectedContent.secondText}
-          </text>
+{selectedContent.video && 
+  <iframe 
+    title='Vídeo Principal' 
+    src={selectedContent.video} 
+    allowFullScreen={true}
+    style={{ ...style.modalImage, height: '500px', width: '3000px' }}
+    onLoad={() => setIsLoading(false)}
+  />
+}
 
-          {selectedContent.secondVideo?          
-          <iframe title='Segundo Vídeo' src={selectedContent.secondVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
+{selectedContent.upperVideo && 
+  <iframe 
+    title='Vídeo de cima' 
+    src={selectedContent.upperVideo} 
+    allowFullScreen={true}
+    width="90%" 
+    height={isMobile ? "220px" : "550px"} 
+    style={{ ...style.modalVideo }}  
+    allow="autoplay"
+    onLoad={() => setIsLoading(false)}
+  />
+}
 
-          <img alt='' src={selectedContent.secondMedia} style={style.modalImage} />
-
-          <text className='thefont' style={style.modalText}>
-            {selectedContent.thirdText}
-          </text>
-
-          {selectedContent.thirdVideo?          
-          <iframe title='Terceiro Vídeo' src={selectedContent.thirdVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.fourthVideo?          
-          <iframe title='Quarto Vídeo' src={selectedContent.fourthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.fifthVideo?          
-          <iframe title='Quinto Vídeo' src={selectedContent.fifthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.sixthVideo?          
-          <iframe title='Sexto video' src={selectedContent.sixthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          <img alt='' src={selectedContent.thirdMedia} style={{...style.modalImage}} />
-
-          {selectedContent.fourthMedia?
-          <img alt='' src={selectedContent.fourthMedia} style={{...style.modalImage, marginTop:50}} />
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.fifthMedia?
-          <img alt='' src={selectedContent.fifthMedia} style={{...style.modalImage, marginTop:50}} />
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.seventhVideo?          
-          <iframe title='Sétimo video' src={selectedContent.seventhVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.eighteenth?          
-          <iframe title='Oitavo video' src={selectedContent.eighteenth} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.blockquoted?
-          
-        <div style={{
-          backgroundColor: 'black',
-          padding: '20px',
-          borderRadius: '10px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          marginTop: '30px'
-        }}>
-          <div style={{
-            maxWidth: isMobile ? '320px' : '540px',
-            width: '100%'
-          }}>
-            <blockquote
-              className="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/tiago_holles"
-              data-instgrm-version="14"
-              style={{
-                width: '100%'
-              }}
-            >
-            </blockquote>
-          </div>
-        </div>
+<div style={{
+  display: 'inline-flex',
+  overflow: 'hidden',
+  borderRadius: '4px',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+  fontFamily: 'Arial, sans-serif'
+}}>
 
 
-        :
 
-        <React.Fragment/>
+</div>
 
-        }
+<text className='thefont' style={style.modalText}>
+  {selectedContent.firstText}
+</text>
 
-        </Modal.Body>
+<div style={{
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  marginTop: '20px'
+}}
+onClick={() => window.open('https://www.instagram.com/tiago_holles', '_blank')}
+>
+
+
+{selectedContent.youtubutton &&
+
+
+<motion.button
+className='thefont'
+whileHover={{
+  scale: 1.1,
+  boxShadow: '0 0 20px rgba(207, 10, 10, 0.8), 0 0 40px rgba(207, 10, 10, 0.5)'
+}}
+whileTap={{ scale: 0.95 }}
+style={{
+  backgroundColor: '#000', // Interior preto
+  border: '2px solid #cf0a0a', // Vermelho
+  borderRadius: '8px',
+  padding: '12px 24px',
+  color: 'white',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  cursor: 'pointer',
+  outline: 'none',
+  boxShadow: '0 0 10px rgba(207, 10, 10, 0.6)', // Glow inicial
+  transition: 'all 0.3s ease',
+  position: 'relative',
+  boxSizing: 'border-box'
+}}
+  onClick={() => window.open('https://www.instagram.com/tiago_holles', '_blank')}
+>
+  
+<FaYoutube size={18} style={{ marginRight: '8px' }} />
+TheCake - YouTube
+
+</motion.button>
+
+
+}
+
+
+{selectedContent.blockx &&
+
+
+<motion.button
+className='thefont'
+whileHover={{
+  scale: 1.1,
+  boxShadow: '0 0 20px rgba(207, 10, 10, 0.8), 0 0 40px rgba(207, 10, 10, 0.5)'
+}}
+whileTap={{ scale: 0.95 }}
+style={{
+  backgroundColor: '#000', // Interior preto
+  border: '2px solid #cf0a0a', // Vermelho
+  borderRadius: '8px',
+  padding: '12px 24px',
+  color: 'white',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  cursor: 'pointer',
+  outline: 'none',
+  boxShadow: '0 0 10px rgba(207, 10, 10, 0.6)', // Glow inicial
+  transition: 'all 0.3s ease',
+  position: 'relative',
+  boxSizing: 'border-box',
+  marginBottom: '8px'
+}}
+  onClick={() => window.open('https://x.com/the_cakeeeee', '_blank')}
+>
+  
+<FaXTwitter size={18} style={{ marginRight: '8px'}} />
+TheCake
+
+</motion.button>
+
+
+}
+
+{selectedContent.blockquoted &&
+
+
+<motion.button
+className='thefont'
+whileHover={{
+  scale: 1.1,
+  boxShadow: '0 0 20px rgba(207, 10, 10, 0.8), 0 0 40px rgba(207, 10, 10, 0.5)'
+}}
+whileTap={{ scale: 0.95 }}
+style={{
+  backgroundColor: '#000', // Interior preto
+  border: '2px solid #cf0a0a', // Vermelho
+  borderRadius: '8px',
+  padding: '12px 24px',
+  color: 'white',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  cursor: 'pointer',
+  outline: 'none',
+  boxShadow: '0 0 10px rgba(207, 10, 10, 0.6)', // Glow inicial
+  transition: 'all 0.3s ease',
+  position: 'relative',
+  boxSizing: 'border-box',
+  marginBottom: '8px'
+}}
+  onClick={() => window.open('https://www.instagram.com/tiago_holles', '_blank')}
+>
+
+<FaInstagram size={18} style={{ marginRight: '8px'}} />
+TheCake - Instagram
+
+</motion.button>
+
+
+}
+
+</div>
+
+
+
+<img 
+  alt='' 
+  src={selectedContent.firstMedia} 
+  style={style.modalImage} 
+  onLoad={() => setIsLoading(false)}
+/>
+
+{selectedContent.firstVideo &&
+  <iframe 
+    title='Primeiro Vídeo' 
+    src={selectedContent.firstVideo} 
+    allowFullScreen={true} 
+    width="90%" 
+    height={isMobile ? "220px" : "550px"} 
+    style={{ ...style.modalVideo }}  
+    allow="autoplay"
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+<ReactCompareSlider
+  style={style.modalImage}
+  itemOne={<ReactCompareSliderImage src={selectedContent.sliderImageOne} />}
+  itemTwo={<ReactCompareSliderImage src={selectedContent.sliderImageTwo} />}
+/>
+
+<text className='thefont' style={style.modalText}>
+  {selectedContent.secondText}
+</text>
+
+{selectedContent.secondVideo &&
+  <iframe 
+    title='Segundo Vídeo' 
+    src={selectedContent.secondVideo} 
+    allowFullScreen={true} 
+    width="90%" 
+    height={isMobile ? "220px" : "550px"} 
+    style={{ ...style.modalVideo }}  
+    allow="autoplay"
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+<img 
+  alt='' 
+  src={selectedContent.secondMedia} 
+  style={style.modalImage} 
+  onLoad={() => setIsLoading(false)}
+/>
+
+<text className='thefont' style={style.modalText}>
+  {selectedContent.thirdText}
+</text>
+
+{selectedContent.thirdVideo &&
+  <iframe 
+    title='Terceiro Vídeo' 
+    src={selectedContent.thirdVideo} 
+    allowFullScreen={true} 
+    width="90%" 
+    height={isMobile ? "220px" : "550px"} 
+    style={{ ...style.modalVideo }}  
+    allow="autoplay"
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+{selectedContent.fourthVideo &&
+  <iframe 
+    title='Quarto Vídeo' 
+    src={selectedContent.fourthVideo} 
+    allowFullScreen={true} 
+    width="90%" 
+    height={isMobile ? "220px" : "550px"} 
+    style={{ ...style.modalVideo }}  
+    allow="autoplay"
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+{selectedContent.fifthVideo &&
+  <iframe 
+    title='Quinto Vídeo' 
+    src={selectedContent.fifthVideo} 
+    allowFullScreen={true} 
+    width="90%" 
+    height={isMobile ? "220px" : "550px"} 
+    style={{ ...style.modalVideo }}  
+    allow="autoplay"
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+{selectedContent.thirdMedia &&
+  <img 
+    alt='' 
+    src={selectedContent.thirdMedia} 
+    style={{ ...style.modalImage }} 
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+{selectedContent.fourthMedia &&
+  <img 
+    alt='' 
+    src={selectedContent.fourthMedia} 
+    style={{ ...style.modalImage, marginTop: 50 }} 
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+{selectedContent.fifthMedia &&
+  <img 
+    alt='' 
+    src={selectedContent.fifthMedia} 
+    style={{ ...style.modalImage, marginTop: 50 }} 
+    onLoad={() => setIsLoading(false)}
+  />
+}
+
+
+
+</Modal.Body>
+
+
+
+
       </Modal>
 
           {/* colocar profile.jpg */}

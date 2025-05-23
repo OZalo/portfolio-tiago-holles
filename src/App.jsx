@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { FaStar } from 'react-icons/fa';
 import logov2  from '../src/Assets/Banners/logo.png'
 
+
+
 const App = () => {
 
   const [width, setWidth] = React.useState(window.innerWidth)
@@ -26,25 +28,20 @@ const App = () => {
   return (
     <div style={{ width: '100%', overflowX: 'hidden' }}>
       <div style={{ position: 'relative', height: '130vh', overflow: 'hidden' }}>
-        <video
-          // autoPlay
-          // loop
-          muted
-          // src={vi}
-          style={{
-            backgroundColor: 'black',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: -2,
-          }}
-        />
+      <div style={{
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundColor: 'black',
+  zIndex: -1,
+  opacity: 1
+}} />
+
 
         {/* Moldura PNG */}
-        <img
+        {/* <img
           src={moldura}
           alt="Moldura decorativa"
           style={{
@@ -57,7 +54,7 @@ const App = () => {
             zIndex: -1,
             pointerEvents: 'none',
           }}
-        />
+        /> */}
 
         <div
           style={{
@@ -87,37 +84,62 @@ const App = () => {
             </motion.div>
 
           {/* Botões */}
-          <div style={{ display: 'flex', gap: '15px', marginTop: '-200px' }}>
-            <button
+          <div style={{ display: 'flex', gap: '30px', marginTop: '-200px' }}>
+            <motion.button
             className='thefont'
-              style={{
-                backgroundColor: '#cf0a0a',
-                color: 'white',
-                padding: '12px 24px',
-                border: 'none',
-                borderRadius: '6px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-              }}
+            whileHover={{
+              scale: 1.1,
+              boxShadow: '0 0 20px rgba(207, 10, 10, 0.8), 0 0 40px rgba(207, 10, 10, 0.5)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              backgroundColor: '#000', // Interior preto
+              border: '2px solid #cf0a0a', // Vermelho
+              borderRadius: '8px',
+              padding: '12px 24px',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '16px',
+              cursor: 'pointer',
+              outline: 'none',
+              boxShadow: '0 0 10px rgba(207, 10, 10, 0.6)', // Glow inicial
+              transition: 'all 0.3s ease',
+              position: 'relative',
+              boxSizing: 'border-box'
+            }}
               onClick={() => window.open('https://www.instagram.com/tiago_holles', '_blank')}
             >
               Instagram
-            </button>
-            <button
+            </motion.button>
+            <motion.button
             className='thefont'
-              style={{
-                backgroundColor: '#cf0a0a',
-                color: 'white',
-                padding: '12px 24px',
-                border: 'none',
-                borderRadius: '6px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-              }}
+            whileHover={{
+              scale: 1.1,
+              boxShadow: '0 0 20px rgba(207, 10, 10, 0.8), 0 0 40px rgba(207, 10, 10, 0.5)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              backgroundColor: '#000', // Interior preto
+              border: '2px solid #cf0a0a', // Vermelho
+              borderRadius: '8px',
+              padding: '12px 24px',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '16px',
+              cursor: 'pointer',
+              outline: 'none',
+              boxShadow: '0 0 10px rgba(207, 10, 10, 0.6)', // Glow inicial
+              transition: 'all 0.3s ease',
+              position: 'relative',
+              boxSizing: 'border-box'
+            }}
               onClick={() => window.open('https://wa.me/91988486359', '_blank')}
             >
-              Whatsapp
-            </button>
+              WhatsApp
+            </motion.button>
+
+
+
           </div>
 
 
@@ -142,6 +164,7 @@ const App = () => {
             zIndex: 1,
             padding: '0 20px',
             textAlign: 'center',
+            backgroundColor: 'black'
           }}
         >
           <Carousel />
@@ -151,7 +174,7 @@ const App = () => {
       <div
         style={{
           height: '10vh',
-          backgroundColor: '#100f10',
+          backgroundColor: 'black',
           padding: '40px 20px',
         }}
       >
