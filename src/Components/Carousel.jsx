@@ -14,7 +14,7 @@ import motionhiguruma from '../Assets/motionhiguruma.gif'
 import sliderImageOne from '../Assets/numero1.png'
 import sliderImageTwo from '../Assets/numero3.png'
 import marcello from '../Assets/Banners/marcello.png'
-import mixagem from '../Assets/Banners/mixagem.png'
+// import mixagem from '../Assets/Banners/mixagem.png'
 import maldade from '../Assets/Banners/maldade.png'
 import instagram from '../Assets/Banners/instagram.png'
 import MMV from '../Assets/Banners/MMV.png'
@@ -27,11 +27,11 @@ const contentArray = [
       src: marcello, 
       title: "Pior Que Dor de Dente",
       upperVideo: "https://drive.google.com/file/d/1_ZoJ_-bBIeEpHQY3uQJDMRsnZXdtqUpI/preview",
-      firstText: "Pior Que Dor de Dente foi um vídeo clipe feito como projeto final do meu curso de filmmaker, eu contribuo como codiretor, roteirista e editor. O cantor Marcello Wall queria um novo clipe para a sua nova música Pior Que Dor de Dente, que havia sido feita com parcerias e outros aspectos de contrato, ou seja, o mesmo não teve tanta liberdade criativa para com a história, takes de cenas ou roteiro.",
+      firstText: "“Pior Que Dor de Dente” é um videoclipe produzido como projeto final do meu curso de filmmaker. Atuei como codiretor, roteirista e editor. O cantor Marcello Wall buscava um novo clipe para sua música Pior Que Dor de Dente, que havia sido produzida em parceria com outros profissionais e dentro de certos contratos, o que limitou sua liberdade criativa em relação à história, aos takes e ao roteiro.",
       firstMedia: 'https://drive.google.com/thumbnail?id=19xQy1mMdv991MOuUPfTTKYRHKquXr-Mj&sz=w1000',
-      secondText: 'Então, ele aceitou nossa proposta de fazer um clipe para ele como projeto final, o que seria benéfico para ambos os lados. Nós ganhamos uma música conhecida nacionalmente, um cantor de nome e facilidade de locação devido aos contatos do Marcello e ele ganha um clipe novinho saindo do forno. O Marcello queria uma história bem serena como a própria música, mas meio fantasiosa no sentido de encontrar a pessoa perfeita, histórias que terminam com um final feliz apesar dos problemas durante a "aventura"',
+      secondText: 'Diante disso, ele aceitou nossa proposta de produzir um clipe como projeto final, o que acabou sendo benéfico para ambos. Ganhamos uma música já conhecida nacionalmente, um cantor de renome e facilidade nas locações graças aos contatos do Marcello. Por outro lado, ele recebeu um clipe novo, feito com muito cuidado e dedicação. A proposta criativa era desenvolver uma história leve, que refletisse o tom sereno da música, mas com um toque de fantasia — uma busca pela pessoa perfeita, com direito a final feliz, mesmo com os desafios enfrentados ao longo dessa “aventura”.',
       secondMedia: "https://drive.google.com/thumbnail?id=1V1kb6Gph7gj4RiNFVfOYn8ILVrFGEvO8&sz=w1000",
-      thirdText: "E apesar dos problemas de locação e da pouca disponibilidade do cantor devido ser muito ocupado, só tivemos 1 dia para gravar o clipe todo, então se não conseguimos alguma cena ela simplesmente não iria existir e não teria como fazer nada a respeito. No fim o clipe foi um sucesso ganhando o Festival de Vídeos Universitários (OSGA), como melhor vídeo clipe em 2023.",
+      thirdText: "Apesar dos desafios com locações e da agenda apertada do cantor, que é bastante ocupado, tivemos apenas um dia para gravar todo o clipe. Isso significava que, se alguma cena não fosse feita, ela simplesmente não existiria — não haveria chance de regravação. Mesmo assim, o resultado superou as expectativas. O clipe foi um sucesso e venceu o Festival de Vídeos Universitários (OSGA) como Melhor Videoclipe de 2023.",
     }
   },
   { //rpg
@@ -39,11 +39,11 @@ const contentArray = [
       title: "As infinitas possibilidades do RPG",
       src: rpg,
       video: 'https://www.youtube.com/embed/rPQUkV3--7c?si=NTKcl1fRetekRUzK',
-      firstText: 'Eu tive a oportunidade de fazer um áudio drama como projeto de faculdade, o objetivo aqui é fazer uma partida de RPG através de uma visão dramatizada de quem está jogando, afinal, ver por fora pessoas jogando RPG, faz o mesmo parecer complexo confuso, e com esse vídeo eu queria trazer o sentimento de "não é tão complicado assim, e olha o quanto pode ser divertido e interessante.',
+      firstText: 'Tive a oportunidade de desenvolver um áudio drama como projeto da faculdade. A proposta era simular uma partida de RPG sob uma perspectiva dramatizada, como se estivéssemos dentro da cabeça de quem joga. Afinal, para quem observa de fora, o RPG pode parecer algo confuso e complexo. Com esse projeto, meu objetivo era justamente quebrar essa impressão, mostrando que não é tão complicado assim — e, mais do que isso, destacar o quanto pode ser divertido, envolvente e criativo.',
       firstMedia: rpgrpg,
-      secondText: "Então, tanto em roteiro quanto em uma pequena atuação como Mestre de Mesa, eu tive que transformar uma sessão de RPG em algo fácil de digerir, até mesmo para quem não sabe nada de mundos medievais fantásticos, e explicar que o RPG traz várias consequências psicológicas positivas para quem os joga. Como criatividade, socialização, autoexpressão e vários outros bens, podendo jogar da sua própria casa com inúmeras pessoas com os mais diversos tipos de pensamento, cultura e formas de ver o mundo.",
+      secondText: "Atuei tanto na roteirização e como Mestre de Mesa. Meu desafio foi transformar uma sessão de RPG em uma experiência acessível, até mesmo para quem não conhece o universo de mundos medievais e fantásticos. Além disso, quis evidenciar os benefícios psicológicos que o RPG proporciona, como desenvolvimento da criatividade, socialização, autoconfiança, empatia e expressão pessoal. É uma atividade que conecta pessoas, independentemente de cultura, pensamentos ou vivências, e que pode ser jogada de qualquer lugar do mundo.",
       secondMedia: "https://drive.google.com/thumbnail?id=1hSJjt4mBdxVIWzmSBICZaWrXrEV4ib-6&sz=w1000",
-      thirdText: "Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos os integrantes que ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama é ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que se tornou cada vez mais raro mundo a fora, devido a natureza social que o jogo trás.",
+      thirdText: "Esse projeto foi muito pessoal, mas também teve como propósito fortalecer o portfólio de todos os envolvidos, unindo o útil ao agradável. O áudio drama tem como objetivo ensinar e apresentar o que é o RPG de Mesa — um jogo de narrativa colaborativa e por turnos, que, infelizmente, se tornou cada vez mais raro em muitos lugares, justamente por depender da interação social presencial, algo que é tanto seu maior desafio quanto sua maior riqueza.",
       thirdMedia: "https://drive.google.com/thumbnail?id=12XuLE2sFYRkUGSzAxriXqos9hYhRZXUI&sz=w1000"
     }
   },
@@ -51,9 +51,9 @@ const contentArray = [
     content: {
       src: maldade, 
       title: "Curta Metragem",
-      firstText: "Reflexo da Maldade foi um curta-metragem feito como projeto final de curso, eu fui convidado com editor por fora, o que é muito interessante porque tem a visão da equipe que produziu e a visão que eu tenho de olhar o projeto do lado de fora. No geral, não era um projeto desafiador no sentido geral, o que realmente precisava de muita atenção era um efeito especial referente ao espelho onde acontecia todo o drama do curta. Se essa parte ficasse ruim, ou não fosse convincente, estragaria toda a experiência de quem está assistindo.",
+      firstText: "“Reflexo da Maldade” é um curta-metragem realizado como projeto final de curso. Fui convidado a participar como editor externo, o que tornou a experiência particularmente interessante — pude trabalhar com o olhar de quem não esteve presente em toda a produção, oferecendo uma perspectiva de fora sobre o material da equipe. No geral, o projeto não apresentava grandes desafios técnicos, mas exigia atenção especial em um ponto crucial: um efeito visual envolvendo um espelho, que é o centro do drama do curta. Esse elemento precisava funcionar perfeitamente, pois, se não fosse convincente, comprometeria toda a imersão e a experiência do espectador.",
       upperVideo: "https://drive.google.com/file/d/1XYd0o72mtAd1jj-qVZMhpADggpGuPWpv/preview",
-      secondText: "Outra parte complicada, era compensar a falta de atores com cenários, já que eles não tinham como chamar atores para o curta, alguns membros da equipe tiveram que suprir essa falta de recurso, e obviamente por não terem conhecimento de atuação, eu tive que na edição dar grandes focos nos cenários, efeitos e ambientes escuros, que escondam esses detalhes.",
+      secondText: "Outro desafio do projeto foi compensar a ausência de atores profissionais. Por limitações de recursos, alguns membros da própria equipe precisaram assumir os papéis no curta. Naturalmente, como não tinham experiência em atuação, meu trabalho na edição ganhou ainda mais importância. Para equilibrar essa limitação, foquei em destacar os cenários, criar atmosferas através de efeitos visuais e utilizar ambientes escuros, que ajudassem a disfarçar essas imperfeições e a manter a imersão do público.",
       secondMedia: "https://drive.google.com/thumbnail?id=1cMq54cA3PpMR2OjaPNsmbDrDHfQR_Ftq&sz=w1000",
       sliderImageOne: sliderImageOne,
       sliderImageTwo: sliderImageTwo
@@ -90,18 +90,12 @@ const contentArray = [
     content: {
       src: 'https://drive.google.com/thumbnail?id=1TtD0mdM0lLedz-Nb1PrEoXSLOJfggZ7P&sz=w1000', 
       title: "Dublagem e Tratamento de Aúdio",
-      firstText: "Dublagem segue em dificuldades do começo ao fim, desde o tratamento acústico que você tem em sua sala até a qualidade de configuração do seu microfone e conhecimento orgânico de mixagem e pós-produção. Eu tive a oportunidade de fazer parte de um projeto de fan-dublagem para dublar o jogo Street Fighter 6, que chegou ao Brasil sem dublagem oficial. Obviamente, parte das complexidades começa com o fato de ter gravado em um quarto sem tratamento acústico.",
-      secondText: "A parte artística de atuação é muito importante, mas para fan-dublagens tende a não ser tão dramático quanto para dublagens oficiais. Toda minha dublagem é baseada em edição para compensar o lugar que gravo, já que qualquer grito ou som de fora da vizinhança pode destruir o áudio em questão. No fim usei plugins da Wave de compressão, De Reverbs (para controle de sala) com SPL De-Reverb da Alliance, tudo isso dentro do programa Reaper para essa gravação e edição.",
-      thirdText: "Essas são outras fan-dublagens que acabei fazendo. Também com o mesmo problema, gravando em um local ruim que acaba sendo o único disponível para mim, porém, com o tratamento de áudio certo e conhecimentos sobre como melhor aproveitar o microfone que tenho (Blue Yeti Classic nessa situação), deu para chegar em um desempenho muito próximo de uma gravação profissional.",
-      firstVideo: "https://drive.google.com/file/d/1w0McaHtNqMSn-hs0xalQE_e-GWinYAaM/preview",
-      secondVideo: "https://drive.google.com/file/d/1isd41huNbSWHQJaEBqRb4WTZDSUxmbFJ/preview",
-      thirdVideo: "https://drive.google.com/file/d/1RL0EWhL3iSRGIbBzzyeUe1eRaPN1VOFT/preview",
-      fourthVideo: "https://drive.google.com/file/d/1nFkXiU7gujJ0VVZaR3HQqVqj69tpUWWt/preview",
-      fifthVideo: "https://drive.google.com/file/d/1aYdXQIN2o2BnI5CLbDAhR3v-hsWsx_jd/preview",
-      sixthVideo: "https://drive.google.com/file/d/1C3EUN9CDmlvd_z9cjpT5uws3DCMIpRBB/preview"
+      firstText: "Amante de dublagem, voz original, sonorização e mixagem de áudio. Meu trabalho une duas grandes paixões: interpretar com a voz e dar vida ao som através da edição, efeitos e trilhas que transformam qualquer cena em uma experiência imersiva. Atualmente, estou em processo para obtenção do meu DRT de ator, mas já conto com alguma experiência prática tanto na área de voz quanto na de pós-produção de áudio. Minha demo foi inteiramente produzida por mim, desde a gravação e interpretação até a edição. Estou aberto para trabalhos de dublagem, voz original e mixagem de áudio.",
+      firstVideo: "https://www.youtube.com/embed/DpdHIX_2WCI?si=ggsZQeg00LZSQYKZ",
+
     }
   },
-  { //dublagem
+  { //instagram
     content: {
       src: instagram, 
       title: "Instagram",
@@ -192,6 +186,23 @@ const Carousel = () => {
       window.removeEventListener("resize", handleWindowSizeChange)
     }
   }, [])
+
+  useEffect(() => {
+    if (selectedContent.blockquoted) {
+      if (window.instgrm) {
+        window.instgrm.Embeds.process();
+      } else {
+        const script = document.createElement('script');
+        script.src = "https://www.instagram.com/embed.js";
+        script.async = true;
+        script.onload = () => {
+          window.instgrm.Embeds.process();
+        };
+        document.body.appendChild(script);
+      }
+    }
+  }, [selectedContent]);
+  
 
   return (
     <div style={{ width: '100%', overflowX: 'hidden', marginTop: '20px' }}>
@@ -328,14 +339,32 @@ const Carousel = () => {
 
           {selectedContent.blockquoted?
           
-          <div width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}>
-              <blockquote 
-              className="instagram-media" 
-              data-instgrm-permalink="https://www.instagram.com/tiago_holles" 
-              data-instgrm-version="14">
-            </blockquote> 
-            <script async src="//www.instagram.com/embed.js"></script>
+        <div style={{
+          backgroundColor: 'black',
+          padding: '20px',
+          borderRadius: '10px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          marginTop: '30px'
+        }}>
+          <div style={{
+            maxWidth: isMobile ? '320px' : '540px',
+            width: '100%'
+          }}>
+            <blockquote
+              className="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/tiago_holles"
+              data-instgrm-version="14"
+              style={{
+                width: '100%'
+              }}
+            >
+            </blockquote>
           </div>
+        </div>
+
 
         :
 
