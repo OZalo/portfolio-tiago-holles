@@ -81,7 +81,7 @@ const App = () => {
               {/* Foto */}
               <motion.img
                 style={{ width: '100%', height: '100%', minHeight: '550px', minWidth: '890px' }}
-                src={'https://drive.google.com/thumbnail?id=1bQhaOCM6yFgp6ZlehNjRTOXiCz8bCHFk&sz=w1000'}
+                src={'https://drive.google.com/thumbnail?id=1pDdkctewGRhz8UaZgKaEsZnpYZanqtUz&sz=w1000'}
               />
 
             </motion.div>
