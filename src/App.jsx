@@ -283,10 +283,9 @@ function App() {
               style={{ cursor: 'pointer' }}
             />
             <i 
-              onClick={() => { window.open('https://www.linkedin.com/in/tiago-holles-30a81a308', '_blank') }}
-              style={{ cursor: 'pointer' }}
+
             
-            className="fa fa-linkedin fa-2x pt-2 mx-4" />
+            className="fa-2x pt-2 mx-4" />
             <i
               onClick={() => { window.open('https://www.youtube.com/@Grid_Zone', '_blank') }}
               className="fa fa-youtube fa-2x pt-2"
