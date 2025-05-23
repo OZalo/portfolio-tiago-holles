@@ -77,7 +77,7 @@ const contentArray = [
   { // motion
     content: {
       src: MMV, 
-      title: "Motion Comics/Mangá",
+      title: "MMV",
       firstText: "Gosto de editar com ritmo, impacto e clareza. Trabalho com foco total na entrega rápida e precisa, alinhado com a demanda do mercado atual. Minha edição valoriza os punchs da música e sabe quando brilhar, seja em algo mais limpo e dinâmico ou numa estética mais pesada, cinematográfica e realista. Cada corte é pensado pra amplificar a energia da música e destacar o detalhe que o artista quis trazer para esse música ou personagem em questão.",
       firstMedia: conquista,
       // secondText: "Você precisa estudar o desenho muito antes de levá-lo a um editor, pois antes de animar, esse desenho precisa ser recortado em detalhes, apenas nas partes que serão animadas ou destacadas com algum efeito posteriormente. Como, por exemplo, a espada do personagem Higuruma, que poderia ser pintada dentro do After Effects (programa usado para essa animação), porém, como eu já tinha certeza de que a cor seria essa, então é menos trabalho e gasto de processamento dentro do editor.",
