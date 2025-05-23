@@ -9,8 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import rpgrpg from '../Assets/rpgrpg.gif'
-import motionmash from '../Assets/motionmash.gif'
-import motionhiguruma from '../Assets/motionhiguruma.gif'
+
 import sliderImageOne from '../Assets/numero1.png'
 import sliderImageTwo from '../Assets/numero3.png'
 import marcello from '../Assets/Banners/marcello.png'
@@ -20,6 +19,10 @@ import instagram from '../Assets/Banners/instagram.png'
 import MMV from '../Assets/Banners/MMV.png'
 import rpg from '../Assets/Banners/rpg.png'
 import youtube from '../Assets/Banners/youtube.png'
+import conquista from '../Assets/conquista.gif'
+import diobrando from '../Assets/diobrando.gif'
+import ripper from '../Assets/ripper.gif'
+import reivoltou from '../Assets/reivoltou.gif'
 
 const contentArray = [
   { //video clipe
@@ -76,14 +79,13 @@ const contentArray = [
       src: MMV, 
       title: "Motion Comics/Mangá",
       firstText: "Gosto de editar com ritmo, impacto e clareza. Trabalho com foco total na entrega rápida e precisa, alinhado com a demanda do mercado atual. Minha edição valoriza os punchs da música e sabe quando brilhar, seja em algo mais limpo e dinâmico ou numa estética mais pesada, cinematográfica e realista. Cada corte é pensado pra amplificar a energia da música e destacar o detalhe que o artista quis trazer para esse música ou personagem em questão.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=1C2RUAjDy-6pLFAv16GYuktWvc_T1wj8X&sz=w1000',
+      firstMedia: conquista,
       // secondText: "Você precisa estudar o desenho muito antes de levá-lo a um editor, pois antes de animar, esse desenho precisa ser recortado em detalhes, apenas nas partes que serão animadas ou destacadas com algum efeito posteriormente. Como, por exemplo, a espada do personagem Higuruma, que poderia ser pintada dentro do After Effects (programa usado para essa animação), porém, como eu já tinha certeza de que a cor seria essa, então é menos trabalho e gasto de processamento dentro do editor.",
-      secondMedia: "https://drive.google.com/thumbnail?id=1HLtAKiswuVRSmRvBlps4CBeqVkrAJNOn&sz=w1000",
+      secondMedia: reivoltou,
       // thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
-      thirdMedia: motionhiguruma,
-      fourthMedia: motionmash,
-      seventhVideo: "https://drive.google.com/file/d/1CnpWz54muD65nXzykiZLKyoeO5Cr83Np/preview",
-      eighteenth: "https://drive.google.com/file/d/1jTqKrCPflXHly-nbQA4ilhmzoMQdfoEo/preview",
+      thirdMedia: ripper,
+      fourthMedia: diobrando,
+
     }
   },
   { //dublagem
