@@ -1,6 +1,6 @@
 {
-  "short_name": "Tiago Holles",
-  "name": "Portfólio Tiago Holles",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",

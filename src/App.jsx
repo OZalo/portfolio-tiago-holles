@@ -1,226 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import { motion, useMotionValue } from "framer-motion"
-import { Modal, CloseButton } from 'react-bootstrap'
-import './index.css'
-import fundo from './assets/miscellaneous/background.png'
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider'
-import sliderImageOne from './assets/miscellaneous/numero1.png'
-import sliderImageTwo from './assets/miscellaneous/numero3.png'
-import motionhiguruma from './assets/miscellaneous/motionhiguruma.gif'
-import rpgrpg from './assets/miscellaneous/rpgrpg.gif'
-import motionmash from './assets/miscellaneous/motionmash.gif'
+import React, { useEffect } from 'react';
+import moldura from '../src/Assets/moldura.png';
+import Carousel from './Components/Carousel';
+import { motion } from 'framer-motion';
+import { FaStar } from 'react-icons/fa';
+import logov2  from '../src/Assets/Banners/logo.png'
 
-const contentArray = [
-  { //video clipe
-    content: {
-      src: 'https://drive.google.com/thumbnail?id=1Wo9862X0Snb44bilgEOyjJbCK1jsiEij&sz=w1000', 
-      title: "Pior Que Dor de Dente",
-      upperVideo: "https://drive.google.com/file/d/1_ZoJ_-bBIeEpHQY3uQJDMRsnZXdtqUpI/preview",
-      firstText: "Pior Que Dor de Dente foi um vídeo clipe feito como projeto final do meu curso de filmmaker, eu contribuo como codiretor, roteirista e editor. O cantor Marcello Wall queria um novo clipe para a sua nova música Pior Que Dor de Dente, que havia sido feita com parcerias e outros aspectos de contrato, ou seja, o mesmo não teve tanta liberdade criativa para com a história, takes de cenas ou roteiro.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=19xQy1mMdv991MOuUPfTTKYRHKquXr-Mj&sz=w1000',
-      secondText: 'Então, ele aceitou nossa proposta de fazer um clipe para ele como projeto final, o que seria benéfico para ambos os lados. Nós ganhamos uma música conhecida nacionalmente, um cantor de nome e facilidade de locação devido aos contatos do Marcello e ele ganha um clipe novinho saindo do forno. O Marcello queria uma história bem serena como a própria música, mas meio fantasiosa no sentido de encontrar a pessoa perfeita, histórias que terminam com um final feliz apesar dos problemas durante a "aventura"',
-      secondMedia: "https://drive.google.com/thumbnail?id=1V1kb6Gph7gj4RiNFVfOYn8ILVrFGEvO8&sz=w1000",
-      thirdText: "E apesar dos problemas de locação e da pouca disponibilidade do cantor devido ser muito ocupado, só tivemos 1 dia para gravar o clipe todo, então se não conseguimos alguma cena ela simplesmente não iria existir e não teria como fazer nada a respeito. No fim o clipe foi um sucesso ganhando o Festival de Vídeos Universitários (OSGA), como melhor vídeo clipe em 2023.",
-    }
-  },
-  { //rpg
-    content: {
-      title: "As infinitas possibilidades do RPG",
-      src: 'https://drive.google.com/thumbnail?id=1XS9iVXvWl6Ug27MSm6vOupAOOxhX3UvQ&sz=w1000',
-      video: 'https://www.youtube.com/embed/rPQUkV3--7c?si=NTKcl1fRetekRUzK',
-      firstText: 'Eu tive a oportunidade de fazer um áudio drama como projeto de faculdade, o objetivo aqui é fazer uma partida de RPG através de uma visão dramatizada de quem está jogando, afinal, ver por fora pessoas jogando RPG, faz o mesmo parecer complexo confuso, e com esse vídeo eu queria trazer o sentimento de "não é tão complicado assim, e olha o quanto pode ser divertido e interessante.',
-      firstMedia: rpgrpg,
-      secondText: "Então, tanto em roteiro quanto em uma pequena atuação como Mestre de Mesa, eu tive que transformar uma sessão de RPG em algo fácil de digerir, até mesmo para quem não sabe nada de mundos medievais fantásticos, e explicar que o RPG traz várias consequências psicológicas positivas para quem os joga. Como criatividade, socialização, autoexpressão e vários outros bens, podendo jogar da sua própria casa com inúmeras pessoas com os mais diversos tipos de pensamento, cultura e formas de ver o mundo.",
-      secondMedia: "https://drive.google.com/thumbnail?id=1hSJjt4mBdxVIWzmSBICZaWrXrEV4ib-6&sz=w1000",
-      thirdText: "Esse projeto foi bastante pessoal, mas tinha como objetivo também portifólio para todos os integrantes que ajudaram nele, então juntou o útil ao agradável. O propósito do áudio drama é ensinar e descrever o que é o RPG de Mesa, um jogo de tabuleiro em turnos que se tornou cada vez mais raro mundo a fora, devido a natureza social que o jogo trás.",
-      thirdMedia: "https://drive.google.com/thumbnail?id=12XuLE2sFYRkUGSzAxriXqos9hYhRZXUI&sz=w1000"
-    }
-  },
-  { //reflexo da maldade
-    content: {
-      src: 'https://drive.google.com/thumbnail?id=1TUAyAVdK77CkFNPmCevg0tF_Lhx4Rp6N&sz=w1000', 
-      title: "Curta Metragem",
-      firstText: "Reflexo da Maldade foi um curta-metragem feito como projeto final de curso, eu fui convidado com editor por fora, o que é muito interessante porque tem a visão da equipe que produziu e a visão que eu tenho de olhar o projeto do lado de fora. No geral, não era um projeto desafiador no sentido geral, o que realmente precisava de muita atenção era um efeito especial referente ao espelho onde acontecia todo o drama do curta. Se essa parte ficasse ruim, ou não fosse convincente, estragaria toda a experiência de quem está assistindo.",
-      upperVideo: "https://drive.google.com/file/d/1XYd0o72mtAd1jj-qVZMhpADggpGuPWpv/preview",
-      secondText: "Outra parte complicada, era compensar a falta de atores com cenários, já que eles não tinham como chamar atores para o curta, alguns membros da equipe tiveram que suprir essa falta de recurso, e obviamente por não terem conhecimento de atuação, eu tive que na edição dar grandes focos nos cenários, efeitos e ambientes escuros, que escondam esses detalhes.",
-      secondMedia: "https://drive.google.com/thumbnail?id=1cMq54cA3PpMR2OjaPNsmbDrDHfQR_Ftq&sz=w1000",
-      sliderImageOne: sliderImageOne,
-      sliderImageTwo: sliderImageTwo
-    }
-  },
-  { //grid
-    content: {
-      src: 'https://drive.google.com/thumbnail?id=1NfAOXw8eXqx8bETPA1xdZ2Bi2_hyiwBc&sz=w1000', 
-      title: "Grid",
-      upperVideo: "https://www.youtube.com/embed/-grurfbGB6U?si=pM-jfGS58vb6pKVW",
-      firstText: "Grid é meu canal do YouTube que tem como objetivo tocar em assuntos aleatórios como treinamento geral de produção, eu sempre busco um assunto que não tem nada a ver com o vídeo passado para me forçar a criar roteiros diferentes, designs novos e propostas de construções de vídeo que eu não posso roubar do vídeo anterior, afinal é bem natural criar um canal no YouTube com uma estética e proposta de construção de vídeo e ir usando ela e todos os vídeos tanto por um padrão quanto por simplicidade de se editar vários vídeos de uma só fez. No fim é apenas um grande playground para eu testar habilidades novas e propostas de vídeo que são usadas mundo a fora e tentar fazer do meu jeito.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=1sPjTpP_NQaXM1GGsbW9gBOcO8SoyaOPT&sz=w1000',
-      secondText: "A parte mais complicada é sempre a construção visual do que você quer. Eu queria passar um ar neutro para quem entrasse no meu canal, através do banner ou títulos dos vídeos. Vocês não sabem qual é o assunto principal desse canal, é uma área aberta para todo tipo de conteúdo.",
-      secondMedia: "https://drive.google.com/thumbnail?id=1_s5MswiIP6qSMN5C0X6OWKH5KbtLozZQ&sz=w1000",
-    }
-  },
-  { // motion
-    content: {
-      src: 'https://drive.google.com/thumbnail?id=1UtDzONkaYtFMxBN5R8aET2jQ5pUK2m8W&sz=w1000', 
-      title: "Motion Comics/Mangá",
-      firstText: "O objetivo do Motion Comics é trazer movimento para desenhos que não foram planejados para serem animados, porém, ainda valorizando o pouco movimento do próprio desenho, afinal, quanto menos movimento, mais detalhe um desenho pode ter. O sentido geral desse tipo de animação é construir um design, um cenário em volta do desenho que está imóvel, e que isso faça sentido na composição final daquele desenho.",
-      firstMedia: 'https://drive.google.com/thumbnail?id=1C2RUAjDy-6pLFAv16GYuktWvc_T1wj8X&sz=w1000',
-      secondText: "Você precisa estudar o desenho muito antes de levá-lo a um editor, pois antes de animar, esse desenho precisa ser recortado em detalhes, apenas nas partes que serão animadas ou destacadas com algum efeito posteriormente. Como, por exemplo, a espada do personagem Higuruma, que poderia ser pintada dentro do After Effects (programa usado para essa animação), porém, como eu já tinha certeza de que a cor seria essa, então é menos trabalho e gasto de processamento dentro do editor.",
-      secondMedia: "https://drive.google.com/thumbnail?id=1HLtAKiswuVRSmRvBlps4CBeqVkrAJNOn&sz=w1000",
-      thirdText: 'É bastante interessante o detalhe de que esse tipo de "animação" não é complicado de ser feita, boa parte dessas animações pode ser feita em poucos minutos, caso queria uma coisa bem polida, talvez horas. O que faz essas animações serem complicadas e caras de se fazer é a construção e sensibilidade do que deve ter movimento e o que não deve ter, o que precisa de cor e o que não precisa. Na minha opinião, para fazer um bom Motion Comics você não precisa ser um bom animador, você precisa ser um bom diretor.',
-      thirdMedia: motionhiguruma,
-      fourthMedia: motionmash,
-      seventhVideo: "https://drive.google.com/file/d/1CnpWz54muD65nXzykiZLKyoeO5Cr83Np/preview",
-      eighteenth: "https://drive.google.com/file/d/1jTqKrCPflXHly-nbQA4ilhmzoMQdfoEo/preview",
-    }
-  },
-  { //dublagem
-    content: {
-      src: 'https://drive.google.com/thumbnail?id=1sp7cVV8RPnjrF_dhtn7suQ7v3xPyPRcK&sz=w1000', 
-      title: "Dublagem e Tratamento de Aúdio",
-      firstText: "Dublagem segue em dificuldades do começo ao fim, desde o tratamento acústico que você tem em sua sala até a qualidade de configuração do seu microfone e conhecimento orgânico de mixagem e pós-produção. Eu tive a oportunidade de fazer parte de um projeto de fan-dublagem para dublar o jogo Street Fighter 6, que chegou ao Brasil sem dublagem oficial. Obviamente, parte das complexidades começa com o fato de ter gravado em um quarto sem tratamento acústico.",
-      secondText: "A parte artística de atuação é muito importante, mas para fan-dublagens tende a não ser tão dramático quanto para dublagens oficiais. Toda minha dublagem é baseada em edição para compensar o lugar que gravo, já que qualquer grito ou som de fora da vizinhança pode destruir o áudio em questão. No fim usei plugins da Wave de compressão, De Reverbs (para controle de sala) com SPL De-Reverb da Alliance, tudo isso dentro do programa Reaper para essa gravação e edição.",
-      thirdText: "Essas são outras fan-dublagens que acabei fazendo. Também com o mesmo problema, gravando em um local ruim que acaba sendo o único disponível para mim, porém, com o tratamento de áudio certo e conhecimentos sobre como melhor aproveitar o microfone que tenho (Blue Yeti Classic nessa situação), deu para chegar em um desempenho muito próximo de uma gravação profissional.",
-      firstVideo: "https://drive.google.com/file/d/1w0McaHtNqMSn-hs0xalQE_e-GWinYAaM/preview",
-      secondVideo: "https://drive.google.com/file/d/1isd41huNbSWHQJaEBqRb4WTZDSUxmbFJ/preview",
-      thirdVideo: "https://drive.google.com/file/d/1RL0EWhL3iSRGIbBzzyeUe1eRaPN1VOFT/preview",
-      fourthVideo: "https://drive.google.com/file/d/1nFkXiU7gujJ0VVZaR3HQqVqj69tpUWWt/preview",
-      fifthVideo: "https://drive.google.com/file/d/1aYdXQIN2o2BnI5CLbDAhR3v-hsWsx_jd/preview",
-      sixthVideo: "https://drive.google.com/file/d/1C3EUN9CDmlvd_z9cjpT5uws3DCMIpRBB/preview"
-    }
-  },
-]
+const App = () => {
 
-const headerStyle = {
-  backgroundColor: '#040509', 
-  color: '#fff',  
-  display: 'flex', 
-  justifyContent: 'space-between', 
-  position: 'fixed', 
-  top: '0', 
-  left: '0', 
-  right: '0', 
-  zIndex: '1000',
-}
-
-const style = {
-  container: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '20px',
-    marginLeft: '10px', 
-    marginRight: '10px', 
-  },
-  mobileContainer: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(1, 2fr)',
-    gap: '20px',
-    marginLeft: '10px', 
-    marginRight: '10px', 
-  },
-  image: {
-    width: '100%',
-    height: '100%', 
-    borderRadius: '20px'
-  },
-  textSection: {
-    gridColumn: '1 / -1',
-    color: 'white',
-    padding: '20px',
-    textAlign: 'center',
-    marginTop:30
-  },
-  button: {
-    display: 'flex',
-    marginTop: '20px',
-    padding: '10px',
-    backgroundColor: 'black',
-    color: 'white',
-    border: 'none',
-    cursor: 'pointer',
-    borderRadius: 10
-  },
-  modalImage: {
-    maxWidth: '90%', 
-    height: 'auto',
-    display: 'block',
-    margin: 'auto',
-  },
-  modalVideo: {
-    display: 'block',
-    margin: 'auto',
-    marginTop:30, 
-    marginBottom:30, 
-  },
-  modalText: {
-    color: 'white',
-    fontSize:24, 
-    textAlign:'left', 
-    display:'flex', 
-    marginTop:30, 
-    marginBottom:30
-  }
-}
-
-const oneSecond = 1000
-const autoDelay = oneSecond * 10
-const dragBuffer = 50
-
-const springOptions = {
-  type: "spring",
-  mass: 3,
-  stiffness: 400,
-  damping: 50,
-}
-
-const carouselItems = [
-  "https://www.youtube.com/embed/fOXJZA_Uh3g?si=64gpe9Ic7C0MvLIK",
-  "https://www.youtube.com/embed/8NCm6vdPf6M?si=1FiG_TSAA2Ncih9n",
-  // "https://www.youtube.com/embed/jvKKDEjygnY?si=4ys8NHSpsWNXK6xd",
-  "https://www.youtube.com/embed/AmyMaNq3h6M?si=lE4BCJBP-9EEKd7i",
-  "https://www.youtube.com/embed/iQL6J2wwb0Y?si=6agQ-NkFhvkCZifs",
-
-]
-
-function App() {
-
-  const [showModal, setShowModal] = useState(false)
-  const [selectedTitle, setSelectedTitle] = useState('')
-  const [selectedContent, setSelectedContent] = useState({})
-  const [width, setWidth] = useState(window.innerWidth)
-  const [itemIndex, setItemIndex] = useState(0)
-  const dragX = useMotionValue(0)
-  const [isPaused, setIsPaused] = useState(false)
-
-  const isMobile = width <= 768
+  const [width, setWidth] = React.useState(window.innerWidth)
 
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth)
   }
 
-  const handleImageClick = (src, title, content) => {
-    setSelectedTitle(title)
-    setSelectedContent(content)
-    setShowModal(true)
-  }
+  const isMobile = width <= 768
 
-  const handleCloseModal = () => {
-    setShowModal(false)
-  }
-
-  const onDragEnd = () => {
-    const x = dragX.get()
-
-    if (x <= -dragBuffer && itemIndex < carouselItems.length - 1) {
-      setItemIndex((pv) => pv + 1)
-    } else if (x >= dragBuffer && itemIndex > 0) {
-      setItemIndex((pv) => pv - 1)
-    }
-  }  
-
-  const handleMouseEnter = () => setIsPaused(true)
-  const handleMouseLeave = () => setIsPaused(false)
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange)
@@ -229,358 +23,141 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    const intervalRef = setInterval(() => {
-      if (!isPaused) {
-        const x = dragX.get()
-        if (x === 0) {
-          setItemIndex((pv) => {
-            if (pv === carouselItems.length - 1) {
-              return 0
-            }
-            return pv + 1
-          })
-        }
-      }
-    }, autoDelay)
-
-    return () => clearInterval(intervalRef)
-    // eslint-disable-next-line
-  }, [isPaused])
-
-
-
   return (
-    <div style={{ backgroundImage: `url(${fundo})` }}>
+    <div style={{ width: '100%', overflowX: 'hidden' }}>
+      <div style={{ position: 'relative', height: '130vh', overflow: 'hidden' }}>
+        <video
+          // autoPlay
+          // loop
+          muted
+          // src={vi}
+          style={{
+            backgroundColor: 'black',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -2,
+          }}
+        />
 
-      <div style={{ paddingBottom: isMobile ? 60 : 70 }}>
-        <nav style={headerStyle}>
-          <div style={{}}>
-            <h1 className='thefont ' style={isMobile? { marginLeft: 5, paddingTop:5 } : { marginLeft: 5, marginTop:5 }}>Tiago Holles</h1>
-          </div>
+        {/* Moldura PNG */}
+        <img
+          src={moldura}
+          alt="Moldura decorativa"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+            pointerEvents: 'none',
+          }}
+        />
 
-          <div 
-          style={
-            isMobile? 
-              {
-                display: 'flex', 
-                flexDirection: 'row', 
-                marginRight: 5, 
-                paddingRight:8
-                } 
-              : 
-              {
-                display: 'flex', 
-                flexDirection: 'row', 
-                marginRight: 5, 
-                paddingRight:8, 
-                paddingTop:5
-              }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '10%',
+            left: '5%',
+            color: 'white',
+            zIndex: 1,
+            maxWidth: '500px',
+          }}
+        >
 
-            <i
-              onClick={() => { window.open('https://www.instagram.com/tiago_holles', '_blank') }}
-              className="fa fa-instagram fa-2x pt-2"
-              style={{ cursor: 'pointer' }}
-            />
-            <i 
-
-            
-            className="fa-2x pt-2 mx-4" />
-            <i
-              onClick={() => { window.open('https://www.youtube.com/@Grid_Zone', '_blank') }}
-              className="fa fa-youtube fa-2x pt-2"
-              style={{ cursor: 'pointer' }}
-            />
-
-          </div>
-        </nav>
-      </div>
-
-      <div style={isMobile? style.mobileContainer : style.container}>
-        {contentArray.map((image, index) => (
-          <div key={index} className='mx-2'>
-
-            <motion.div whileHover={{ scale: 1.02, cursor: 'pointer' }} whileTap={{ scale: 0.8 }}>
+          <motion.div style={{display: 'flex', justifyContent:'space-between', gap: '150px'}} >
+              
+              {/* Logo */}
               <motion.img
-                style={style.image}
-                onClick={() => handleImageClick(image.content.src, image.content.title, image.content)}
-                src={image.content.src}
-                alt={image.content.title}
+                style={{ width: '100%', height: '100%', minHeight: isMobile? '310px' :'350px', minWidth: isMobile? '340px' :'690px' }}
+                src={logov2}
               />
+              
+              {/* Foto */}
+              <motion.img
+                style={{ width: '100%', height: '100%', minHeight: '550px', minWidth: '890px' }}
+                src={'https://drive.google.com/thumbnail?id=1bQhaOCM6yFgp6ZlehNjRTOXiCz8bCHFk&sz=w1000'}
+              />
+
             </motion.div>
 
+          {/* Botões */}
+          <div style={{ display: 'flex', gap: '15px', marginTop: '-200px' }}>
+            <button
+            className='thefont'
+              style={{
+                backgroundColor: '#cf0a0a',
+                color: 'white',
+                padding: '12px 24px',
+                border: 'none',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+              }}
+              onClick={() => window.open('https://www.instagram.com/tiago_holles', '_blank')}
+            >
+              Instagram
+            </button>
+            <button
+            className='thefont'
+              style={{
+                backgroundColor: '#cf0a0a',
+                color: 'white',
+                padding: '12px 24px',
+                border: 'none',
+                borderRadius: '6px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+              }}
+              onClick={() => window.open('https://wa.me/91988486359?text=teste-fodaaaa', '_blank')}
+            >
+              Whatsapp
+            </button>
           </div>
-        ))}
-      </div>
-
-      <div style={{
-          color: 'white',
-          textAlign: 'center',
-          marginTop: 30
-
-      }} >
-        <h3 className='thefont'>
-          VÍDEOS QUE JÁ EDITEI
-        </h3>
-      </div>
-      <div 
-        style={{backgroundColor:'#040509'}} 
-        className="position-relative overflow-hidden mt-4"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        >
-      <motion.div
-        drag="x"
-        dragConstraints={{
-          left: 0,
-          right: 0,
-        }}
-        style={{
-          x: dragX,
-        }}
-        animate={{
-          translateX: `-${itemIndex * 100}%`,
-        }}
-        transition={springOptions}
-        onDragEnd={onDragEnd}
-        className="d-flex align-items-center"
-      >
-        <VideosContainer height={isMobile? '200px' : '500px'} width={isMobile? '350px' : '900px'} itemIndex={itemIndex} />
-      </motion.div>
-
-      <Dots itemIndex={itemIndex} setItemIndex={setItemIndex} />
-      <GradientEdges />
-    </div>
-
-      {isMobile?
-      <React.Fragment></React.Fragment>
-      :
-      <div style={style.textSection} >
-        <h3 className='thefont'>
-          Olá. Me chamo Tiago Holles, sou editor, roteirista e nos tempos livres dublador. Busco oportunidade de aprender<br />
-          mais na minha área de formação, crescimento profissional e estabilidade no mercado de trabalho,<br />
-          sempre melhorando minhas habilidades de roteiro, edição e narração.
-        </h3>
-      </div>
-
-      }
 
 
-      <div style={ isMobile? {  marginTop: 36} : {  marginTop: 0}} className="d-flex justify-content-center">
-        <motion.button
-          className='mb-5 thefont '
-          whileHover={{ scale: 1.02, cursor: 'pointer' }}
-          whileTap={{ scale: 0.8 }}
-          style={style.button}
-          onClick={() => { window.open('https://www.instagram.com/tiago_holles', '_blank') }}
-        >
-          <text style={{fontSize:24}}>
-
-          Contato
-          </text>
-        </motion.button>
-      </div>
+          <div className='thefont' style={{ display: 'flex', color: 'white', marginTop: '100px', gap: '10px', fontSize: 23, flexWrap: 'wrap' }}>
+  <FaStar style={{ color: '#cf0a0a', marginTop: '5px' }} />
+  <span>
+    MINHAS HABILIDADES
+    {isMobile && <br />}
+    E PROJETOS
+  </span>
+</div>
 
 
 
-      <Modal style={{color:'white'}} contentClassName='text-white btn-close-white ' centered size='xl' show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton={false} style={{ backgroundColor: '#040509'  }}>
-          <Modal.Title  className='thefont' >{selectedTitle}</Modal.Title>
-          <CloseButton onClick={handleCloseModal} variant="white" />
-        </Modal.Header>
-        <Modal.Body  style={{ backgroundColor: '#040509' }} >
+        </div>
 
-          {selectedContent.video? 
-          <iframe title='Vídeo Principal' src={selectedContent.video} allowFullScreen={true} style={{...style.modalImage, height:'500px', width:'3000px'}} />
-          :
-          <React.Fragment></React.Fragment>
-          }
-          
-          {selectedContent.upperVideo?          
-          <iframe title='Vídeo de cima' src={selectedContent.upperVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          <text className='thefont' style={style.modalText}>
-            {selectedContent.firstText}
-          </text>
-
-          <img alt='' src={selectedContent.firstMedia} style={style.modalImage} />
-
-          {selectedContent.firstVideo?          
-          <iframe title='Primeiro Vídeo' src={selectedContent.firstVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-
-          <ReactCompareSlider
-            style={style.modalImage}
-            itemOne={<ReactCompareSliderImage src={selectedContent.sliderImageOne}/>}
-            itemTwo={<ReactCompareSliderImage src={selectedContent.sliderImageTwo}/>}
-          />
-
-          <text className='thefont' style={style.modalText}>
-            {selectedContent.secondText}
-          </text>
-
-          {selectedContent.secondVideo?          
-          <iframe title='Segundo Vídeo' src={selectedContent.secondVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          <img alt='' src={selectedContent.secondMedia} style={style.modalImage} />
-
-          <text className='thefont' style={style.modalText}>
-            {selectedContent.thirdText}
-          </text>
-
-          {selectedContent.thirdVideo?          
-          <iframe title='Terceiro Vídeo' src={selectedContent.thirdVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.fourthVideo?          
-          <iframe title='Quarto Vídeo' src={selectedContent.fourthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.fifthVideo?          
-          <iframe title='Quinto Vídeo' src={selectedContent.fifthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.sixthVideo?          
-          <iframe src={selectedContent.sixthVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          <img alt='' src={selectedContent.thirdMedia} style={{...style.modalImage}} />
-
-          {selectedContent.fourthMedia?
-          <img alt='' src={selectedContent.fourthMedia} style={{...style.modalImage, marginTop:50}} />
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.fifthMedia?
-          <img alt='' src={selectedContent.fifthMedia} style={{...style.modalImage, marginTop:50}} />
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.seventhVideo?          
-          <iframe src={selectedContent.seventhVideo} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-          {selectedContent.eighteenth?          
-          <iframe src={selectedContent.eighteenth} allowFullScreen={true} width="90%" height={isMobile? "220px" : "550px"} style={{...style.modalVideo}}  allow="autoplay"/>
-          :
-          <React.Fragment/>
-          }
-
-
-        </Modal.Body>
-        
-      </Modal>
-
-    </div>
-  )
-}
-
-const VideosContainer = ({ itemIndex, height, width }) => {
-  return (
-    <>
-      {carouselItems.map((item, idx) => {
-        return (
-          <motion.div
-          key={idx}
+        <div
           style={{
-            flexShrink: 0,
-            width: "100%",
-            padding: "0 10%",
+            position: 'absolute',
+            bottom: '0%',
+            width: '100%',
+            zIndex: 1,
+            padding: '0 20px',
+            textAlign: 'center',
           }}
-          animate={{ scale: itemIndex === idx ? 0.95 : 0.85 }}
-          transition={springOptions}
         >
-          <iframe
-            title='carouselVideo'
-            src={item}
-            style={{
-              height: height,
-              width: width,
-              display: 'block',
-              margin: 'auto',
-            }}
-            allowFullScreen
-          />
-        </motion.div>
-        )
-      })}
-    </>
-  )
-}
+          <Carousel />
+        </div>
+      </div>
 
-
-const Dots = ({ itemIndex, setItemIndex }) => {
-  return (
-    <div style={{ marginTop: "1rem", display: "flex", justifyContent: "center", gap: "0.5rem" }}>
-      {carouselItems.map((_, idx) => {
-        return (
-          <button
-            key={idx}
-            onClick={() => setItemIndex(idx)}
-            style={{
-              width: "12px",
-              height: "12px",
-              borderRadius: "50%",
-              padding: 8,
-              marginBottom:10,
-              backgroundColor: idx === itemIndex ? "#f8f9fa" : "#6c757d",
-              border: "none",
-              cursor: "pointer",
-              transition: "background-color 0.3s",
-            }}
-          />
-        )
-      })}
+      <div
+        style={{
+          height: '10vh',
+          backgroundColor: '#100f10',
+          padding: '40px 20px',
+        }}
+      >
+      </div>
     </div>
-  )
-}
+  );
+};
 
-const GradientEdges = () => {
-  return (
-    <>
-      <div style={{
-        pointerEvents: "none",
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        top: 0,
-        width: "10vw",
-        maxWidth: "100px",
-        background: "linear-gradient(to right, rgba(33, 37, 41, 0.5), rgba(33, 37, 41, 0))"
-      }} />
-      <div style={{
-        pointerEvents: "none",
-        position: "absolute",
-        bottom: 0,
-        right: 0,
-        top: 0,
-        width: "10vw",
-        maxWidth: "100px",
-        background: "linear-gradient(to left, rgba(33, 37, 41, 0.5), rgba(33, 37, 41, 0))"
-      }} />
-    </>
-  )
-}
-
-export default App
+export default App;

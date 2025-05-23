@@ -1,22 +1,22 @@
 body {
   margin: 0;
-  font-family: 'GothamThin', sans-serif;
-  src: local('GothamThin'), url(./fonts/GothamThin.otf) format('otf');
+  font-family: 'URWGeometricMedium', sans-serif;
+  src: local('URWGeometricMedium'), url(./fonts/URWGeometricMedium.otf) format('otf');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .thefont {
-  font-family: 'GothamThin';
+  font-family: 'URWGeometricMedium';
 }
 
 @font-face {
-  font-family: 'GothamThin';
-  src: url(./fonts/GothamThin.otf) format('otf'),
+  font-family: 'URWGeometricMedium';
+  src: url(./fonts/URWGeometricMedium.otf) format('otf'),
 }
 
 code {
-  font-family: 'GothamThin', sans-serif;
-  src: local('GothamThin'), url(./fonts/GothamThin.otf) format('otf'),
+  font-family: 'URWGeometricMedium', sans-serif;
+  src: local('URWGeometricMedium'), url(./fonts/URWGeometricMedium.otf) format('otf'),
     monospace;
 }
