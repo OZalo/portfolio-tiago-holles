@@ -114,7 +114,7 @@ const App = () => {
                 fontWeight: 'bold',
                 cursor: 'pointer',
               }}
-              onClick={() => window.open('https://wa.me/91988486359?text=teste-fodaaaa', '_blank')}
+              onClick={() => window.open('https://wa.me/91988486359', '_blank')}
             >
               Whatsapp
             </button>
