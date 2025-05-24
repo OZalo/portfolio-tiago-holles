@@ -146,10 +146,9 @@ const App = () => {
           <div className='thefont' style={{ display: 'flex', color: 'white', marginTop: '100px', gap: '10px', fontSize: 23, flexWrap: 'wrap' }}>
   <FaStar style={{ color: '#cf0a0a', marginTop: '5px' }} />
   <span>
-    MINHAS HABILIDADES
-    {isMobile && <br />}
-    E PROJETOS
-  </span>
+  MINHAS HABILIDADES
+  {isMobile ? <><br />E PROJETOS</> : ' E PROJETOS'}
+</span>
 </div>
 
 
