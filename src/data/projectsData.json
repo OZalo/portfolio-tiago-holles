@@ -91,5 +91,15 @@
       "blockquoted": "true",
       "firstMedia": "https://res.cloudinary.com/dkbqg1jiq/image/upload/v1741101781/line.png"
     }
+  },
+  {
+    "id": 8,
+    "category": "vfx / edição",
+    "content": {
+      "src": "https://res.cloudinary.com/dje6clroh/image/upload/v1777779942/Quadrado---BloodRush_cejxhn.png",
+      "title": "BloodRush",
+      "video": "https://www.youtube.com/embed/TUvSO85xJmM?si=f9nmDn-oP4MwB1Wv",
+      "firstText": "BloodRush é um projeto focado em edição de alto impacto e efeitos visuais dinâmicos. O objetivo aqui foi trabalhar o ritmo frenético em sincronia com a trilha sonora, explorando transições complexas e uma coloração agressiva que reforça a energia do vídeo."
+    }
   }
 ]
