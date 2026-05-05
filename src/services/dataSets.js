@@ -1,4 +1,4 @@
-const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+const cloudName = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME || 'dje6clroh';
 
 export const DATASETS = {
   projects: {
@@ -8,5 +8,9 @@ export const DATASETS = {
   config: {
     key: "config",
     baseUrl: `https://res.cloudinary.com/${cloudName}/raw/upload/siteConfig_tiago.json`,
+  },
+  demos: {
+    key: "demos",
+    baseUrl: `https://res.cloudinary.com/${cloudName}/raw/upload/demosData_tiago.json`,
   }
 };
