@@ -132,7 +132,12 @@ export default function AdminPanel() {
   if (loading && projects.length === 0) return <div style={{ color: "#fff", padding: "50px", textAlign: "center" }} className="thefont">Carregando Painel...</div>;
 
   return (
-    <div style={{ backgroundColor: "#000", minHeight: "100vh", color: "#fff", padding: "40px 20px" }}>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ backgroundColor: "#000", minHeight: "100vh", color: "#fff", padding: "40px 20px", position: 'relative', zIndex: 1 }}
+    >
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "40px", borderBottom: "1px solid #222", paddingBottom: "20px" }}>
         <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
           <h1 className="thefont" style={{ color: "#fff", margin: 0, fontSize: '1.5rem' }}>PAINEL ADMIN</h1>
@@ -243,7 +248,7 @@ export default function AdminPanel() {
       </AnimatePresence>
 
       {loading && <div style={loadingOverlayStyle}>Aguarde...</div>}
-    </div>
+    </motion.div>
   );
 }
 

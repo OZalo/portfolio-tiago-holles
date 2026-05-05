@@ -36,7 +36,8 @@ const Header = () => {
       gap: '20px',
       backgroundColor: '#111',
       borderBottom: '1px solid #333',
-      position: 'relative'
+      position: 'relative',
+      zIndex: 1100
     }}>
       <div style={{ textAlign: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
