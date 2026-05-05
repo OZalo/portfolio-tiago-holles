@@ -1,5 +1,7 @@
 :root {
-  --primary-color: #00d2ff; /* Ciano Elétrico */
+  --primary-color: #ffffff;
+  --bg-color: #000000;
+  --text-color: #ffffff;
 }
 
 html {

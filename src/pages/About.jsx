@@ -10,7 +10,7 @@ const About = () => {
         margin: '0 auto', 
         textAlign: 'center' 
       }}>
-        <h2 className='thefont' style={{ color: '#00d2ff', marginBottom: '40px', fontSize: '2.5rem' }}>SOBRE MIM</h2>
+        <h2 className='thefont' style={{ color: '#ffffff', fontSize: '2.5rem', marginBottom: '30px', textTransform: 'uppercase' }}>Sobre Mim</h2>
         <div style={{ color: '#ccc', lineHeight: '2', fontSize: '1.2rem', textAlign: 'justify' }}>
           <p>
             Criar para o audiovisual é, acima de tudo, entender o ritmo. Com 6 anos de experiência em edição de vídeo e 2 anos dedicados à engenharia de áudio, foco em edições ágeis e narrativas orgânicas, onde o objetivo é contar uma história simples mas memorável.

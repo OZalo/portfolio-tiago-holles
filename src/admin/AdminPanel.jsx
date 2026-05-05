@@ -211,17 +211,17 @@ export default function AdminPanel() {
 }
 
 // Estilos
-const btnPrimaryStyle = { backgroundColor: "#00d2ff", color: "#000", border: "none", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
-const btnSecondaryStyle = { backgroundColor: "#222", color: "#00d2ff", border: "1px solid #00d2ff", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
+const btnPrimaryStyle = { backgroundColor: "#ffffff", color: "#000", border: "none", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
+const btnSecondaryStyle = { backgroundColor: "#222", color: "#ffffff", border: "1px solid #ffffff", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
 const cardStyle = { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "15px 20px", backgroundColor: "#111", border: "1px solid #222", borderRadius: "8px" };
 const thumbStyle = { width: "60px", height: "60px", objectFit: "cover", borderRadius: "4px", border: "1px solid #333" };
-const iconBtnStyle = { background: "#222", border: "none", color: "#fff", padding: "8px", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" };
+const iconBtnStyle = { background: "#222", border: "none", color: "#fff", padding: "8px", borderRadius: "4px", display: "flex", alignItems: "center", justify: "center", cursor: "pointer" };
 const modalOverlayStyle = { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.9)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 1000, padding: "20px" };
 const modalContentStyle = { backgroundColor: "#111", border: "1px solid #333", padding: "30px", borderRadius: "12px", width: "100%", maxWidth: "700px", maxHeight: "90vh", overflowY: "auto" };
 const inputGroupStyle = { display: "flex", flexDirection: "column", gap: "5px" };
 const inputStyle = { backgroundColor: "#222", border: "1px solid #444", color: "#fff", padding: "10px", borderRadius: "5px", outline: "none", width: '100%' };
-const selectStyle = { backgroundColor: "#333", border: "none", color: "#00d2ff", padding: "5px 10px", borderRadius: "4px", fontSize: '0.8rem', fontWeight: 'bold' };
+const selectStyle = { backgroundColor: "#333", border: "none", color: "#ffffff", padding: "5px 10px", borderRadius: "4px", fontSize: '0.8rem', fontWeight: 'bold' };
 const blockContainerStyle = { backgroundColor: "#181818", padding: "15px", borderRadius: "8px", border: "1px solid #222" };
-const btnAddBlockStyle = { backgroundColor: 'transparent', color: '#00d2ff', border: '1px dashed #00d2ff', padding: '10px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' };
-const btnSubmitStyle = { backgroundColor: "#00d2ff", color: "#000", border: "none", padding: "15px", borderRadius: "5px", fontWeight: "bold", fontSize: "1rem", cursor: "pointer", marginTop: "20px" };
-const loadingOverlayStyle = { position: "fixed", bottom: "20px", right: "20px", backgroundColor: "#00d2ff", color: "#000", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", zIndex: 2000 };
+const btnAddBlockStyle = { backgroundColor: 'transparent', color: '#ffffff', border: '1px dashed #ffffff', padding: '10px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' };
+const btnSubmitStyle = { backgroundColor: "#ffffff", color: "#000", border: "none", padding: "15px", borderRadius: "5px", fontWeight: "bold", fontSize: "1rem", cursor: "pointer", marginTop: "20px" };
+const loadingOverlayStyle = { position: "fixed", bottom: "20px", right: "20px", backgroundColor: "#ffffff", color: "#000", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", zIndex: 2000 };

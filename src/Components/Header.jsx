@@ -28,10 +28,10 @@ const Header = () => {
   ];
 
   return (
-    <header style={{ 
-      padding: '40px 20px', 
-      display: 'flex', 
-      flexDirection: 'column', 
+    <header style={{
+      padding: '40px 20px',
+      display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       gap: '20px',
       backgroundColor: '#111',
@@ -40,51 +40,51 @@ const Header = () => {
     }}>
       <div style={{ textAlign: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
-          <h1 className='thefont' style={{ 
-            fontSize: isMobile ? '2.2rem' : '3.5rem', 
-            color: '#00d2ff', 
+          <h1 className='thefont' style={{
+            fontSize: isMobile ? '2.2rem' : '3.5rem',
+            color: '#ffffff',
             textTransform: 'uppercase',
             letterSpacing: '6px',
             margin: 0,
-            textShadow: '0 0 15px rgba(0, 210, 255, 0.5)'
+            textShadow: '0 0 15px rgba(255, 255, 255, 0.3)'
           }}>
             Tiago Holles
           </h1>
         </Link>
-        <p className='thefont' style={{ 
-          fontSize: '0.8rem', 
-          color: '#888', 
-          letterSpacing: '3px', 
+        <p className='thefont' style={{
+          fontSize: '0.8rem',
+          color: '#888',
+          letterSpacing: '3px',
           margin: '5px 0 0 0',
-          textTransform: 'uppercase' 
+          textTransform: 'uppercase'
         }}>
-          EDIÇÃO | AMV | DUBLAGEM | VFX
+          EDIÇÃO | MMV | DUBLAGEM | VFX
         </p>
       </div>
 
-      <div style={{ 
-        display: 'flex', 
-        gap: '20px', 
+      <div style={{
+        display: 'flex',
+        gap: '20px',
         position: isMobile ? 'static' : 'absolute',
         right: '40px',
         top: '50%',
         transform: isMobile ? 'none' : 'translateY(-50%)'
       }}>
-        <motion.a href={config.social.instagram} target="_blank" whileHover={{ scale: 1.2, color: '#00d2ff' }} style={{ color: 'white' }}>
+        <motion.a href={config.social.instagram} target="_blank" whileHover={{ scale: 1.2, color: '#ffffff' }} style={{ color: 'white' }}>
           <FaInstagram size={22} />
         </motion.a>
-        <motion.a href={config.social.whatsapp} target="_blank" whileHover={{ scale: 1.2, color: '#00d2ff' }} style={{ color: 'white' }}>
+        <motion.a href={config.social.whatsapp} target="_blank" whileHover={{ scale: 1.2, color: '#ffffff' }} style={{ color: 'white' }}>
           <FaWhatsapp size={22} />
         </motion.a>
-        <motion.a href={config.social.twitter} target="_blank" whileHover={{ scale: 1.2, color: '#00d2ff' }} style={{ color: 'white' }}>
+        <motion.a href={config.social.twitter} target="_blank" whileHover={{ scale: 1.2, color: '#ffffff' }} style={{ color: 'white' }}>
           <FaXTwitter size={22} />
         </motion.a>
       </div>
 
-      <nav style={{ 
-        display: 'flex', 
-        gap: '30px', 
-        flexWrap: 'wrap', 
+      <nav style={{
+        display: 'flex',
+        gap: '30px',
+        flexWrap: 'wrap',
         justifyContent: 'center',
         maxWidth: '1000px',
         marginTop: '10px'
@@ -93,13 +93,15 @@ const Header = () => {
           <Link
             key={item.path}
             to={item.path}
-            style={{ 
-              color: location.pathname === item.path ? '#00d2ff' : '#aaa', 
-              textDecoration: 'none', 
-              fontSize: '0.8rem', 
+            style={{
+              color: location.pathname === item.path ? '#ffffff' : '#aaa',
+              textDecoration: 'none',
+              fontSize: '0.8rem',
               textTransform: 'uppercase',
               fontWeight: 'bold',
-              letterSpacing: '2px'
+              letterSpacing: '2px',
+              borderBottom: location.pathname === item.path ? '1px solid #fff' : 'none',
+              paddingBottom: '3px'
             }}
           >
             <motion.span whileHover={{ scale: 1.1 }}>{item.name}</motion.span>

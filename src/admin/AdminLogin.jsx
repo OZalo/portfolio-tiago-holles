@@ -58,7 +58,7 @@ export default function AdminLogin() {
           boxShadow: "0 0 30px rgba(0, 210, 255, 0.1)"
         }}
       >
-        <h2 className="thefont" style={{ color: "#00d2ff", marginBottom: "30px", letterSpacing: "2px" }}>ADMIN TIAGO</h2>
+        <h2 className="thefont" style={{ color: "#ffffff", marginBottom: "30px", letterSpacing: "2px" }}>ADMIN TIAGO</h2>
         <input
           type="password"
           placeholder="Senha"
@@ -81,7 +81,7 @@ export default function AdminLogin() {
           style={{
             width: "100%",
             padding: "12px",
-            backgroundColor: "#00d2ff",
+            backgroundColor: "#ffffff",
             color: "#000",
             border: "none",
             borderRadius: "6px",
