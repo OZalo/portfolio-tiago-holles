@@ -84,11 +84,11 @@ const ProjectGrid = () => {
               style={{
                 position: 'absolute',
                 top: 0, left: 0, right: 0, bottom: 0,
-                backgroundColor: 'rgba(0, 0, 0, 0.4)', // Overlay suave, não muito cinza
+                backgroundColor: 'rgba(0, 0, 0, 0.4)', 
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-end',
                 justifyContent: 'center',
-                padding: '20px',
+                padding: '40px 20px',
                 textAlign: 'center'
               }}
             >
