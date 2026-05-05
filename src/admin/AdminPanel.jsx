@@ -36,7 +36,11 @@ export default function AdminPanel() {
     setLoading(true);
     try {
       await uploadJsonToCloudinary("projects", updatedList || projects);
-      alert("Alterações salvas com sucesso no Cloudinary!");
+      alert("Alterações salvas com sucesso no Cloudinary! Se não mudar na hora, tente abrir o site em uma aba anônima.");
+      
+      // Recarregar os dados do servidor para confirmar
+      const data = await fetchProjects();
+      setProjects(data);
     } catch (err) {
       alert("Erro ao salvar: " + err.message);
     } finally {

@@ -3,7 +3,7 @@ import localConfig from "../data/siteConfig.json";
 
 export async function fetchProjects() {
   try {
-    const response = await fetch(`/api/getData?dataset=projects&cb=${Date.now()}`, { cache: "no-store" });
+    const response = await fetch(`/api/getData?dataset=projects&cb=${Date.now()}&t=${new Date().getTime()}`, { cache: "no-store" });
     if (!response.ok) throw new Error("Falha ao buscar projetos via API");
     const data = await response.json();
     return Array.isArray(data) && data.length > 0 ? data : localProjects;
