@@ -1,12 +1,11 @@
-import React from 'react';
-import Carousel from '../Components/Carousel';
+import ProjectGrid from '../Components/ProjectGrid';
 import PageWrapper from '../Components/PageWrapper';
 
 const Home = () => {
   return (
     <PageWrapper>
       <main style={{ marginTop: '20px' }}>
-        <Carousel />
+        <ProjectGrid />
       </main>
       <footer style={{ 
         marginTop: '60px', 
