@@ -31,3 +31,15 @@ export async function fetchConfig() {
     return localConfig;
   }
 }
+
+export async function fetchDemos() {
+  try {
+    const response = await fetch(`/api/getData?dataset=demos&cb=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Erro ao carregar demos:", error);
+    return [];
+  }
+}

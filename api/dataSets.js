@@ -3,4 +3,5 @@
 export const DATASETS = {
   projects: "projectsData_tiago",
   config: "siteConfig_tiago",
+  demos: "demosData_tiago",
 };
