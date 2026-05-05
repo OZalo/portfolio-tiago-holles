@@ -171,7 +171,7 @@ export default function AdminPanel() {
           demos.map((d, index) => (
             <motion.div layout key={d.id} style={cardStyle}>
               <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-                <div style={{ backgroundColor: '#222', padding: '10px', borderRadius: '50%' }}><FaMusic color="#fff"/></div>
+                <div style={{ backgroundColor: '#222', padding: '10px', borderRadius: '50%' }}><FaMusic color="#fff" /></div>
                 <div>
                   <strong style={{ fontSize: "1.1rem" }}>{d.title}</strong>
                   <span style={{ color: "#666", fontSize: "0.8rem", display: 'block' }}>{d.url}</span>
@@ -194,16 +194,16 @@ export default function AdminPanel() {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} style={modalContentStyle}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '25px' }}>
                 <h2 className="thefont" style={{ color: "#fff", margin: 0 }}>{isAdding ? "Adicionar" : "Editar"} {activeTab === "projects" ? "Projeto" : "Demo"}</h2>
-                <button onClick={() => { setEditingItem(null); setIsAdding(false); }} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}><FaTimes size={24}/></button>
+                <button onClick={() => { setEditingItem(null); setIsAdding(false); }} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}><FaTimes size={24} /></button>
               </div>
-              
+
               <form onSubmit={handleSubmit} style={{ display: "grid", gap: "15px" }}>
                 {activeTab === "projects" ? (
                   <>
-                    <div style={inputGroupStyle}><label>Título</label><input style={inputStyle} value={editingItem?.content?.title || ""} onChange={e => setEditingItem({...editingItem, content: {...editingItem.content, title: e.target.value}})} required /></div>
-                    <div style={inputGroupStyle}><label>Capa URL</label><input style={inputStyle} value={editingItem?.content?.src || ""} onChange={e => setEditingItem({...editingItem, content: {...editingItem.content, src: e.target.value}})} required /></div>
-                    <div style={inputGroupStyle}><label>Categoria</label><input style={inputStyle} value={editingItem?.category || ""} onChange={e => setEditingItem({...editingItem, category: e.target.value})} /></div>
-                    
+                    <div style={inputGroupStyle}><label>Título</label><input style={inputStyle} value={editingItem?.content?.title || ""} onChange={e => setEditingItem({ ...editingItem, content: { ...editingItem.content, title: e.target.value } })} required /></div>
+                    <div style={inputGroupStyle}><label>Capa URL</label><input style={inputStyle} value={editingItem?.content?.src || ""} onChange={e => setEditingItem({ ...editingItem, content: { ...editingItem.content, src: e.target.value } })} required /></div>
+                    <div style={inputGroupStyle}><label>Categoria</label><input style={inputStyle} value={editingItem?.category || ""} onChange={e => setEditingItem({ ...editingItem, category: e.target.value })} /></div>
+
                     {/* GERENCIADOR DE BLOCOS (RESTAURADO) */}
                     <div style={{ marginTop: '10px', borderTop: '1px solid #333', paddingTop: '15px' }}>
                       <label style={{ color: '#fff', fontSize: '0.9rem', marginBottom: '10px', display: 'block' }}>Blocos de Conteúdo</label>
@@ -216,7 +216,7 @@ export default function AdminPanel() {
                                 <option value="video">Vídeo</option>
                                 <option value="media">GIF/Mídia</option>
                               </select>
-                              <button type="button" onClick={() => removeBlock(bIdx)} style={{ color: '#ff4444', background: 'none', border: 'none', cursor: 'pointer' }}><FaTrash size={10}/></button>
+                              <button type="button" onClick={() => removeBlock(bIdx)} style={{ color: '#ff4444', background: 'none', border: 'none', cursor: 'pointer' }}><FaTrash size={10} /></button>
                             </div>
                             {block.type === 'text' ? (
                               <textarea style={inputStyle} value={block.value} onChange={e => updateBlock(bIdx, 'value', e.target.value)} />
@@ -231,8 +231,8 @@ export default function AdminPanel() {
                   </>
                 ) : (
                   <>
-                    <div style={inputGroupStyle}><label>Título do Áudio</label><input style={inputStyle} value={editingItem?.title || ""} onChange={e => setEditingItem({...editingItem, title: e.target.value})} required /></div>
-                    <div style={inputGroupStyle}><label>URL do Arquivo (.mp3)</label><input style={inputStyle} value={editingItem?.url || ""} onChange={e => setEditingItem({...editingItem, url: e.target.value})} required /></div>
+                    <div style={inputGroupStyle}><label>Título do Áudio</label><input style={inputStyle} value={editingItem?.title || ""} onChange={e => setEditingItem({ ...editingItem, title: e.target.value })} required /></div>
+                    <div style={inputGroupStyle}><label>URL do Arquivo</label><input style={inputStyle} value={editingItem?.url || ""} onChange={e => setEditingItem({ ...editingItem, url: e.target.value })} required /></div>
                   </>
                 )}
                 <button type="submit" style={{ ...btnPrimaryStyle, justifyContent: 'center', marginTop: '20px' }}>Salvar Alterações</button>

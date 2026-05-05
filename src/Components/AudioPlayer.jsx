@@ -7,38 +7,60 @@ const AudioPlayer = ({ src, title }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef(null);
 
+  // Resetar o estado quando o SRC mudar
+  useEffect(() => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+    if (audioRef.current) {
+      audioRef.current.load(); // Força o recarregamento do novo arquivo
+    }
+  }, [src]);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const setAudioData = () => setDuration(audio.duration);
-    const setAudioTime = () => setCurrentTime(audio.currentTime);
+    const setAudioData = () => {
+      setDuration(audio.duration);
+    };
+
+    const setAudioTime = () => {
+      setCurrentTime(audio.currentTime);
+    };
+
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setCurrentTime(0);
+    };
 
     audio.addEventListener('loadedmetadata', setAudioData);
     audio.addEventListener('timeupdate', setAudioTime);
+    audio.addEventListener('ended', handleEnded);
 
     return () => {
       audio.removeEventListener('loadedmetadata', setAudioData);
       audio.removeEventListener('timeupdate', setAudioTime);
+      audio.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [src]); // Re-registra eventos se o áudio mudar
 
   const togglePlay = () => {
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play();
+      audioRef.current.play().catch(err => console.error("Erro ao dar play:", err));
     }
     setIsPlaying(!isPlaying);
   };
 
   const handleProgressChange = (e) => {
-    const time = e.target.value;
+    const time = Number(e.target.value);
     audioRef.current.currentTime = time;
     setCurrentTime(time);
   };
 
   const formatTime = (time) => {
+    if (isNaN(time)) return "0:00";
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -46,7 +68,10 @@ const AudioPlayer = ({ src, title }) => {
 
   return (
     <div style={playerContainerStyle}>
-      <audio ref={audioRef} src={src} />
+      <audio ref={audioRef} key={src}>
+        <source src={src} />
+        Seu navegador não suporta este formato de áudio.
+      </audio>
       
       <div style={topInfoStyle}>
         <span style={titleStyle}>{title}</span>
@@ -54,13 +79,14 @@ const AudioPlayer = ({ src, title }) => {
       </div>
 
       <div style={controlsRowStyle}>
-        <button onClick={togglePlay} style={playBtnStyle}>
+        <button onClick={togglePlay} style={playBtnStyle} type="button">
           {isPlaying ? <FaPause /> : <FaPlay style={{ marginLeft: '3px' }} />}
         </button>
 
         <input 
           type="range" 
           value={currentTime} 
+          min="0"
           max={duration || 0} 
           onChange={handleProgressChange} 
           style={rangeStyle}
