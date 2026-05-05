@@ -2,7 +2,7 @@
 // Lê um dataset JSON (RAW) da Cloudinary.
 import { DATASETS } from "./dataSets.js";
 
-const CLOUD_NAME = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || process.env.REACT_APP_CLOUDINARY_CLOUD_NAME || 'dje6clroh';
 
 function buildRawUrl(publicId) {
   return `https://res.cloudinary.com/${CLOUD_NAME}/raw/upload/${publicId}.json`;
