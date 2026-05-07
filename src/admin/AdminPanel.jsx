@@ -3,7 +3,7 @@ import { fetchProjects, fetchDemos, fetchConfig, getLocalProjects } from "../ser
 import { uploadJsonToCloudinary } from "../services/dataCloudRaw";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaEdit, FaTrash, FaArrowUp, FaArrowDown, FaPlus, FaSave, FaTimes, FaMusic, FaThLarge, FaCog, FaSync } from "react-icons/fa";
+import { FaEdit, FaTrash, FaArrowUp, FaArrowDown, FaPlus, FaSave, FaTimes, FaMusic, FaThLarge, FaCog, FaSync, FaEye } from "react-icons/fa";
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState("projects");
@@ -32,6 +32,11 @@ export default function AdminPanel() {
         ]);
         setProjects(pData);
         setDemos(dData);
+
+        // Se o texto vier vazio, coloca o padrão para facilitar
+        if (!cData.aboutText) {
+          cData.aboutText = `Criar para o audiovisual é, acima de tudo, entender o ritmo. Com 6 anos de experiência em edição de vídeo e 2 anos dedicados à engenharia de áudio, foco em edições ágeis e narrativas orgânicas, onde o objetivo é contar uma história simples mas memorável.\n\nSou dublador e mixador há 2 anos, e atualmente estou na busca de meu DRT para dublagem, apesar disso já fiz trabalhos interessantes no ramo, tanto na comunidade de fandublagem, quanto no mercado real.`;
+        }
         setConfig(cData);
       } catch (err) {
         console.error("Erro ao carregar dados:", err);
@@ -143,8 +148,28 @@ export default function AdminPanel() {
     }
   };
 
+  const handleEdit = (item) => {
+    let updatedItem = { ...item };
+    
+    // Se o item não tem blocos, vamos converter o que ele tinha para o sistema de blocos
+    if (!updatedItem.content.blocks) {
+      const blocks = [];
+      const c = updatedItem.content;
+      
+      if (c.firstText) blocks.push({ type: 'text', value: c.firstText });
+      if (c.video || c.upperVideo) blocks.push({ type: 'video', value: c.video || c.upperVideo });
+      if (c.firstMedia) blocks.push({ type: 'media', value: c.firstMedia });
+      if (c.secondMedia) blocks.push({ type: 'media', value: c.secondMedia });
+      if (c.secondText) blocks.push({ type: 'text', value: c.secondText });
+      
+      updatedItem.content = { ...c, blocks };
+    }
+    
+    setEditingItem(updatedItem);
+  };
+
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -185,7 +210,7 @@ export default function AdminPanel() {
               <div style={{ display: "flex", gap: "10px" }}>
                 <button onClick={() => moveItem(index, -1, "projects")} style={iconBtnStyle} disabled={index === 0}><FaArrowUp /></button>
                 <button onClick={() => moveItem(index, 1, "projects")} style={iconBtnStyle} disabled={index === projects.length - 1}><FaArrowDown /></button>
-                <button onClick={() => setEditingItem(p)} style={iconBtnStyle}><FaEdit /></button>
+                <button onClick={() => handleEdit(p)} style={iconBtnStyle}><FaEdit /></button>
                 <button onClick={() => deleteItem(p.id)} style={{ ...iconBtnStyle, color: "#ff4444" }}><FaTrash /></button>
               </div>
             </motion.div>
@@ -213,15 +238,36 @@ export default function AdminPanel() {
         )}
 
         {activeTab === "config" && (
-          <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px' }}>
-            <h3 className="thefont" style={{ fontSize: '1.2rem', margin: 0 }}>Texto do "Sobre Mim"</h3>
-            <textarea 
-              style={{ ...inputStyle, minHeight: '300px', lineHeight: '1.6', fontSize: '1.1rem' }}
-              value={config.aboutText}
-              onChange={(e) => setConfig({ ...config, aboutText: e.target.value })}
-              placeholder="Escreva sua história aqui..."
-            />
-            <p style={{ color: '#666', fontSize: '0.9rem' }}>Use o botão "Salvar Sobre Mim" no topo para aplicar as mudanças.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+            <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px' }}>
+              <h3 className="thefont" style={{ fontSize: '1.2rem', margin: 0 }}>Editor de Texto</h3>
+              <textarea
+                style={{ ...inputStyle, minHeight: '400px', lineHeight: '1.6', fontSize: '1rem' }}
+                value={config.aboutText}
+                onChange={(e) => setConfig({ ...config, aboutText: e.target.value })}
+              />
+              <p style={{ color: '#666', fontSize: '0.8rem' }}>Dica: Use parágrafos duplos para separar as ideias.</p>
+            </div>
+
+            <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px', backgroundColor: '#050505' }}>
+              <h3 className="thefont" style={{ fontSize: '1.2rem', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <FaEye size={18} /> Prévia do Site
+              </h3>
+              <div style={{
+                color: '#ccc',
+                lineHeight: '1.8',
+                fontSize: '1rem',
+                textAlign: 'justify',
+                whiteSpace: 'pre-wrap',
+                width: '100%',
+                maxHeight: '400px',
+                overflowY: 'auto',
+                paddingRight: '10px'
+              }}>
+                {config.aboutText}
+              </div>
+              <div style={{ marginTop: 'auto', color: '#444', fontSize: '0.8rem' }}>Assim é como o texto aparecerá na página "Sobre Mim".</div>
+            </div>
           </div>
         )}
       </div>
