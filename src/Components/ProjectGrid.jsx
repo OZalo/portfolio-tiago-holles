@@ -125,13 +125,21 @@ const ProjectGrid = () => {
         size='xl' 
         show={showModal} 
         onHide={() => setShowModal(false)}
+        scrollable={true}
         contentClassName='bg-dark text-white'
+        style={{ zIndex: 2000 }}
       >
-        <Modal.Header style={{ backgroundColor: '#040509', borderBottom: '1px solid #111' }}>
-          <Modal.Title className='thefont' style={{ color: '#fff' }}>{selectedContent.title}</Modal.Title>
+        <Modal.Header style={{ 
+          backgroundColor: '#040509', 
+          borderBottom: '1px solid #111',
+          padding: '20px 30px'
+        }}>
+          <Modal.Title className='thefont' style={{ color: '#fff', fontSize: '1.2rem', letterSpacing: '2px' }}>
+            {selectedContent.title}
+          </Modal.Title>
           <CloseButton onClick={() => setShowModal(false)} variant='white' />
         </Modal.Header>
-        <Modal.Body style={{ backgroundColor: '#040509', padding: '30px' }}>
+        <Modal.Body style={{ backgroundColor: '#040509', padding: isMobile ? '15px' : '30px' }}>
           
           {selectedContent.blocks ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
