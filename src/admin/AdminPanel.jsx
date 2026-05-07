@@ -150,21 +150,21 @@ export default function AdminPanel() {
 
   const handleEdit = (item) => {
     let updatedItem = { ...item };
-    
+
     // Se o item não tem blocos, vamos converter o que ele tinha para o sistema de blocos
     if (!updatedItem.content.blocks) {
       const blocks = [];
       const c = updatedItem.content;
-      
+
       if (c.firstText) blocks.push({ type: 'text', value: c.firstText });
       if (c.video || c.upperVideo) blocks.push({ type: 'video', value: c.video || c.upperVideo });
       if (c.firstMedia) blocks.push({ type: 'media', value: c.firstMedia });
       if (c.secondMedia) blocks.push({ type: 'media', value: c.secondMedia });
       if (c.secondText) blocks.push({ type: 'text', value: c.secondText });
-      
+
       updatedItem.content = { ...c, blocks };
     }
-    
+
     setEditingItem(updatedItem);
   };
 
@@ -186,9 +186,6 @@ export default function AdminPanel() {
         </div>
 
         <div style={{ display: "flex", gap: "15px" }}>
-          {activeTab === "projects" && (
-            <button onClick={syncLocalProjects} style={btnSecondaryStyle} title="Importar do arquivo local"><FaSync /> Sincronizar Local</button>
-          )}
           {activeTab !== "config" && (
             <button onClick={startAdding} style={btnPrimaryStyle}><FaPlus /> Novo {activeTab === "projects" ? "Projeto" : "Áudio"}</button>
           )}
@@ -246,7 +243,6 @@ export default function AdminPanel() {
                 value={config.aboutText}
                 onChange={(e) => setConfig({ ...config, aboutText: e.target.value })}
               />
-              <p style={{ color: '#666', fontSize: '0.8rem' }}>Dica: Use parágrafos duplos para separar as ideias.</p>
             </div>
 
             <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px', backgroundColor: '#050505' }}>
@@ -266,7 +262,6 @@ export default function AdminPanel() {
               }}>
                 {config.aboutText}
               </div>
-              <div style={{ marginTop: 'auto', color: '#444', fontSize: '0.8rem' }}>Assim é como o texto aparecerá na página "Sobre Mim".</div>
             </div>
           </div>
         )}
