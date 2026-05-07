@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchProjects, fetchDemos, fetchConfig, getLocalProjects } from "../services/dataService";
+import localConfig from "../data/siteConfig.json";
 import { uploadJsonToCloudinary } from "../services/dataCloudRaw";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,7 +11,8 @@ export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState("projects");
   const [projects, setProjects] = useState([]);
   const [demos, setDemos] = useState([]);
-  const [config, setConfig] = useState({ aboutText: "" });
+  const defaultAbout = `Criar para o audiovisual é, acima de tudo, entender o ritmo. Com 6 anos de experiência em edição de vídeo e 2 anos dedicados à engenharia de áudio, foco em edições ágeis e narrativas orgânicas, onde o objetivo é contar uma história simples mas memorável.\n\nSou dublador e mixador há 2 anos, e atualmente estou na busca de meu DRT para dublagem, apesar disso já fiz trabalhos interessantes no ramo, tanto na comunidade de fandublagem, quanto no mercado real.`;
+  const [config, setConfig] = useState({ aboutText: localConfig.aboutText || defaultAbout });
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -34,10 +36,10 @@ export default function AdminPanel() {
         setProjects(pData);
         setDemos(dData);
         
-        if (!cData || !cData.aboutText) {
-          cData.aboutText = config.aboutText || ""; 
+        // Se a nuvem estiver vazia ou sem o texto, mantém o que já temos no config (que veio do localConfig)
+        if (cData && cData.aboutText) {
+          setConfig(cData);
         }
-        setConfig(cData);
       } catch (err) {
         console.error("Erro ao carregar dados:", err);
       } finally {
