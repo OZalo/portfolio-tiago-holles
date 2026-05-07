@@ -11,8 +11,13 @@ export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState("projects");
   const [projects, setProjects] = useState([]);
   const [demos, setDemos] = useState([]);
+  
+  // Texto padrão original
   const defaultAbout = `Criar para o audiovisual é, acima de tudo, entender o ritmo. Com 6 anos de experiência em edição de vídeo e 2 anos dedicados à engenharia de áudio, foco em edições ágeis e narrativas orgânicas, onde o objetivo é contar uma história simples mas memorável.\n\nSou dublador e mixador há 2 anos, e atualmente estou na busca de meu DRT para dublagem, apesar disso já fiz trabalhos interessantes no ramo, tanto na comunidade de fandublagem, quanto no mercado real.`;
+  
+  // Inicializa com o que tiver no local ou o padrão
   const [config, setConfig] = useState({ aboutText: localConfig.aboutText || defaultAbout });
+  
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -28,20 +33,25 @@ export default function AdminPanel() {
     const loadData = async () => {
       setLoading(true);
       try {
+        console.log("Iniciando carga de dados...");
         const [pData, dData, cData] = await Promise.all([
           fetchProjects(),
           fetchDemos(),
           fetchConfig()
         ]);
+        
         setProjects(pData);
         setDemos(dData);
         
-        // Se a nuvem estiver vazia ou sem o texto, mantém o que já temos no config (que veio do localConfig)
-        if (cData && cData.aboutText) {
+        // Se cData trouxe um texto válido da nuvem, atualiza o estado
+        if (cData && cData.aboutText && cData.aboutText !== "") {
+          console.log("Config carregada da nuvem com sucesso.");
           setConfig(cData);
+        } else {
+          console.log("Config da nuvem vazia, mantendo padrão.");
         }
       } catch (err) {
-        console.error("Erro ao carregar dados:", err);
+        console.error("Erro no loadData:", err);
       } finally {
         setLoading(false);
       }
@@ -57,10 +67,12 @@ export default function AdminPanel() {
       } else if (activeTab === "demos") {
         await uploadJsonToCloudinary("demos", demos);
       } else {
+        console.log("Tentando salvar config:", config);
         await uploadJsonToCloudinary("config", config);
       }
-      alert("Alterações salvas com sucesso no Cloudinary!");
+      alert("Alterações salvas com sucesso!");
     } catch (err) {
+      console.error("Erro ao salvar:", err);
       alert("Erro ao salvar: " + err.message);
     } finally {
       setLoading(false);
