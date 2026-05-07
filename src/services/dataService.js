@@ -19,7 +19,8 @@ export async function fetchConfig() {
     const response = await fetch(`/api/getData?dataset=config&cb=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) return localConfig;
     const data = await response.json();
-    return data && data.aboutText ? data : localConfig;
+    // Se vier um objeto com aboutText, usa ele. Se vier vazio ou array, usa o local.
+    return (data && data.aboutText) ? data : localConfig;
   } catch (error) {
     return localConfig;
   }
@@ -36,7 +37,6 @@ export async function fetchDemos() {
   }
 }
 
-// Função para o Admin forçar o uso do arquivo local
 export function getLocalProjects() {
   return localProjects;
 }

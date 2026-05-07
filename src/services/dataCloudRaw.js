@@ -33,7 +33,8 @@ export async function uploadJsonToCloudinary(dataset, items) {
     throw new Error(sig?.error || "Falha ao assinar (cloudSignJson)");
   }
 
-  const pretty = JSON.stringify(items ?? [], null, 2);
+  const pretty = JSON.stringify(items, null, 2);
+  if (!pretty || pretty === "null") throw new Error("Dados inválidos para upload");
   const blob = new Blob([pretty], { type: "application/json" });
 
   const form = new FormData();
