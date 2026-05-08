@@ -5,7 +5,7 @@ import { DATASETS } from "./dataSets.js";
 const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || process.env.REACT_APP_CLOUDINARY_CLOUD_NAME || 'dje6clroh';
 
 function buildRawUrl(publicId) {
-  return `https://res.cloudinary.com/${CLOUD_NAME}/raw/upload/${publicId}.json`;
+  return `https://res.cloudinary.com/${CLOUD_NAME}/raw/upload/${publicId}`;
 }
 
 export default async function handler(req, res) {
@@ -40,7 +40,9 @@ export default async function handler(req, res) {
     const data = await upstream.json().catch(() => []);
     
     res.setHeader("Cache-Control", "no-store, max-age=0, must-revalidate");
-    return res.status(200).json(Array.isArray(data) ? data : []);
+    // Se data for um array, retorna array. Se for objeto, retorna objeto. Caso contrário []
+    const result = data ? data : [];
+    return res.status(200).json(result);
   } catch (err) {
     console.error("getData error:", err);
     return res.status(200).json([]);
