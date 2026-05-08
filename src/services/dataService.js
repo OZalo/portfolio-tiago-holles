@@ -16,10 +16,9 @@ export async function fetchProjects() {
 
 export async function fetchConfig() {
   try {
-    const response = await fetch(`/api/getData?dataset=config&cb=${Date.now()}`, { cache: "no-store" });
+    const response = await fetch(`/api/getData?dataset=about&cb=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) return localConfig;
     const data = await response.json();
-    // Se vier um objeto com aboutText, usa ele. Se vier vazio ou array, usa o local.
     return (data && data.aboutText) ? data : localConfig;
   } catch (error) {
     return localConfig;

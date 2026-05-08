@@ -5,7 +5,7 @@ import { DATASETS } from "./dataSets.js";
 const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || process.env.REACT_APP_CLOUDINARY_CLOUD_NAME || 'dje6clroh';
 
 function buildRawUrl(publicId) {
-  return `https://res.cloudinary.com/${CLOUD_NAME}/raw/upload/${publicId}`;
+  return `https://res.cloudinary.com/${CLOUD_NAME}/raw/upload/${publicId}.json`;
 }
 
 export default async function handler(req, res) {

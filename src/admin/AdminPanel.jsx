@@ -12,12 +12,9 @@ export default function AdminPanel() {
   const [projects, setProjects] = useState([]);
   const [demos, setDemos] = useState([]);
   
-  // Texto padrão original
   const defaultAbout = `Criar para o audiovisual é, acima de tudo, entender o ritmo. Com 6 anos de experiência em edição de vídeo e 2 anos dedicados à engenharia de áudio, foco em edições ágeis e narrativas orgânicas, onde o objetivo é contar uma história simples mas memorável.\n\nSou dublador e mixador há 2 anos, e atualmente estou na busca de meu DRT para dublagem, apesar disso já fiz trabalhos interessantes no ramo, tanto na comunidade de fandublagem, quanto no mercado real.`;
   
-  // Inicializa com o que tiver no local ou o padrão
-  const [config, setConfig] = useState({ aboutText: localConfig.aboutText || defaultAbout });
-  
+  const [config, setConfig] = useState({ aboutText: defaultAbout });
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -33,7 +30,6 @@ export default function AdminPanel() {
     const loadData = async () => {
       setLoading(true);
       try {
-        console.log("Iniciando carga de dados...");
         const [pData, dData, cData] = await Promise.all([
           fetchProjects(),
           fetchDemos(),
@@ -43,12 +39,8 @@ export default function AdminPanel() {
         setProjects(pData);
         setDemos(dData);
         
-        // Se cData trouxe um texto válido da nuvem, atualiza o estado
-        if (cData && cData.aboutText && cData.aboutText !== "") {
-          console.log("Config carregada da nuvem com sucesso.");
+        if (cData && cData.aboutText) {
           setConfig(cData);
-        } else {
-          console.log("Config da nuvem vazia, mantendo padrão.");
         }
       } catch (err) {
         console.error("Erro no loadData:", err);
@@ -67,8 +59,8 @@ export default function AdminPanel() {
       } else if (activeTab === "demos") {
         await uploadJsonToCloudinary("demos", demos);
       } else {
-        console.log("Tentando salvar config:", config);
-        await uploadJsonToCloudinary("config", config);
+        // Agora usamos o dataset "about"
+        await uploadJsonToCloudinary("about", config);
       }
       alert("Alterações salvas com sucesso!");
     } catch (err) {
@@ -187,9 +179,6 @@ export default function AdminPanel() {
               </div>
 
               <div style={{ display: "flex", gap: "15px" }}>
-                {activeTab !== "config" && (
-                  <button onClick={startAdding} style={btnPrimaryStyle}><FaPlus /> Novo {activeTab === "projects" ? "Projeto" : "Áudio"}</button>
-                )}
                 <button onClick={handleSaveAll} style={btnPrimaryStyle}><FaSave /> Salvar {activeTab === "projects" ? "Projetos" : activeTab === "demos" ? "Demos" : "Sobre Mim"}</button>
               </div>
             </header>
