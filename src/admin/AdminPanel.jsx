@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { fetchProjects, fetchDemos, fetchConfig, getLocalProjects } from "../services/dataService";
-import localConfig from "../data/siteConfig.json";
+import { fetchProjects, fetchDemos, fetchConfig } from "../services/dataService";
 import { uploadJsonToCloudinary } from "../services/dataCloudRaw";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaEdit, FaTrash, FaArrowUp, FaArrowDown, FaPlus, FaSave, FaTimes, FaMusic, FaThLarge, FaCog, FaSync, FaEye } from "react-icons/fa";
+import { FaEdit, FaTrash, FaArrowUp, FaArrowDown, FaPlus, FaSave, FaTimes, FaMusic, FaThLarge, FaCog, FaEye } from "react-icons/fa";
 import PageWrapper from "../Components/PageWrapper";
 
 export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState("projects");
   const [projects, setProjects] = useState([]);
   const [demos, setDemos] = useState([]);
-  
+
+  // Esse é o texto que você tem hoje no site. 
+  // Ele serve de base caso você ainda não tenha salvo nada na nuvem.
   const defaultAbout = `Criar para o audiovisual é, acima de tudo, entender o ritmo. Com 6 anos de experiência em edição de vídeo e 2 anos dedicados à engenharia de áudio, foco em edições ágeis e narrativas orgânicas, onde o objetivo é contar uma história simples mas memorável.\n\nSou dublador e mixador há 2 anos, e atualmente estou na busca de meu DRT para dublagem, apesar disso já fiz trabalhos interessantes no ramo, tanto na comunidade de fandublagem, quanto no mercado real.`;
-  
+
   const [config, setConfig] = useState({ aboutText: defaultAbout });
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState(null);
@@ -35,15 +36,17 @@ export default function AdminPanel() {
           fetchDemos(),
           fetchConfig()
         ]);
-        
+
         setProjects(pData);
         setDemos(dData);
-        
+
+        // Se já existir o arquivo "aboutMeData.json" na nuvem, usamos ele.
+        // Se não existir, o config continua com o defaultAbout lá de cima.
         if (cData && cData.aboutText) {
           setConfig(cData);
         }
       } catch (err) {
-        console.error("Erro no loadData:", err);
+        console.error("Erro ao carregar:", err);
       } finally {
         setLoading(false);
       }
@@ -59,18 +62,18 @@ export default function AdminPanel() {
       } else if (activeTab === "demos") {
         await uploadJsonToCloudinary("demos", demos);
       } else {
-        // Agora usamos o dataset "about"
+        // Ao salvar aqui, o arquivo "aboutMeData.json" é criado na sua Cloudinary.
         await uploadJsonToCloudinary("about", config);
       }
-      alert("Alterações salvas com sucesso!");
+      alert("Salvo com sucesso!");
     } catch (err) {
-      console.error("Erro ao salvar:", err);
       alert("Erro ao salvar: " + err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  // ... (resto das funções de movimentação e edição que já funcionam)
   const moveItem = (index, direction, type) => {
     const list = type === "projects" ? [...projects] : [...demos];
     const targetIndex = index + direction;
@@ -82,11 +85,8 @@ export default function AdminPanel() {
 
   const deleteItem = (id) => {
     if (window.confirm("Tem certeza?")) {
-      if (activeTab === "projects") {
-        setProjects(projects.filter(p => p.id !== id));
-      } else {
-        setDemos(demos.filter(d => d.id !== id));
-      }
+      if (activeTab === "projects") setProjects(projects.filter(p => p.id !== id));
+      else setDemos(demos.filter(d => d.id !== id));
     }
   };
 
@@ -107,28 +107,19 @@ export default function AdminPanel() {
 
   const addBlock = () => {
     const currentBlocks = editingItem.content.blocks || [];
-    setEditingItem({
-      ...editingItem,
-      content: { ...editingItem.content, blocks: [...currentBlocks, { type: 'text', value: '' }] }
-    });
+    setEditingItem({ ...editingItem, content: { ...editingItem.content, blocks: [...currentBlocks, { type: 'text', value: '' }] } });
   };
 
   const updateBlock = (index, field, value) => {
     const currentBlocks = [...(editingItem.content.blocks || [])];
     currentBlocks[index][field] = value;
-    setEditingItem({
-      ...editingItem,
-      content: { ...editingItem.content, blocks: currentBlocks }
-    });
+    setEditingItem({ ...editingItem, content: { ...editingItem.content, blocks: currentBlocks } });
   };
 
   const removeBlock = (index) => {
     const currentBlocks = [...(editingItem.content.blocks || [])];
     currentBlocks.splice(index, 1);
-    setEditingItem({
-      ...editingItem,
-      content: { ...editingItem.content, blocks: currentBlocks }
-    });
+    setEditingItem({ ...editingItem, content: { ...editingItem.content, blocks: currentBlocks } });
   };
 
   const handleSubmit = (e) => {
@@ -154,18 +145,26 @@ export default function AdminPanel() {
 
   const startAdding = () => {
     setIsAdding(true);
-    if (activeTab === "projects") {
-      setEditingItem({ category: "vfx / edição", content: { title: "", src: "", blocks: [{ type: 'text', value: '' }] } });
-    } else {
-      setEditingItem({ title: "", url: "" });
-    }
+    if (activeTab === "projects") setEditingItem({ category: "vfx / edição", content: { title: "", src: "", blocks: [{ type: 'text', value: '' }] } });
+    else setEditingItem({ title: "", url: "" });
   };
+
+  const tabStyle = { backgroundColor: 'transparent', color: '#666', border: 'none', padding: '10px 20px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' };
+  const tabActiveStyle = { ...tabStyle, color: '#fff', borderBottom: '2px solid #fff' };
+  const btnPrimaryStyle = { backgroundColor: "#fff", color: "#000", border: "none", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
+  const cardStyle = { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "15px 20px", backgroundColor: "#111", border: "1px solid #222", borderRadius: "8px" };
+  const thumbStyle = { width: "50px", height: "50px", objectFit: "cover", borderRadius: "4px" };
+  const iconBtnStyle = { background: "#222", border: "none", color: "#fff", padding: "8px", borderRadius: "4px", cursor: "pointer", display: 'flex', alignItems: 'center', justifyContent: 'center' };
+  const modalOverlayStyle = { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.8)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 3000 };
+  const modalContentStyle = { backgroundColor: "#111", border: "1px solid #333", padding: "30px", borderRadius: "12px", width: "95%", maxWidth: "600px", maxHeight: '90vh', overflowY: 'auto' };
+  const inputGroupStyle = { display: "flex", flexDirection: "column", gap: "5px" };
+  const inputStyle = { backgroundColor: "#222", border: "1px solid #444", color: "#fff", padding: "10px", borderRadius: "5px", outline: "none", width: '100%' };
 
   return (
     <PageWrapper>
       <div style={{ backgroundColor: "#000", minHeight: "100vh", color: "#fff", padding: "40px 20px" }}>
         {loading && projects.length === 0 ? (
-          <div style={{ color: "#fff", padding: "50px", textAlign: "center" }} className="thefont">Carregando Painel...</div>
+          <div style={{ color: "#fff", padding: "50px", textAlign: "center" }} className="thefont">Carregando...</div>
         ) : (
           <>
             <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "40px", borderBottom: "1px solid #222", paddingBottom: "20px" }}>
@@ -173,13 +172,12 @@ export default function AdminPanel() {
                 <h1 className="thefont" style={{ color: "#fff", margin: 0, fontSize: '1.5rem' }}>PAINEL ADMIN</h1>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <button onClick={() => setActiveTab("projects")} style={activeTab === "projects" ? tabActiveStyle : tabStyle}><FaThLarge /> Projetos</button>
-                  <button onClick={() => setActiveTab("demos")} style={activeTab === "demos" ? tabActiveStyle : tabStyle}><FaMusic /> Demos de Voz</button>
-                  <button onClick={() => setActiveTab("config")} style={activeTab === "config" ? tabActiveStyle : tabStyle}><FaCog /> Configuração</button>
+                  <button onClick={() => setActiveTab("demos")} style={activeTab === "demos" ? tabActiveStyle : tabStyle}><FaMusic /> Demos</button>
+                  <button onClick={() => setActiveTab("config")} style={activeTab === "config" ? tabActiveStyle : tabStyle}><FaCog /> Sobre Mim</button>
                 </div>
               </div>
-
               <div style={{ display: "flex", gap: "15px" }}>
-                <button onClick={handleSaveAll} style={btnPrimaryStyle}><FaSave /> Salvar {activeTab === "projects" ? "Projetos" : activeTab === "demos" ? "Demos" : "Sobre Mim"}</button>
+                <button onClick={handleSaveAll} style={btnPrimaryStyle}><FaSave /> Salvar Alterações</button>
               </div>
             </header>
 
@@ -188,10 +186,7 @@ export default function AdminPanel() {
                 <div key={p.id} style={cardStyle}>
                   <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
                     <img src={p.content.src.replace('dkbqg1jiq', 'dje6clroh')} alt="" style={thumbStyle} />
-                    <div>
-                      <strong style={{ fontSize: "1.1rem" }}>{p.content.title}</strong>
-                      <span style={{ color: "#666", fontSize: "0.8rem", marginLeft: '10px' }}>{p.category}</span>
-                    </div>
+                    <div><strong>{p.content.title}</strong><span style={{ color: "#666", fontSize: "0.8rem", marginLeft: '10px' }}>{p.category}</span></div>
                   </div>
                   <div style={{ display: "flex", gap: "10px" }}>
                     <button onClick={() => moveItem(index, -1, "projects")} style={iconBtnStyle} disabled={index === 0}><FaArrowUp /></button>
@@ -201,16 +196,9 @@ export default function AdminPanel() {
                   </div>
                 </div>
               ))}
-
               {activeTab === "demos" && demos.map((d, index) => (
                 <div key={d.id} style={cardStyle}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-                    <div style={{ backgroundColor: '#222', padding: '10px', borderRadius: '50%' }}><FaMusic color="#fff" /></div>
-                    <div>
-                      <strong style={{ fontSize: "1.1rem" }}>{d.title}</strong>
-                      <span style={{ color: "#666", fontSize: "0.8rem", display: 'block' }}>{d.url}</span>
-                    </div>
-                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "20px" }}><FaMusic /><strong>{d.title}</strong></div>
                   <div style={{ display: "flex", gap: "10px" }}>
                     <button onClick={() => moveItem(index, -1, "demos")} style={iconBtnStyle} disabled={index === 0}><FaArrowUp /></button>
                     <button onClick={() => moveItem(index, 1, "demos")} style={iconBtnStyle} disabled={index === demos.length - 1}><FaArrowDown /></button>
@@ -219,24 +207,13 @@ export default function AdminPanel() {
                   </div>
                 </div>
               ))}
-
               {activeTab === "config" && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
                   <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px' }}>
-                    <h3 className="thefont" style={{ fontSize: '1.2rem', margin: 0 }}>Editor de Texto</h3>
-                    <textarea 
-                      style={{ ...inputStyle, minHeight: '400px', lineHeight: '1.6', fontSize: '1rem' }}
-                      value={config.aboutText}
-                      onChange={(e) => setConfig({ ...config, aboutText: e.target.value })}
-                    />
+                    <textarea style={{ ...inputStyle, minHeight: '400px' }} value={config.aboutText} onChange={(e) => setConfig({ ...config, aboutText: e.target.value })} />
                   </div>
                   <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px', backgroundColor: '#050505' }}>
-                    <h3 className="thefont" style={{ fontSize: '1.2rem', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <FaEye size={18} /> Prévia do Site
-                    </h3>
-                    <div style={{ color: '#ccc', lineHeight: '1.8', fontSize: '1rem', textAlign: 'justify', whiteSpace: 'pre-wrap', width: '100%', maxHeight: '400px', overflowY: 'auto', paddingRight: '10px' }}>
-                      {config.aboutText}
-                    </div>
+                    <div style={{ color: '#ccc', lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>{config.aboutText}</div>
                   </div>
                 </div>
               )}
@@ -247,46 +224,39 @@ export default function AdminPanel() {
                 <div style={modalOverlayStyle}>
                   <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} style={modalContentStyle}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '25px' }}>
-                      <h2 className="thefont" style={{ color: "#fff", margin: 0 }}>{isAdding ? "Adicionar" : "Editar"} {activeTab === "projects" ? "Projeto" : "Demo"}</h2>
-                      <button onClick={() => { setEditingItem(null); setIsAdding(false); }} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}><FaTimes size={24} /></button>
+                      <h2 className="thefont">{isAdding ? "Novo" : "Editar"}</h2>
+                      <button onClick={() => { setEditingItem(null); setIsAdding(false); }} style={{ background: 'none', border: 'none', color: '#fff' }}><FaTimes size={24} /></button>
                     </div>
                     <form onSubmit={handleSubmit} style={{ display: "grid", gap: "15px" }}>
                       {activeTab === "projects" ? (
                         <>
                           <div style={inputGroupStyle}><label>Título</label><input style={inputStyle} value={editingItem?.content?.title || ""} onChange={e => setEditingItem({ ...editingItem, content: { ...editingItem.content, title: e.target.value } })} required /></div>
                           <div style={inputGroupStyle}><label>Capa URL</label><input style={inputStyle} value={editingItem?.content?.src || ""} onChange={e => setEditingItem({ ...editingItem, content: { ...editingItem.content, src: e.target.value } })} required /></div>
-                          <div style={inputGroupStyle}><label>Categoria</label><input style={inputStyle} value={editingItem?.category || ""} onChange={e => setEditingItem({ ...editingItem, category: e.target.value })} /></div>
-                          <div style={{ marginTop: '10px', borderTop: '1px solid #333', paddingTop: '15px' }}>
-                            <label style={{ color: '#fff', fontSize: '0.9rem', marginBottom: '10px', display: 'block' }}>Blocos de Conteúdo</label>
+                          <div style={{ marginTop: '10px' }}>
+                            <label>Blocos</label>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                               {(editingItem.content.blocks || []).map((block, bIdx) => (
-                                <div key={bIdx} style={{ backgroundColor: '#181818', padding: '10px', borderRadius: '5px', border: '1px solid #222' }}>
-                                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                                    <select value={block.type} onChange={e => updateBlock(bIdx, 'type', e.target.value)} style={{ backgroundColor: '#333', color: '#fff', border: 'none', padding: '2px 5px', borderRadius: '3px', fontSize: '0.7rem' }}>
-                                      <option value="text">Texto</option>
-                                      <option value="video">Vídeo</option>
-                                      <option value="media">GIF/Mídia</option>
-                                    </select>
-                                    <button type="button" onClick={() => removeBlock(bIdx)} style={{ color: '#ff4444', background: 'none', border: 'none', cursor: 'pointer' }}><FaTrash size={10} /></button>
-                                  </div>
-                                  {block.type === 'text' ? (
-                                    <textarea style={inputStyle} value={block.value} onChange={e => updateBlock(bIdx, 'value', e.target.value)} />
-                                  ) : (
-                                    <input style={inputStyle} value={block.value} onChange={e => updateBlock(bIdx, 'value', e.target.value)} />
-                                  )}
+                                <div key={bIdx} style={{ backgroundColor: '#181818', padding: '10px' }}>
+                                  <select value={block.type} onChange={e => updateBlock(bIdx, 'type', e.target.value)} style={{ backgroundColor: '#333', color: '#fff' }}>
+                                    <option value="text">Texto</option>
+                                    <option value="video">Vídeo</option>
+                                    <option value="media">Mídia</option>
+                                  </select>
+                                  <textarea style={inputStyle} value={block.value} onChange={e => updateBlock(bIdx, 'value', e.target.value)} />
+                                  <button type="button" onClick={() => removeBlock(bIdx)} style={{ color: 'red' }}>Remover</button>
                                 </div>
                               ))}
-                              <button type="button" onClick={addBlock} style={{ ...btnSecondaryStyle, fontSize: '0.8rem', padding: '5px' }}>+ Adicionar Bloco</button>
+                              <button type="button" onClick={addBlock}>+ Adicionar Bloco</button>
                             </div>
                           </div>
                         </>
                       ) : (
                         <>
-                          <div style={inputGroupStyle}><label>Título do Áudio</label><input style={inputStyle} value={editingItem?.title || ""} onChange={e => setEditingItem({ ...editingItem, title: e.target.value })} required /></div>
-                          <div style={inputGroupStyle}><label>URL do Áudio</label><input style={inputStyle} value={editingItem?.url || ""} onChange={e => setEditingItem({ ...editingItem, url: e.target.value })} required /></div>
+                          <div style={inputGroupStyle}><label>Título</label><input style={inputStyle} value={editingItem?.title || ""} onChange={e => setEditingItem({ ...editingItem, title: e.target.value })} required /></div>
+                          <div style={inputGroupStyle}><label>URL</label><input style={inputStyle} value={editingItem?.url || ""} onChange={e => setEditingItem({ ...editingItem, url: e.target.value })} required /></div>
                         </>
                       )}
-                      <button type="submit" style={{ ...btnPrimaryStyle, justifyContent: 'center', marginTop: '20px' }}>Salvar Alterações</button>
+                      <button type="submit" style={btnPrimaryStyle}>Salvar</button>
                     </form>
                   </motion.div>
                 </div>
@@ -294,22 +264,7 @@ export default function AdminPanel() {
             </AnimatePresence>
           </>
         )}
-        {loading && <div style={loadingOverlayStyle}>Aguarde...</div>}
       </div>
     </PageWrapper>
   );
 }
-
-// Estilos
-const tabStyle = { backgroundColor: 'transparent', color: '#666', border: 'none', padding: '10px 20px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' };
-const tabActiveStyle = { ...tabStyle, color: '#fff', borderBottom: '2px solid #fff' };
-const btnPrimaryStyle = { backgroundColor: "#fff", color: "#000", border: "none", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
-const btnSecondaryStyle = { backgroundColor: "#222", color: "#fff", border: "1px solid #444", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
-const cardStyle = { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "15px 20px", backgroundColor: "#111", border: "1px solid #222", borderRadius: "8px" };
-const thumbStyle = { width: "50px", height: "50px", objectFit: "cover", borderRadius: "4px" };
-const iconBtnStyle = { background: "#222", border: "none", color: "#fff", padding: "8px", borderRadius: "4px", cursor: "pointer", display: 'flex', alignItems: 'center', justifyContent: 'center' };
-const modalOverlayStyle = { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.8)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 3000 };
-const modalContentStyle = { backgroundColor: "#111", border: "1px solid #333", padding: "30px", borderRadius: "12px", width: "95%", maxWidth: "600px", maxHeight: '90vh', overflowY: 'auto' };
-const inputGroupStyle = { display: "flex", flexDirection: "column", gap: "5px" };
-const inputStyle = { backgroundColor: "#222", border: "1px solid #444", color: "#fff", padding: "10px", borderRadius: "5px", outline: "none", width: '100%' };
-const loadingOverlayStyle = { position: "fixed", bottom: "20px", right: "20px", backgroundColor: "#fff", color: "#000", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", zIndex: 4000 };
