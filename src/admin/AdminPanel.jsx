@@ -15,6 +15,7 @@ export default function AdminPanel() {
   const [config, setConfig] = useState({
     title: "Sobre Mim",
     image: "",
+    showImage: true,
     text: ""
   });
   
@@ -272,6 +273,10 @@ export default function AdminPanel() {
                           <input type="file" style={{ display: 'none' }} accept="image/*" onChange={e => handleFileUpload(e, url => setConfig({ ...config, image: url }))} />
                         </label>
                       </div>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px', cursor: 'pointer', color: '#fff' }}>
+                        <input type="checkbox" checked={config.showImage !== false} onChange={(e) => setConfig({ ...config, showImage: e.target.checked })} style={{ width: '16px', height: '16px' }} />
+                        Mostrar foto no site
+                      </label>
                     </div>
                     <div style={{ width: '100%', ...inputGroupStyle }}>
                       <label>Texto Principal</label>
@@ -280,7 +285,7 @@ export default function AdminPanel() {
                   </div>
                   <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px', backgroundColor: '#050505', overflowY: 'auto', maxHeight: '700px' }}>
                     <h2 className="thefont" style={{ color: '#fff', fontSize: '2rem', textTransform: 'uppercase', margin: 0 }}>{config.title}</h2>
-                    {config.image && <img src={config.image} alt="Sobre" style={{ width: '100%', borderRadius: '8px', maxHeight: '250px', objectFit: 'cover' }} />}
+                    {config.image && config.showImage !== false && <img src={config.image} alt="Sobre" style={{ width: '100%', borderRadius: '8px', maxHeight: '250px', objectFit: 'cover' }} />}
                     <div style={{ color: '#ccc', lineHeight: '1.8', whiteSpace: 'pre-wrap', textAlign: 'justify' }}>{config.text}</div>
                   </div>
                 </div>

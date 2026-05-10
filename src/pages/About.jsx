@@ -42,7 +42,7 @@ const About = () => {
               {config.title || "Sobre Mim"}
             </h2>
 
-            {config.image && (
+            {config.image && config.showImage !== false && (
               <img 
                 src={config.image} 
                 alt={config.title || "Sobre Mim"} 
