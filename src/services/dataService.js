@@ -1,5 +1,6 @@
 import localProjects from "../data/projectsData.json";
 import localConfig from "../data/siteConfig.json";
+import localAbout from "../data/aboutData.json";
 
 export async function fetchProjects() {
   try {
@@ -17,11 +18,11 @@ export async function fetchProjects() {
 export async function fetchConfig() {
   try {
     const response = await fetch(`/api/getData?dataset=about&cb=${Date.now()}`, { cache: "no-store" });
-    if (!response.ok) return localConfig;
+    if (!response.ok) return localAbout;
     const data = await response.json();
-    return (data && data.aboutText) ? data : localConfig;
+    return (data && data.text) ? data : localAbout;
   } catch (error) {
-    return localConfig;
+    return localAbout;
   }
 }
 

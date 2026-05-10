@@ -11,11 +11,13 @@ export default function AdminPanel() {
   const [projects, setProjects] = useState([]);
   const [demos, setDemos] = useState([]);
 
-  // Esse é o texto que você tem hoje no site. 
-  // Ele serve de base caso você ainda não tenha salvo nada na nuvem.
-  const defaultAbout = `Criar para o audiovisual é, acima de tudo, entender o ritmo. Com 6 anos de experiência em edição de vídeo e 2 anos dedicados à engenharia de áudio, foco em edições ágeis e narrativas orgânicas, onde o objetivo é contar uma história simples mas memorável.\n\nSou dublador e mixador há 2 anos, e atualmente estou na busca de meu DRT para dublagem, apesar disso já fiz trabalhos interessantes no ramo, tanto na comunidade de fandublagem, quanto no mercado real.`;
-
-  const [config, setConfig] = useState({ aboutText: defaultAbout });
+  // Importando o fallback local (embora o fetchConfig já o retorne em caso de erro)
+  const [config, setConfig] = useState({
+    title: "Sobre Mim",
+    image: "",
+    text: ""
+  });
+  
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -40,9 +42,8 @@ export default function AdminPanel() {
         setProjects(pData);
         setDemos(dData);
 
-        // Se já existir o arquivo "aboutMeData.json" na nuvem, usamos ele.
-        // Se não existir, o config continua com o defaultAbout lá de cima.
-        if (cData && cData.aboutText) {
+        // Agora cData contém o objeto completo { title, image, text }
+        if (cData && cData.text) {
           setConfig(cData);
         }
       } catch (err) {
@@ -249,10 +250,29 @@ export default function AdminPanel() {
               {activeTab === "config" && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
                   <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px' }}>
-                    <textarea style={{ ...inputStyle, minHeight: '400px' }} value={config.aboutText} onChange={(e) => setConfig({ ...config, aboutText: e.target.value })} />
+                    <div style={{ width: '100%', ...inputGroupStyle }}>
+                      <label>Título</label>
+                      <input style={inputStyle} value={config.title || ""} onChange={(e) => setConfig({ ...config, title: e.target.value })} />
+                    </div>
+                    <div style={{ width: '100%', ...inputGroupStyle }}>
+                      <label>Imagem URL</label>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <input style={inputStyle} value={config.image || ""} onChange={(e) => setConfig({ ...config, image: e.target.value })} />
+                        <label style={{ ...btnPrimaryStyle, cursor: 'pointer', whiteSpace: 'nowrap', margin: 0, fontSize: '0.8rem', padding: '10px' }}>
+                          ☁️ Upload
+                          <input type="file" style={{ display: 'none' }} accept="image/*" onChange={e => handleFileUpload(e, url => setConfig({ ...config, image: url }))} />
+                        </label>
+                      </div>
+                    </div>
+                    <div style={{ width: '100%', ...inputGroupStyle }}>
+                      <label>Texto Principal</label>
+                      <textarea style={{ ...inputStyle, minHeight: '300px' }} value={config.text || ""} onChange={(e) => setConfig({ ...config, text: e.target.value })} />
+                    </div>
                   </div>
-                  <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px', backgroundColor: '#050505' }}>
-                    <div style={{ color: '#ccc', lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>{config.aboutText}</div>
+                  <div style={{ ...cardStyle, flexDirection: 'column', alignItems: 'flex-start', gap: '20px', padding: '30px', backgroundColor: '#050505', overflowY: 'auto', maxHeight: '700px' }}>
+                    <h2 className="thefont" style={{ color: '#fff', fontSize: '2rem', textTransform: 'uppercase', margin: 0 }}>{config.title}</h2>
+                    {config.image && <img src={config.image} alt="Sobre" style={{ width: '100%', borderRadius: '8px', maxHeight: '250px', objectFit: 'cover' }} />}
+                    <div style={{ color: '#ccc', lineHeight: '1.8', whiteSpace: 'pre-wrap', textAlign: 'justify' }}>{config.text}</div>
                   </div>
                 </div>
               )}
