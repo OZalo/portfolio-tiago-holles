@@ -21,7 +21,14 @@ export default function AdminPanel() {
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
+  const [toast, setToast] = useState(null);
   const navigate = useNavigate();
+
+  const showToast = (message, type = "success") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
 
   useEffect(() => {
     const isAdmin = sessionStorage.getItem("isAdmin");
@@ -67,9 +74,9 @@ export default function AdminPanel() {
         // Ao salvar aqui, o arquivo "aboutMeData.json" é criado na sua Cloudinary.
         await uploadJsonToCloudinary("about", config);
       }
-      alert("Salvo com sucesso!");
+      showToast("Salvo com sucesso!");
     } catch (err) {
-      alert("Erro ao salvar: " + err.message);
+      showToast("Erro ao salvar: " + err.message, "error");
     } finally {
       setLoading(false);
     }
@@ -178,10 +185,11 @@ export default function AdminPanel() {
       if (!uploadRes.ok) throw new Error("Erro no upload para a Cloudinary");
       const data = await uploadRes.json();
       
+      showToast("Upload concluído com sucesso!");
       callback(data.secure_url);
     } catch (err) {
       console.error(err);
-      alert("Falha no upload: " + err.message);
+      showToast("Falha no upload: " + err.message, "error");
     } finally {
       setLoading(false);
       // Limpa o input file para permitir o mesmo arquivo se necessário
@@ -354,6 +362,32 @@ export default function AdminPanel() {
             </AnimatePresence>
           </>
         )}
+        
+        {/* Toast Notification */}
+        <AnimatePresence>
+          {toast && (
+            <motion.div
+              initial={{ opacity: 0, y: 50, x: '-50%' }}
+              animate={{ opacity: 1, y: 0, x: '-50%' }}
+              exit={{ opacity: 0, y: 50, x: '-50%' }}
+              style={{
+                position: 'fixed',
+                bottom: '30px',
+                left: '50%',
+                backgroundColor: toast.type === 'error' ? '#ff4444' : '#00C851',
+                color: '#fff',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                fontWeight: 'bold',
+                zIndex: 9999,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+              }}
+            >
+              {toast.message}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
     </PageWrapper>
   );

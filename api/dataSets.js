@@ -2,6 +2,6 @@
 // Configuração dos nomes dos arquivos no Cloudinary para o Backend
 export const DATASETS = {
   projects: "projectsData_tiago",
-  about: "aboutMeData",
+  about: "aboutMe_tiago",
   demos: "demosData_tiago",
 };
