@@ -149,6 +149,44 @@ export default function AdminPanel() {
     else setEditingItem({ title: "", url: "" });
   };
 
+  const handleFileUpload = async (e, callback) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    setLoading(true);
+    try {
+      const resSign = await fetch(`/api/cloudSignMedia?cb=${Date.now()}`);
+      if (!resSign.ok) throw new Error("Erro ao obter assinatura de upload");
+      const { cloudName, apiKey, timestamp, folder, signature } = await resSign.json();
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("api_key", apiKey);
+      formData.append("timestamp", timestamp);
+      formData.append("folder", folder);
+      formData.append("signature", signature);
+
+      const resourceType = 'auto'; // Deixa a Cloudinary descobrir se é imagem, vídeo ou áudio
+      
+      const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!uploadRes.ok) throw new Error("Erro no upload para a Cloudinary");
+      const data = await uploadRes.json();
+      
+      callback(data.secure_url);
+    } catch (err) {
+      console.error(err);
+      alert("Falha no upload: " + err.message);
+    } finally {
+      setLoading(false);
+      // Limpa o input file para permitir o mesmo arquivo se necessário
+      e.target.value = null;
+    }
+  };
+
   const tabStyle = { backgroundColor: 'transparent', color: '#666', border: 'none', padding: '10px 20px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' };
   const tabActiveStyle = { ...tabStyle, color: '#fff', borderBottom: '2px solid #fff' };
   const btnPrimaryStyle = { backgroundColor: "#fff", color: "#000", border: "none", padding: "10px 20px", borderRadius: "5px", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" };
@@ -176,11 +214,9 @@ export default function AdminPanel() {
                   <button onClick={() => setActiveTab("config")} style={activeTab === "config" ? tabActiveStyle : tabStyle}><FaCog /> Sobre Mim</button>
                 </div>
               </div>
-              <div style={{ display: "flex", gap: "15px" }}>
-                {activeTab !== "config" && (
-                  <button onClick={startAdding} style={btnPrimaryStyle}><FaPlus /> Novo {activeTab === "projects" ? "Projeto" : "Áudio"}</button>
-                )}
-                <button onClick={handleSaveAll} style={btnPrimaryStyle}><FaSave /> Salvar Alterações</button>
+              <div style={{ display: "flex", gap: "15px", flexShrink: 0 }}>
+                <button onClick={startAdding} style={{ ...btnPrimaryStyle, whiteSpace: 'nowrap' }}><FaPlus /> Novo {activeTab === "projects" ? "Projeto" : "Áudio"}</button>
+                <button onClick={handleSaveAll} style={{ ...btnPrimaryStyle, whiteSpace: 'nowrap' }}><FaSave /> Salvar Alterações</button>
               </div>
             </header>
 
@@ -234,29 +270,59 @@ export default function AdminPanel() {
                       {activeTab === "projects" ? (
                         <>
                           <div style={inputGroupStyle}><label>Título</label><input style={inputStyle} value={editingItem?.content?.title || ""} onChange={e => setEditingItem({ ...editingItem, content: { ...editingItem.content, title: e.target.value } })} required /></div>
-                          <div style={inputGroupStyle}><label>Capa URL</label><input style={inputStyle} value={editingItem?.content?.src || ""} onChange={e => setEditingItem({ ...editingItem, content: { ...editingItem.content, src: e.target.value } })} required /></div>
-                          <div style={{ marginTop: '10px' }}>
-                            <label>Blocos</label>
+                          <div style={inputGroupStyle}>
+                            <label>Capa URL</label>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                              <input style={inputStyle} value={editingItem?.content?.src || ""} onChange={e => setEditingItem({ ...editingItem, content: { ...editingItem.content, src: e.target.value } })} required />
+                              <label style={{ ...btnPrimaryStyle, cursor: 'pointer', whiteSpace: 'nowrap', margin: 0, fontSize: '0.8rem', padding: '10px' }}>
+                                ☁️ Upload
+                                <input type="file" style={{ display: 'none' }} accept="image/*,video/*" onChange={e => handleFileUpload(e, url => setEditingItem({ ...editingItem, content: { ...editingItem.content, src: url } }))} />
+                              </label>
+                            </div>
+                          </div>
+                          <div style={{ marginTop: '10px', borderTop: '1px solid #333', paddingTop: '15px' }}>
+                            <label style={{ color: '#fff', fontSize: '0.9rem', marginBottom: '10px', display: 'block' }}>Blocos de Conteúdo</label>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                               {(editingItem.content.blocks || []).map((block, bIdx) => (
-                                <div key={bIdx} style={{ backgroundColor: '#181818', padding: '10px' }}>
-                                  <select value={block.type} onChange={e => updateBlock(bIdx, 'type', e.target.value)} style={{ backgroundColor: '#333', color: '#fff' }}>
-                                    <option value="text">Texto</option>
-                                    <option value="video">Vídeo</option>
-                                    <option value="media">Mídia</option>
-                                  </select>
-                                  <textarea style={inputStyle} value={block.value} onChange={e => updateBlock(bIdx, 'value', e.target.value)} />
-                                  <button type="button" onClick={() => removeBlock(bIdx)} style={{ color: 'red' }}>Remover</button>
+                                <div key={bIdx} style={{ backgroundColor: '#181818', padding: '10px', borderRadius: '5px', border: '1px solid #222' }}>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                                    <select value={block.type} onChange={e => updateBlock(bIdx, 'type', e.target.value)} style={{ backgroundColor: '#333', color: '#fff', border: 'none', padding: '2px 5px', borderRadius: '3px', fontSize: '0.7rem' }}>
+                                      <option value="text">Texto</option>
+                                      <option value="video">Vídeo</option>
+                                      <option value="media">GIF/Mídia</option>
+                                    </select>
+                                    <button type="button" onClick={() => removeBlock(bIdx)} style={{ color: '#ff4444', background: 'none', border: 'none', cursor: 'pointer' }}><FaTrash size={10} /></button>
+                                  </div>
+                                  {block.type === 'text' ? (
+                                    <textarea style={{ ...inputStyle, minHeight: '80px' }} value={block.value} onChange={e => updateBlock(bIdx, 'value', e.target.value)} />
+                                  ) : (
+                                    <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+                                      <input style={inputStyle} value={block.value} onChange={e => updateBlock(bIdx, 'value', e.target.value)} />
+                                      <label style={{ ...btnPrimaryStyle, cursor: 'pointer', whiteSpace: 'nowrap', margin: 0, fontSize: '0.8rem', padding: '10px' }}>
+                                        ☁️ Upload
+                                        <input type="file" style={{ display: 'none' }} accept="image/*,video/*" onChange={e => handleFileUpload(e, url => updateBlock(bIdx, 'value', url))} />
+                                      </label>
+                                    </div>
+                                  )}
                                 </div>
                               ))}
-                              <button type="button" onClick={addBlock}>+ Adicionar Bloco</button>
+                              <button type="button" onClick={addBlock} style={{ ...btnPrimaryStyle, fontSize: '0.8rem', padding: '5px', justifyContent: 'center', backgroundColor: '#222', color: '#fff', border: '1px solid #444' }}>+ Adicionar Bloco</button>
                             </div>
                           </div>
                         </>
                       ) : (
                         <>
-                          <div style={inputGroupStyle}><label>Título</label><input style={inputStyle} value={editingItem?.title || ""} onChange={e => setEditingItem({ ...editingItem, title: e.target.value })} required /></div>
-                          <div style={inputGroupStyle}><label>URL</label><input style={inputStyle} value={editingItem?.url || ""} onChange={e => setEditingItem({ ...editingItem, url: e.target.value })} required /></div>
+                          <div style={inputGroupStyle}><label>Título do Áudio</label><input style={inputStyle} value={editingItem?.title || ""} onChange={e => setEditingItem({ ...editingItem, title: e.target.value })} required /></div>
+                          <div style={inputGroupStyle}>
+                            <label>URL do Áudio</label>
+                            <div style={{ display: 'flex', gap: '10px' }}>
+                              <input style={inputStyle} value={editingItem?.url || ""} onChange={e => setEditingItem({ ...editingItem, url: e.target.value })} required />
+                              <label style={{ ...btnPrimaryStyle, cursor: 'pointer', whiteSpace: 'nowrap', margin: 0, fontSize: '0.8rem', padding: '10px' }}>
+                                ☁️ Upload
+                                <input type="file" style={{ display: 'none' }} accept="audio/*,video/*" onChange={e => handleFileUpload(e, url => setEditingItem({ ...editingItem, url: url }))} />
+                              </label>
+                            </div>
+                          </div>
                         </>
                       )}
                       <button type="submit" style={btnPrimaryStyle}>Salvar</button>
