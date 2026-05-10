@@ -177,6 +177,9 @@ export default function AdminPanel() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: "15px" }}>
+                {activeTab !== "config" && (
+                  <button onClick={startAdding} style={btnPrimaryStyle}><FaPlus /> Novo {activeTab === "projects" ? "Projeto" : "Áudio"}</button>
+                )}
                 <button onClick={handleSaveAll} style={btnPrimaryStyle}><FaSave /> Salvar Alterações</button>
               </div>
             </header>
