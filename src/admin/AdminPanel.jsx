@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchProjects, fetchDemos, fetchConfig } from "../services/dataService";
+import { fetchProjects, fetchDemos, fetchAbout } from "../services/dataService";
 import { uploadJsonToCloudinary } from "../services/dataCloudRaw";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +11,7 @@ export default function AdminPanel() {
   const [projects, setProjects] = useState([]);
   const [demos, setDemos] = useState([]);
 
-  // Importando o fallback local (embora o fetchConfig já o retorne em caso de erro)
+  // Importando o fallback local (embora o fetchAbout já o retorne em caso de erro)
   const [config, setConfig] = useState({
     title: "Sobre Mim",
     image: "",
@@ -36,8 +36,9 @@ export default function AdminPanel() {
         const [pData, dData, cData] = await Promise.all([
           fetchProjects(),
           fetchDemos(),
-          fetchConfig()
+          fetchAbout()
         ]);
+
 
         setProjects(pData);
         setDemos(dData);

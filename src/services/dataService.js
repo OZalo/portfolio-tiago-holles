@@ -15,7 +15,7 @@ export async function fetchProjects() {
   }
 }
 
-export async function fetchConfig() {
+export async function fetchAbout() {
   try {
     const response = await fetch(`/api/getData?dataset=about&cb=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) return localAbout;
@@ -24,6 +24,10 @@ export async function fetchConfig() {
   } catch (error) {
     return localAbout;
   }
+}
+
+export async function fetchConfig() {
+  return localConfig;
 }
 
 export async function fetchDemos() {

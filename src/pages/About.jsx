@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageWrapper from '../Components/PageWrapper';
-import { fetchConfig } from '../services/dataService';
+import { fetchAbout } from '../services/dataService';
 
 const About = () => {
   const [config, setConfig] = useState(null);
@@ -9,7 +9,7 @@ const About = () => {
   useEffect(() => {
     const loadAbout = async () => {
       try {
-        const data = await fetchConfig();
+        const data = await fetchAbout();
         setConfig(data);
       } catch (err) {
         console.error("Erro ao carregar sobre:", err);
